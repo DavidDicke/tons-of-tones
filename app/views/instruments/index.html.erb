@@ -1,0 +1,12 @@
+<h1>Instruments#index</h1>
+<p>Find me in app/views/instruments/index.html.erb</p>
+
+<h1>All Instruments</h1>
+<ul>
+  <% @instruments.each do |instrument| %>
+    <li>
+      <%= link_to instrument.name, instrument_path(instrument) %> -
+      <%= instrument.description %>
+    </li>
+  <% end %>
+</ul>
