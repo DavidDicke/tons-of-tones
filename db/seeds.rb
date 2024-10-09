@@ -9,7 +9,8 @@
 #   end
 
 user = User.create!(
-  name: 'Sample User',
+  first_name: 'Sample First Name',
+  last_name: 'Sample Last Name',
   email: 'unique_user@example.com',
   password: 'password123',
   password_confirmation: 'password123'
