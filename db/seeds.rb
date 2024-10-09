@@ -8,15 +8,48 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-user = User.create!(
-  first_name: 'Sample First Name',
-  last_name: 'Sample Last Name',
-  email: 'unique_user@example.com',
-  password: 'password123',
-  password_confirmation: 'password123'
+# db/seeds.rb
+
+# db/seeds.rb
+
+# Delete all instruments before deleting users to avoid foreign key violations
+
+Booking.destroy_all
+Instrument.destroy_all
+User.destroy_all
+
+user1 = User.create!(
+  email: 'alice@example.com',
+  password: 'password',
+  name: 'Alice Wonderland',
+  first_name: 'Alice',
+  last_name: 'Wonderland'
 )
 
-Instrument.create!([
-  { name: 'Guitar', description: 'An acoustic guitar.', capacity: 1, address: '123 Music Lane', price: 100.0, user_id: user.id },
-  { name: 'Piano', description: 'A grand piano.', capacity: 2, address: '456 Melody St.', price: 200.0, user_id: user.id }
-])
+instrument1 = Instrument.create!(
+  name: 'Guitar',
+  address: '123 Music Lane, Berlin',
+  category: 'String',
+  price: 20,
+  user: user1,
+  description: 'An acoustic guitar in great condition.',
+  capacity: 1
+)
+
+user2 = User.create!(
+  email: 'bob@example.com',
+  password: 'password',
+  name: 'Bob Builder',
+  first_name: 'Bob',
+  last_name: 'Builder'
+)
+
+instrument2 = Instrument.create!(
+  name: 'Piano',
+  address: '456 Melody Street, Berlin',
+  category: 'Keyboard',
+  price: 50,
+  user: user2,
+  description: 'A grand piano available for rent.',
+  capacity: 2
+)
