@@ -3,6 +3,8 @@
 
 <h1><%= @instrument.name %></h1>
 <p><%= @instrument.description %></p>
-<p>Capacity: <%= @instrument.capacity %></p>
+<p>Address: <%= @instrument.address %></p>
+<p>Category: <%= @instrument.category %></p>
 <p>Price: <%= @instrument.price %></p>
-<%= link_to 'Back to Instruments', instruments_path %>
+
+<%= link_to 'Back to Instruments', instruments_path, class: "" %>
