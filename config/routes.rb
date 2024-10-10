@@ -11,7 +11,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-
-  resources :instruments, only: [:index, :show]
-
+  resources :instruments do
+    resources :bookings, only: [:new, :create]  # User can book an apartment
+  end
+  resources :bookings, only: [:index, show:, :destroy, :edit, :update]
 end
