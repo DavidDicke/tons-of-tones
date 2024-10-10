@@ -5,3 +5,10 @@
 <p><%= @instrument.description %></p>
 <p>Price: <%= @instrument.price %></p>
 <%= link_to 'Back to Instruments', instruments_path %>
+
+
+<h2>Book</h2>
+<%= simple_form_for [@instrument, @booking] do |f| %>
+  <%= f.input :start_date, as: :string, input_html: { data: { controller: "datepicker", "datepicker-unavailable-dates-value" => @unavailable_dates } } %>
+  <%= f.submit "Book", class: "btn btn-flat" %>
+<% end %>
