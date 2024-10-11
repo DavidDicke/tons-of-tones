@@ -8,5 +8,6 @@ class InstrumentsController < ApplicationController
   def show
     @instrument = Instrument.find(params[:id])
     @booking = Booking.new
+    @booking.user_id = current_user.id if current_user.present?
   end
 end

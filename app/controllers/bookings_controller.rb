@@ -6,7 +6,14 @@ class BookingsController < ApplicationController
 
   def create
     @instrument = Instrument.find(params[:instrument_id])
-    @booking = @instrument.bookings.build(booking_params.merge(user_id: current_user.id))
+    @booking = @instrument.bookings.new(booking_params)
+    @booking.user_id = current_user.id if current_user.present?
+
+    if @booking.end_date < @booking.start_date
+      flash[:alert] = "End date cannot be before start date."
+      render 'instruments/show', status: :unprocessable_entity and return
+    end
+
     number_of_days = (@booking.end_date - @booking.start_date).to_i
     @booking.total_price = number_of_days * @instrument.price
     if @booking.save
@@ -19,6 +26,6 @@ class BookingsController < ApplicationController
   private
 
   def booking_params
-    params.require(:booking).permit(:status, :total_price, :instrument_id, :user_id, :start_date, :end_date)
+    params.require(:booking).permit(:start_date, :end_date)
   end
 end
