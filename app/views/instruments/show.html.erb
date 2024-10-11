@@ -5,7 +5,7 @@
 <p><%= @instrument.description %></p>
 <p>Address: <%= @instrument.address %></p>
 <p>Category: <%= @instrument.category %></p>
-<p>Price: <%= @instrument.price %></p>
+<p>Price: <%= @instrument.price %> EUR</p>
 
 <h3>Photos</h3>
 <% if @instrument.photos.attached? %>
@@ -16,6 +16,13 @@
   </div>
 <% else %>
   <p>No photos available for this instrument.</p>
+<% end %>
+
+<h2>Book</h2>
+<%= simple_form_for [@instrument, @booking] do |f| %>
+  <%= f.input :start_date, as: :string, input_html: { data: { controller: "datepicker" } } %>
+  <%= f.input :end_date, as: :string, input_html: { data: { controller: "datepicker" } } %>
+  <%= f.submit "Book", class: "btn btn-flat" %>
 <% end %>
 
 <%= link_to 'Back to Instruments', instruments_path, class: "" %>

@@ -1,5 +1,4 @@
 class InstrumentsController < ApplicationController
-  # This ensures that users are logged in for actions that modify data
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
@@ -8,6 +7,8 @@ class InstrumentsController < ApplicationController
 
   def show
     @instrument = Instrument.find(params[:id])
+    @booking = Booking.new
+    @booking.user_id = current_user.id if current_user.present?
   end
 
   def new
