@@ -4,6 +4,7 @@
   <%= f.input :address, label: "Address" %>
   <%= f.input :price, label: "Price" %>
   <%= f.input :category, label: "Category" %>
+  <%= f.input :photos, as: :file, input_html: { multiple: true }, label: "Upload Photos" %>
 
   <%= f.submit "Create Instrument", class: "" %>
 <% end %>
