@@ -7,6 +7,9 @@
     <li>
       <%= link_to instrument.name, instrument_path(instrument) %> -
       <%= instrument.description %>
+      <%= instrument.price %>
     </li>
   <% end %>
 </ul>
+
+<%= link_to 'Create a New Instrument', new_instrument_path, class: "" %>
