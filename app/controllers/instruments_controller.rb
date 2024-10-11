@@ -1,6 +1,6 @@
 class InstrumentsController < ApplicationController
   # This ensures that users are logged in for actions that modify data
-  before_action :authenticate_user!, only: [:new, :create]
+  skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
     @instruments = Instrument.all
@@ -21,7 +21,7 @@ class InstrumentsController < ApplicationController
     if @instrument.save
       redirect_to instrument_path(@instrument), notice: 'Instrument successfully created!'
     else
-      render :new, alert: 'There was an issue creating your instrument listing.'
+      render :new, status: :unprocessable_entity
     end
   end
 
