@@ -9,6 +9,7 @@
 
 <h2>Book</h2>
 <%= simple_form_for [@instrument, @booking] do |f| %>
-  <%= f.input :dates_range, as: :string, input_html: { data: { controller: "datepicker"} } %>
+  <%= f.input :start_date, as: :string, input_html: { data: { controller: "datepicker" } } %>
+  <%= f.input :end_date, as: :string, input_html: { data: { controller: "datepicker" } } %>
   <%= f.submit "Book", class: "btn btn-flat" %>
 <% end %>
