@@ -20,6 +20,6 @@ user = User.create!(
 )
 
 Instrument.create!([
-  { name: 'Guitar', description: 'An acoustic guitar.', address: '123 Music Lane', price: 100.0, user_id: user.id },
-  { name: 'Piano', description: 'A grand piano.', address: '456 Melody St.', price: 200.0, user_id: user.id }
+  { name: 'Guitar', description: 'An acoustic guitar.', category:'a', address: '123 Music Lane', price: 100.0, user_id: user.id },
+  { name: 'Piano', description: 'A grand piano.', category:'a', address: '456 Melody St.', price: 200.0, user_id: user.id }
 ])
