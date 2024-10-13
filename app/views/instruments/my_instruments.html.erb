@@ -5,8 +5,6 @@
     <% @instruments.each do |instrument| %>
       <li>
         <%= link_to instrument.name, instrument_path(instrument) %>
-        <%= link_to 'Edit', edit_instrument_path(instrument), class: 'btn btn-secondary' %>
-        <%= link_to 'Delete', instrument_path(instrument), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
       </li>
     <% end %>
   </ul>
