@@ -8,12 +8,13 @@ Rails.application.routes.draw do
 
   get "up" => "rails/health#show", as: :rails_health_check
 
-  get 'my_instruments', to: 'instruments#my_instruments', as: :my_instruments
-
   # Defines the root path route ("/")
   # root "posts#index"
 
   resources :instruments do
+    collection do
+      get 'my_instruments', to: 'instruments#my_instruments', as: :my_instruments
+    end
     resources :bookings, only: [:new, :create]  # User can book an apartment
   end
 
