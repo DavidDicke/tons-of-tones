@@ -45,11 +45,13 @@ class InstrumentsController < ApplicationController
   end
 
   def destroy
-    @instrument.destroy
-    redirect_to my_instruments_instruments_path, notice: 'Instrument successfully deleted.'
+    @instrument = Instrument.find(params[:id])
+    if @instrument.destroy
+      redirect_to my_instruments_instruments_path, notice: 'Instrument successfully deleted.'
+    else
+      redirect_to instrument_path(@instrument), alert: 'Unable to delete the instrument.'
+    end
   end
-
-
 
   private
 
