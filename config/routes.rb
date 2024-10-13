@@ -14,5 +14,13 @@ Rails.application.routes.draw do
   resources :instruments do
     resources :bookings, only: [:new, :create]  # User can book an apartment
   end
+
   resources :bookings, only: [:index, :show, :destroy, :edit, :update]
+
+  resources :instruments do
+    collection do
+      get 'my_instruments', to: 'instruments#my_instruments', as: :my_instruments
+    end
+  end
+
 end
