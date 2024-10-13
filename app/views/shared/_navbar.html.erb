@@ -1,44 +1,65 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
-    <%= link_to "#", class: "navbar-brand" do %>
-      <%= image_tag image_path("logo.png") %>
-    <% end %>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
-        <% if user_signed_in? %>
-          <li class="nav-item active">
-            <%= link_to "Home", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Messages", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item dropdown">
-          <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <% if user_signed_in? && current_user.photo.attached? %>
+    <div class="row w-100 align-items-center mx-0">
+      <div class="col-3 p-0">
+        <div class="w-100">
+          <% if user_signed_in? %>
+            <% if current_user.photo.attached? %>
               <%= cl_image_tag(current_user.photo.key, class: "avatar", alt: "User Profile Picture") %>
             <% else %>
-              <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
+              <%= image_tag "avatar-placeholder.png", class: "avatar", alt: "dropdown menu" %>
             <% end %>
-          </a>
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "List an Instrument", "#", class: "dropdown-item" %>
-              <%= link_to "My Listings", "#", class: "dropdown-item" %>
-              <%= link_to "My Rentals", "#", class: "dropdown-item" %>
-              <%= link_to "Profile", "#", class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
-            </div>
-          </li>
-        <% else %>
-          <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-          </li>
-        <% end %>
-      </ul>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-6 p-0">
+        <div class="w-100 d-flex justify-content-center align-items-center m-0">
+          <%= link_to root_path, class: "navbar-textlogo" do %>
+            <%# <%= image_tag image_path("logo.png") %>
+            <h5 class="m-0">Tons of Tones</h5>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-3 p-0">
+        <div class="d-flex justify-content-end w-100">
+          <button class="navbar-toggler border-0" type="button" data-bs-toggle="modal" data-bs-target="#newNavbarModal" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto">
+          <% if user_signed_in? %>
+            <li class="nav-item active">
+              <%= link_to "Home", "#", class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Messages", "#", class: "nav-link" %>
+            </li>
+            <li class="nav-item dropdown">
+            <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <% if user_signed_in? && current_user.photo.attached? %>
+                <%= cl_image_tag(current_user.photo.key, class: "avatar", alt: "User Profile Picture") %>
+              <% else %>
+                <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
+              <% end %>
+            </a>
+              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <%= link_to "List an Instrument", "#", class: "dropdown-item" %>
+                <%= link_to "My Listings", "#", class: "dropdown-item" %>
+                <%= link_to "My Rentals", "#", class: "dropdown-item" %>
+                <%= link_to "Profile", "#", class: "dropdown-item" %>
+                <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+              </div>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <%= render "shared/modal_navbar" %>
     </div>
   </div>
 </div>
