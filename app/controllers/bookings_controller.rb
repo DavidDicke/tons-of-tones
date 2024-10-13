@@ -73,7 +73,7 @@ class BookingsController < ApplicationController
 
   def overlapping_bookings?(instrument, start_date, end_date)
     instrument.bookings.where.not(id: @booking.id)
-      .where("start_date < ? AND end_date > ?", end_date, start_date)
+      .where("start_date < ? AND end_date > ? AND status != ?", end_date, start_date, 3)
       .exists?
   end
 end
