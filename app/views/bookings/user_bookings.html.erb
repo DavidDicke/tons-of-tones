@@ -22,7 +22,7 @@
               Instrument: <%= user_booking.instrument.name %>,
               Status: <%= user_booking.status %>,
               Period booked: <%= user_booking.start_date.strftime("%B %d, %Y") %> to <%= user_booking.end_date.strftime("%B %d, %Y") %>
-              <%= button_to 'Cancel', booking_path(user_booking), method: :patch, params: { booking: { status: :cancelled } }, class: 'btn btn-secondary' %>
+              <%= button_to 'Cancel', booking_path(user_booking), method: :patch, params: { booking: { status: :cancelled } }, class: 'btn btn-secondary', data: { turbo: true } %>
             </li>
           <% end %>
         <% else %>

@@ -22,8 +22,8 @@
               Instrument: <%= booking.instrument.name %>,
               Status: <%= booking.status %>,
               Period booked: <%= booking.start_date.strftime("%B %d, %Y") %> to <%= booking.end_date.strftime("%B %d, %Y") %>
-              <%= button_to 'Confirm', booking_path(booking), method: :patch, params: { booking: { status: :confirmed } }, class: 'btn btn-secondary' %>
-              <%= button_to 'Reject', booking_path(booking), method: :patch, params: { booking: { status: :cancelled } }, class: 'btn btn-dark' %>
+              <%= button_to 'Confirm', booking_path(booking), method: :patch, params: { booking: { status: :confirmed } }, class: 'btn btn-secondary', data: { turbo: true } %>
+              <%= button_to 'Reject', booking_path(booking), method: :patch, params: { booking: { status: :cancelled } }, class: 'btn btn-dark', data: { turbo: true } %>
             </li>
           <% end %>
         <% else %>
