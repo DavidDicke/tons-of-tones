@@ -30,7 +30,7 @@ class InstrumentsController < ApplicationController
   end
 
   def my_instruments
-    @instruments = current_user.instruments
+    @instruments = Instrument.where(user: current_user)
   end
 
   def edit
@@ -54,8 +54,13 @@ class InstrumentsController < ApplicationController
   private
 
   def set_instrument
-    @instrument = Instrument.find(params[:id])
+    if params[:id] == 'my_instruments'
+      redirect_to my_instruments_path and return
+    else
+      @instrument = Instrument.find(params[:id])
+    end
   end
+
 
   def instrument_params
     params.require(:instrument).permit(:name, :description, :address, :price, :category, photos: [])

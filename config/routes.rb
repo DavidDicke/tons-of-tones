@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'instruments/index'
-  get 'instruments/show'
   devise_for :users
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -12,15 +10,14 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   resources :instruments do
+
+    collection do
+      get 'my_instruments', to: 'instruments#my_instruments'
+    end
+
     resources :bookings, only: [:new, :create]  # User can book an apartment
   end
 
   resources :bookings, only: [:index, :show, :destroy, :edit, :update]
-
-  resources :instruments do
-    collection do
-      get 'my_instruments', to: 'instruments#my_instruments', as: :my_instruments
-    end
-  end
 
 end
