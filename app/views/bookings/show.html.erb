@@ -5,5 +5,5 @@
 <p>End Date: <%= @booking.end_date %></p>
 <p>Status: <%= @booking.status %></p>
 <p>Total price: <%= @booking.total_price %> EUR</p>
-<%= link_to 'Pay Now', class: 'btn btn-primary' %>
+<%= link_to 'Pay Now', user_bookings_bookings_path, class: 'btn btn-primary' %>
 </div>

@@ -1,0 +1,90 @@
+<div>
+  <h1>Instruments on loan</h1>
+
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <button class="nav-link active" id="nav-pending-tab" data-bs-toggle="tab" data-bs-target="#nav-pending" type="button" role="tab" aria-controls="nav-pending" aria-selected="true">Booking Requests</button>
+      <button class="nav-link" id="nav-confirmed-tab" data-bs-toggle="tab" data-bs-target="#nav-confirmed" type="button" role="tab" aria-controls="nav-confirmed" aria-selected="false">Confirmed</button>
+      <button class="nav-link" id="nav-cancelled-tab" data-bs-toggle="tab" data-bs-target="#nav-cancelled" type="button" role="tab" aria-controls="nav-cancelled" aria-selected="false">Rejected</button>
+      <button class="nav-link" id="nav-completed-tab" data-bs-toggle="tab" data-bs-target="#nav-completed" type="button" role="tab" aria-controls="nav-completed" aria-selected="false">Completed</button>
+    </div>
+  </nav>
+
+  <div class="tab-content" id="nav-tabPending">
+
+    <!-- Booking Requests -->
+    <div class="tab-pane fade show active" id="nav-pending" role="tabpanel" aria-labelledby="nav-pending-tab">
+      <ul>
+        <% pending_instrument_bookings = @instrument_bookings.select { |booking| booking.status == 'pending' } %>
+        <% if pending_instrument_bookings.any? %>
+          <% pending_instrument_bookings.each do |booking| %>
+            <li>
+              Instrument: <%= booking.instrument.name %>,
+              Status: <%= booking.status %>,
+              Period booked: <%= booking.start_date.strftime("%B %d, %Y") %> to <%= booking.end_date.strftime("%B %d, %Y") %>
+              <%= button_to 'Confirm', booking_path(booking), method: :patch, params: { booking: { status: :confirmed } }, class: 'btn btn-secondary' %>
+              <%= button_to 'Reject', booking_path(booking), method: :patch, params: { booking: { status: :cancelled } }, class: 'btn btn-dark' %>
+            </li>
+          <% end %>
+        <% else %>
+          <li>You don't have any booking requests.</li>
+        <% end %>
+      </ul>
+    </div>
+
+    <!-- Confirmed -->
+    <div class="tab-pane fade" id="nav-confirmed" role="tabpanel" aria-labelledby="nav-confirmed-tab">
+      <ul>
+        <% confirmed_instrument_bookings = @instrument_bookings.select { |booking| booking.status == 'confirmed' } %>
+        <% if confirmed_instrument_bookings.any? %>
+          <% confirmed_instrument_bookings.each do |booking| %>
+            <li>
+              Instrument: <%= booking.instrument.name %>,
+              Status: <%= booking.status %>,
+              Period booked: <%= booking.start_date.strftime("%B %d, %Y") %> to <%= booking.end_date.strftime("%B %d, %Y") %>
+            </li>
+          <% end %>
+        <% else %>
+          <li>You don't have any confirmed bookings.</li>
+        <% end %>
+      </ul>
+    </div>
+
+    <!-- Rejected -->
+    <div class="tab-pane fade" id="nav-cancelled" role="tabpanel" aria-labelledby="nav-cancelled-tab">
+      <ul>
+        <% cancelled_instrument_bookings = @instrument_bookings.select { |booking| booking.status == 'cancelled' } %>
+        <% if cancelled_instrument_bookings.any? %>
+          <% cancelled_instrument_bookings.each do |booking| %>
+            <li>
+              Instrument: <%= booking.instrument.name %>,
+              Status: <%= booking.status %>,
+              Period booked: <%= booking.start_date.strftime("%B %d, %Y") %> to <%= booking.end_date.strftime("%B %d, %Y") %>
+            </li>
+          <% end %>
+        <% else %>
+          <li>You have not rejected any bookings.</li>
+        <% end %>
+      </ul>
+    </div>
+
+    <!-- Completed -->
+    <div class="tab-pane fade" id="nav-completed" role="tabpanel" aria-labelledby="nav-completed-tab">
+      <ul>
+        <% completed_instrument_bookings = @instrument_bookings.select { |booking| booking.status == 'completed' } %>
+        <% if completed_instrument_bookings.any? %>
+          <% completed_instrument_bookings.each do |booking| %>
+            <li>
+              Instrument: <%= booking.instrument.name %>,
+              Status: <%= booking.status %>,
+              Period booked: <%= booking.start_date.strftime("%B %d, %Y") %> to <%= booking.end_date.strftime("%B %d, %Y") %>
+            </li>
+          <% end %>
+        <% else %>
+          <li>You don't have any completed bookings.</li>
+        <% end %>
+      </ul>
+    </div>
+
+  </div>
+</div>
