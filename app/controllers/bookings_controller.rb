@@ -1,5 +1,6 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :update]
+  before_action :update_completed_bookings
 
 
   def index
@@ -75,5 +76,11 @@ class BookingsController < ApplicationController
     instrument.bookings.where.not(id: @booking.id)
       .where("start_date < ? AND end_date > ? AND status != ?", end_date, start_date, 3)
       .exists?
+  end
+
+  def update_completed_bookings
+    Booking.where('end_date < ? AND status = ?', Time.current, 2).find_each do |booking|
+      booking.update(status: :completed)
+    end
   end
 end
