@@ -1,8 +1,5 @@
 class InstrumentsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
-  before_action :set_instrument, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :authorize_user!, only: [:edit, :update, :destroy]
 
   def index
     @instruments = Instrument.all
