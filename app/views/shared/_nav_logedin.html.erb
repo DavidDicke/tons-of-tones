@@ -4,10 +4,16 @@
     <a href="">TODO: Favourites</a>
   </div>
   <div class="my-3">
-    <a href="">TODO: Manage Offers</a>
+    <%= link_to 'On Loan', instrument_bookings_bookings_path %>
   </div>
   <div class="my-3">
-    <a href="">TODO: Manage Bookings</a>
+    <%= link_to 'Borrowed', user_bookings_bookings_path %>
+  </div>
+  <div class="my-3">
+    <%= link_to "My Instruments", my_instruments_instruments_path%>
+  </div>
+  <div class="my-3">
+    <%= link_to "List an Instrument", new_instrument_path %>
   </div>
   <div class="my-3">
     <a href="">TODO: Edit Profile</a>

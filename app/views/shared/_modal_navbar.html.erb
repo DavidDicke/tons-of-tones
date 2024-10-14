@@ -9,7 +9,7 @@
                 <% if current_user.photo.attached? %>
                   <%= cl_image_tag(current_user.photo.key, class: "avatar", alt: "User Profile Picture") %>
                 <% else %>
-                  <%= image_tag "avatar-placeholder.png", class: "avatar", alt: "dropdown menu" %>
+                  <%= image_tag "avatar_img.png", class: "avatar", alt: "dropdown menu" %>
                 <% end %>
               <% end %>
             </div>

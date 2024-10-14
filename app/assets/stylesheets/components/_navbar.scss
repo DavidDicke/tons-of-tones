@@ -26,3 +26,8 @@ $nav-height: 8dvh;
   height: 100dvh!important;
   margin: 0;
 }
+
+.navbar-lewagon .navbar-nav {
+  display: flex;
+  align-items: center; /* This ensures vertical centering */
+}
