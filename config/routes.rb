@@ -15,9 +15,13 @@ Rails.application.routes.draw do
     collection do
       get 'my_instruments', to: 'instruments#my_instruments', as: :my_instruments
     end
-    resources :bookings, only: [:new, :create]  # User can book an apartment
+    resources :bookings, only: [:new, :create]
   end
 
-  resources :bookings, only: [:index, :show, :destroy, :edit, :update]
-
+  resources :bookings, only: [:index, :show, :edit, :update] do
+    collection do
+      get 'user_bookings', to: 'bookings#user_bookings'
+      get 'instrument_bookings', to: 'bookings#instrument_bookings'
+    end
+  end
 end
