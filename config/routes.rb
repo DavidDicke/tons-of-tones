@@ -12,13 +12,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   resources :instruments do
-    resources :bookings, only: [:new, :create]
+    resources :bookings, only: [:new, :create]  # User can book an apartment
   end
-
-  resources :bookings, only: [:index, :show, :edit, :update] do
-    collection do
-      get 'user_bookings', to: 'bookings#user_bookings'
-      get 'instrument_bookings', to: 'bookings#instrument_bookings'
-    end
-  end
+  resources :bookings, only: [:index, :show, :destroy, :edit, :update]
 end
