@@ -8,3 +8,4 @@ pin_all_from "app/javascript/controllers", under: "controllers"
 pin "bootstrap", to: "bootstrap.min.js", preload: true
 pin "@popperjs/core", to: "popper.js", preload: true
 pin "flatpickr" # @4.6.13
+pin "@rails/ujs", to: "https://ga.jspm.io/npm:@rails/ujs@7.0.4/lib/assets/compiled/rails-ujs.js"
