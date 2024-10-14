@@ -1,6 +1,17 @@
 class BookingsController < ApplicationController
+  before_action :set_booking, only: [:show, :update]
+  before_action :update_completed_bookings
+
+
+  def index
+    @user_bookings = current_user.bookings
+    @instruments = current_user.instruments
+    @instrument_bookings = @instruments.includes(:bookings).flat_map do |instrument|
+      instrument.bookings
+    end
+  end
+
   def show
-    @booking = Booking.find(params[:id])
     @instrument = @booking.instrument
   end
 
@@ -28,15 +39,48 @@ class BookingsController < ApplicationController
     end
   end
 
+  def update
+    if @booking.update(booking_params)
+      if @booking.cancelled?
+        flash[:notice] = "Booking was successfully cancelled."
+      elsif @booking.confirmed?
+        flash[:notice] = "Booking was successfully confirmed."
+      else
+        flash[:notice] = "Booking was successfully updated."
+      end
+      redirect_back(fallback_location: root_path)
+    else
+      render :edit, alert: 'There was an issue updating the booking.'
+    end
+  end
+
+  def user_bookings
+    @user_bookings = current_user.bookings.includes(:instrument)
+  end
+
+  def instrument_bookings
+    @instrument_bookings = Booking.includes(:instrument).where(instrument: current_user.instruments)
+  end
+
   private
 
+  def set_booking
+    @booking = Booking.find(params[:id])
+  end
+
   def booking_params
-    params.require(:booking).permit(:start_date, :end_date)
+    params.require(:booking).permit(:start_date, :end_date, :status)
   end
 
   def overlapping_bookings?(instrument, start_date, end_date)
     instrument.bookings.where.not(id: @booking.id)
-      .where("start_date < ? AND end_date > ?", end_date, start_date)
+      .where("start_date < ? AND end_date > ? AND status != ?", end_date, start_date, 3)
       .exists?
+  end
+
+  def update_completed_bookings
+    Booking.where('end_date < ? AND status = ?', Time.current, 2).find_each do |booking|
+      booking.update(status: :completed)
+    end
   end
 end
