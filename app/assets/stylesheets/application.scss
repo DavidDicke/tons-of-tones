@@ -10,3 +10,13 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+a {
+  text-decoration: none;
+  font-weight: 600;
+  font-style: italic;
+  color: $violin-red;
+}
+.btn {
+  font-style: normal;
+}

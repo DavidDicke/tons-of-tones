@@ -1,0 +1,42 @@
+.card-guide {
+  padding: 2em;
+  margin-top: 5em;
+  background-color: $flute-blue;
+  h2 {
+    text-align: center;
+  }
+}
+.card-guide .carousel-item {
+  aspect-ratio: 1/1;
+  border-radius: 2rem;
+  background-color: white;
+  padding: 4rem 0;
+  box-shadow: 4px, 10px, 30px,rgba(0,0,0,0.1);
+
+  h5 {
+  text-align: center;
+  margin-top: 1em;
+  }
+}
+.card-guide i {
+  font-size: 5em;
+  text-align: center;
+  width: 100%;
+  padding: 2rem;
+  color: $brass-yellow;
+}
+.carousel-idicator-rel {
+ position: relative;
+ margin-top: 2rem;
+}
+.carousel-indicators {
+  margin: 0;
+  margin-top: 1rem;
+
+  [data-bs-target] {
+    border: solid 2px $piano-black;
+    border-radius: 50%;
+    width: 3px;
+    background-color: $piano-black;
+  }
+}

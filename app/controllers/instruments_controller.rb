@@ -31,9 +31,11 @@ class InstrumentsController < ApplicationController
   end
 
   def edit
+    @instrument = Instrument.find(params[:id])
   end
 
   def update
+    @instrument = Instrument.find(params[:id])
     if @instrument.update(instrument_params)
       redirect_to instrument_path(@instrument), notice: 'Instrument successfully updated!'
     else
@@ -59,6 +61,8 @@ class InstrumentsController < ApplicationController
       @instrument = Instrument.find(params[:id])
     end
   end
+
+
 
 
   def instrument_params
