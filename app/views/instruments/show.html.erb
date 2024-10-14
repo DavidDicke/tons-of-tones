@@ -11,7 +11,7 @@
 <% if @instrument.photos.attached? %>
   <div class="">
     <% @instrument.photos.each do |photo| %>
-      <%= image_tag(photo, class: "") %>
+      <%= cl_image_tag photo.key, width: 400, height: 300, crop: :fill, class: "" %>
     <% end %>
   </div>
 <% else %>
