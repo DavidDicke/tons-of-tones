@@ -4,10 +4,12 @@
       <div class="col-3 p-0">
         <div class="w-100">
           <% if user_signed_in? %>
-            <% if current_user.photo.attached? %>
-              <%= cl_image_tag(current_user.photo.key, class: "avatar", alt: "User Profile Picture") %>
-            <% else %>
-              <%= image_tag "avatar-placeholder.png", class: "avatar", alt: "dropdown menu" %>
+            <%= link_to user_path(current_user) do %>
+              <% if current_user.photo.attached? %>
+                <%= cl_image_tag(current_user.photo.key, class: "avatar", alt: "User Profile Picture") %>
+              <% else %>
+                <%= image_tag "avatar-placeholder.png", class: "avatar", alt: "dropdown menu" %>
+              <% end %>
             <% end %>
           <% end %>
         </div>
