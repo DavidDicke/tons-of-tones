@@ -95,5 +95,31 @@ instruments = Instrument.all
   )
 end
 
+
+user_emails = ["pguelfi@gmail.com", "post@david-dicke.de", "momoelgazzar@gmail.com"]
+today = Date.today
+
+user_emails.each do |email|
+  user = User.find_by(email: email)
+
+  3.times do
+    end_date = Faker::Date.between(from: 1.year.ago, to: today - 1.day)
+    start_date = Faker::Date.between(from: 1.year.ago, to: end_date)
+
+    total_price = (end_date - start_date).to_i * instruments.sample.price
+
+    Booking.create!(
+      instrument: instruments.sample,
+      user: user,
+      start_date: start_date,
+      end_date: end_date,
+      total_price: total_price,
+      status: "completed"
+    )
+  end
+end
+
+
+
 puts "#{Booking.count} bookings created!"
 puts "Seeding complete!"
