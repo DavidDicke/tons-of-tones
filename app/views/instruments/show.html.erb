@@ -27,14 +27,14 @@
 <% end %>
 
 <h3>Reviews for this Instrument:</h3>
-<% reviews = @instrument.bookings.flat_map(&:booking_reviews) %>
+<% reviews = @instrument.booking_reviews %>
 <% if reviews.any? %>
   <ul>
     <% reviews.each do |review| %>
       <li>
         <strong>Rating:</strong> <%= review.rating %> / 5<br>
         <strong>Review:</strong> <%= review.content %><br>
-        <strong>By:</strong> <%= "#{review.booking.user.first_name} #{review.booking.user.last_name}" %>
+        <strong>By:</strong> <%= "#{review.user.first_name} #{review.user.last_name}" %>
         <!-- #TODO Link to user profile -->
       </li>
     <% end %>

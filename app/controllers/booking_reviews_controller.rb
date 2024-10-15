@@ -2,19 +2,28 @@ class BookingReviewsController < ApplicationController
 
   def new
     @booking = Booking.find(params[:booking_id])
-    @booking_review = @booking.booking_reviews.build
+
+    if @booking.booking_review.present?
+      redirect_to instrument_path(@booking.instrument), notice: 'You have already submitted a review for this booking.'
+    else
+      @booking_review = @booking.build_booking_review
+    end
   end
 
   def create
     @booking = Booking.find(params[:booking_id])
-    @booking_review = @booking.booking_reviews.new(booking_review_params)
-    @booking_review.user = current_user
 
-    if @booking_review.save
-      redirect_to instrument_path(@booking.instrument), notice: "Review added successfully."
+    if @booking.booking_review.present?
+      redirect_to instrument_path(@booking.instrument), notice: 'You have already submitted a review for this booking.'
     else
-      # Redirect with an error message if the review is not saved
-      redirect_to instrument_path(@booking.instrument), alert: @booking_review.errors.full_messages.to_sentence
+      @booking_review = @booking.build_booking_review(booking_review_params)
+      @booking_review.user = current_user
+
+      if @booking_review.save
+        redirect_to instrument_path(@booking.instrument), notice: 'Review added successfully.'
+      else
+        redirect_to instrument_path(@booking.instrument), alert: @booking_review.errors.full_messages.to_sentence
+      end
     end
   end
 

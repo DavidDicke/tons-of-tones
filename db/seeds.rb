@@ -2,10 +2,10 @@ require 'faker'
 require 'open-uri'
 
 # Clear existing data
+BookingReview.destroy_all  # Clear existing reviews
 Booking.destroy_all
 Instrument.destroy_all
 User.destroy_all
-BookingReview.destroy_all  # Add this line to clear existing reviews
 
 # Create Users
 puts "Creating users..."
@@ -81,6 +81,7 @@ puts "#{Instrument.count} instruments created!"
 puts "Creating bookings..."
 instruments = Instrument.all
 
+# Create 100 random bookings
 100.times do
   start_date = Faker::Date.between(from: Date.today, to: 1.month.from_now)
   end_date = start_date + rand(1..10).days
@@ -96,13 +97,14 @@ instruments = Instrument.all
   )
 end
 
+# Additional bookings for specific users
 user_emails = ["pguelfi@gmail.com", "post@david-dicke.de", "momoelgazzar@gmail.com"]
 today = Date.today
 
 user_emails.each do |email|
   user = User.find_by(email: email)
 
-  # Create 5 completed bookings without reviews
+  # Create 2 completed bookings without reviews
   2.times do
     end_date = Faker::Date.between(from: 1.year.ago, to: today - 1.day)
     start_date = Faker::Date.between(from: 1.year.ago, to: end_date)
