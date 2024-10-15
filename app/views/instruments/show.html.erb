@@ -22,4 +22,25 @@
   <%= render 'booking_form' %>
 <% end %>
 
+<% if current_user && current_user != @instrument.user %>
+  <%= render 'booking_form' %>
+<% end %>
+
+<h3>Reviews for this Instrument:</h3>
+<% reviews = @instrument.bookings.flat_map(&:booking_reviews) %>
+<% if reviews.any? %>
+  <ul>
+    <% reviews.each do |review| %>
+      <li>
+        <strong>Rating:</strong> <%= review.rating %> / 5<br>
+        <strong>Review:</strong> <%= review.content %><br>
+        <strong>By:</strong> <%= "#{review.booking.user.first_name} #{review.booking.user.last_name}" %>
+        <!-- #TODO Link to user profile -->
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No reviews yet for this instrument.</p>
+<% end %>
+
 <%= link_to 'Back to Instruments', instruments_path, class: "" %>

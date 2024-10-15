@@ -1,0 +1,8 @@
+<h2>Write your review</h2>
+<%= simple_form_for [@booking, @booking_review] do |f| %>
+  <%= f.input :content, placeholder: "How did you like the instrument?" %>
+
+  <%= f.input :rating, label: "Rating (0-5)", input_html: { min: 0, max: 5, step: 1 } %>
+
+  <%= f.submit "Add Review", class: "btn btn-flat" %>
+<% end %>

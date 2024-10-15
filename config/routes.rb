@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   end
 
   resources :bookings, only: [:index, :show, :edit, :update] do
+    resources :booking_reviews, only: [:new, :create]
+
     collection do
       get 'user_bookings', to: 'bookings#user_bookings'
       get 'instrument_bookings', to: 'bookings#instrument_bookings'
