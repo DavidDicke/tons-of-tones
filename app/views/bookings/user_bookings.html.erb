@@ -77,6 +77,11 @@
               Instrument: <%= user_booking.instrument.name %>,
               Status: <%= user_booking.status %>,
               Period booked: <%= user_booking.start_date.strftime("%B %d, %Y") %> to <%= user_booking.end_date.strftime("%B %d, %Y") %>
+              <% if user_booking.booking_review %>
+                <%= link_to "View Your Review", instrument_path(user_booking.instrument) %>
+              <% else %>
+                <%= link_to "Write a Review", new_booking_booking_review_path(user_booking.id) %>
+              <% end %>
             </li>
           <% end %>
         <% else %>
