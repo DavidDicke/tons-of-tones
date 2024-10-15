@@ -41,7 +41,7 @@
   </ul>
 <% else %>
   <p>No reviews yet for this instrument.</p>
-
+<% end %>
 <h3>Rented out by</h3>
 <%= link_to @instrument.user.first_name, user_path(@instrument.user) %>
 
