@@ -22,10 +22,6 @@
   <%= render 'booking_form' %>
 <% end %>
 
-<% if current_user && current_user != @instrument.user %>
-  <%= render 'booking_form' %>
-<% end %>
-
 <h3>Reviews for this Instrument:</h3>
 <% reviews = @instrument.booking_reviews %>
 <% if reviews.any? %>
