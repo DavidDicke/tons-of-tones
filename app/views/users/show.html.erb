@@ -1,18 +1,54 @@
 <div class="container">
-  <h4><%= @user.first_name %><%= @user.last_name %></h4>
+  <h4><%= @user.first_name %> <%= @user.last_name %></h4>
+
   <% if current_user.photo.attached? %>
     <%= cl_image_tag(@user.photo.key, class: "avatar", alt: "User Profile Picture") %>
   <% else %>
     <%= image_tag "avatar-placeholder.png", class: "avatar", alt: "dropdown menu" %>
   <% end %>
-  <h4>TODO: Reviews</h4>
+
+  <h4>Reviews about me</h4>
+
+  <% if @reviews_about_me.any? %>
+    <ul>
+      <% @reviews_about_me.each do |review| %>
+        <li>
+          <strong>About:</strong> <%= link_to review.booking.instrument.name, instrument_path(review.booking.instrument) %><br>
+          <strong>Rating:</strong> <%= review.rating %><br>
+          <strong>Content:</strong> <%= review.content %><br>
+          <strong>Reviewed by:</strong> <%= review.user.first_name %> <%= review.user.last_name %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No reviews about <%= current_user.first_name %> yet.</p>
+  <% end %>
+
+  <h4>Reviews by me</h4>
+
+  <% if @reviews_by_me.any? %>
+    <ul>
+      <% @reviews_by_me.each do |review| %>
+        <li>
+          <strong>About:</strong> <%= link_to review.booking.instrument.name, instrument_path(review.booking.instrument) %><br>
+          <strong>Rating:</strong> <%= review.rating %><br>
+          <strong>Content:</strong> <%= review.content %><br>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No reviews written by this <%= current_user.first_name %> yet.</p>
+  <% end %>
 
   <h4>Instruments</h4>
+
   <% if @user.instruments.any? %>
     <% @user.instruments.each do |instrument| %>
       <div>
-        <%= link_to instrument.name, instrument_path(instrument)%>
+        <%= link_to instrument.name, instrument_path(instrument) %>
       </div>
     <% end %>
+  <% else %>
+    <p>No instruments found for this user.</p>
   <% end %>
 </div>

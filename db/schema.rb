@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_15_125520) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_16_080123) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -75,7 +75,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_15_125520) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "description"
+    t.integer "capacity"
     t.index ["user_id"], name: "index_instruments_on_user_id"
+  end
+
+  create_table "user_reviews", force: :cascade do |t|
+    t.text "content"
+    t.integer "rating"
+    t.bigint "user_id", null: false
+    t.bigint "booking_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["booking_id"], name: "index_user_reviews_on_booking_id"
+    t.index ["user_id"], name: "index_user_reviews_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -86,6 +98,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_15_125520) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
     t.string "first_name"
     t.string "last_name"
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -99,4 +112,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_15_125520) do
   add_foreign_key "bookings", "instruments"
   add_foreign_key "bookings", "users"
   add_foreign_key "instruments", "users"
+  add_foreign_key "user_reviews", "bookings"
+  add_foreign_key "user_reviews", "users"
 end

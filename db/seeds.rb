@@ -1,13 +1,11 @@
 require 'faker'
 require 'open-uri'
 
-# Clear existing data
-BookingReview.destroy_all  # Clear existing reviews
+BookingReview.destroy_all
 Booking.destroy_all
 Instrument.destroy_all
 User.destroy_all
 
-# Create Users
 puts "Creating users..."
 User.create!(
   email: "pguelfi@gmail.com",
@@ -41,6 +39,7 @@ end
 
 puts "#{User.count} users created!"
 
+<<<<<<< HEAD
 # Create Instruments with attached photos
 # puts "Creating instruments..."
 # users = User.all
@@ -57,6 +56,22 @@ puts "#{User.count} users created!"
 #   "drums.jpeg",
 #   "piano.jpg"
 # ]
+=======
+puts "Creating instruments..."
+users = User.all
+
+image_files = [
+  "instrument1.jpg",
+  "instrument2.jpg",
+  "kalimba.webp",
+  "violin.avif",
+  "guitar.jpg",
+  "electric guitar.jpg",
+  "trumpet.jpg",
+  "drums.jpeg",
+  "piano.jpg"
+]
+>>>>>>> master
 
 # TODO: Create Real Adresses in Berlin from: https://www.generatormix.com/random-address-in-berlin?number=50
 
@@ -88,6 +103,7 @@ def create_instruments_manually
     price: rand(50..500),
     user: users.sample
   )
+<<<<<<< HEAD
   # Attach photos to instruments (using image files from the db folder)
   photo_path = Rails.root.join("db/seed_images/cello.webp")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
@@ -425,6 +441,10 @@ def create_instruments_manually
   )
   # Attach photos to instruments (using image files from the db folder)
   photo_path = Rails.root.join("db/seed_images/Yamaha_Drum_Kit.webp")
+=======
+
+  photo_path = Rails.root.join("db/#{image_files.sample}")
+>>>>>>> master
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   puts "Created #{instrument.name} with a photo."
 end
@@ -432,20 +452,28 @@ end
 create_instruments_manually
 puts "#{Instrument.count} instruments created!"
 
+<<<<<<< HEAD
 # Create Bookings
 users = User.all
+=======
+>>>>>>> master
 puts "Creating bookings..."
 instruments = Instrument.all
 
-# Create 100 random bookings
 100.times do
   start_date = Faker::Date.between(from: Date.today, to: 1.month.from_now)
   end_date = start_date + rand(1..10).days
-  total_price = (end_date - start_date).to_i * instruments.sample.price
+
+  instrument = instruments.sample
+
+  # Ensure the user is not the owner of the selected instrument
+  booking_user = users.reject { |user| user == instrument.user }.sample
+
+  total_price = (end_date - start_date).to_i * instrument.price
 
   Booking.create!(
-    instrument: instruments.sample,
-    user: users.sample,
+    instrument: instrument,
+    user: booking_user,
     start_date: start_date,
     end_date: end_date,
     total_price: total_price,
@@ -453,7 +481,7 @@ instruments = Instrument.all
   )
 end
 
-# Additional bookings for specific users
+# Additional bookings for:
 user_emails = ["pguelfi@gmail.com", "post@david-dicke.de", "momoelgazzar@gmail.com"]
 today = Date.today
 
@@ -465,11 +493,14 @@ user_emails.each do |email|
     end_date = Faker::Date.between(from: 1.year.ago, to: today - 1.day)
     start_date = Faker::Date.between(from: 1.year.ago, to: end_date)
 
-    total_price = (end_date - start_date).to_i * instruments.sample.price
+    instrument = instruments.sample
+    booking_user = users.reject { |u| u == instrument.user }.sample
+
+    total_price = (end_date - start_date).to_i * instrument.price
 
     Booking.create!(
-      instrument: instruments.sample,
-      user: user,
+      instrument: instrument,
+      user: booking_user,
       start_date: start_date,
       end_date: end_date,
       total_price: total_price,
@@ -482,11 +513,14 @@ user_emails.each do |email|
     end_date = Faker::Date.between(from: 1.year.ago, to: today - 1.day)
     start_date = Faker::Date.between(from: 1.year.ago, to: end_date)
 
-    total_price = (end_date - start_date).to_i * instruments.sample.price
+    instrument = instruments.sample
+    booking_user = users.reject { |u| u == instrument.user }.sample
+
+    total_price = (end_date - start_date).to_i * instrument.price
 
     booking = Booking.create!(
-      instrument: instruments.sample,
-      user: user,
+      instrument: instrument,
+      user: booking_user,
       start_date: start_date,
       end_date: end_date,
       total_price: total_price,
@@ -504,5 +538,5 @@ user_emails.each do |email|
 end
 
 puts "#{Booking.count} bookings created!"
-puts "#{BookingReview.count} reviews created!"  # Add this line to show the number of created reviews
+puts "#{BookingReview.count} reviews created!"
 puts "Seeding complete!"
