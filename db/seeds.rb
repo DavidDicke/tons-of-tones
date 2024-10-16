@@ -87,7 +87,7 @@ def create_instruments_manually
     user: users.sample
   )
   # Attach photos to instruments (using image files from the db folder)
-  photo_path = Rails.root.join("db/seed_images/cello.webp")
+  photo_path = Rails.root.join("db/seed_images/Cello.webp")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   puts "Created #{instrument.name} with a photo."
 # Create Violin 1
