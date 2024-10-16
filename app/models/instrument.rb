@@ -1,6 +1,6 @@
 class Instrument < ApplicationRecord
   belongs_to :user
-  has_many_attached :photos
+  has_many_attached :photos, dependent: :destroy
   has_many :bookings, dependent: :destroy
   has_many :booking_reviews, through: :bookings
 
