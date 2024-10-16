@@ -75,6 +75,8 @@
           <% completed_instrument_bookings.each do |booking| %>
             <li>
               Instrument: <%= booking.instrument.name %>,
+              User: <%= booking.user.first_name %>, <%= booking.user.last_name %>
+              <%= booking.user.email %>
               Status: <%= booking.status %>,
               Period booked: <%= booking.start_date.strftime("%B %d, %Y") %> to <%= booking.end_date.strftime("%B %d, %Y") %>,
               <% if booking.user_review.present? %>
