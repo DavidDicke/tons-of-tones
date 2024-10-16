@@ -390,7 +390,7 @@ def create_instruments_manually
     user: users.sample
   )
   # Attach photos to instruments (using image files from the db folder)
-  photo_path = Rails.root.join("db/seed_images/Trumpet_Red.jpg")
+  photo_path = Rails.root.join("db/seed_images/Trumpet_red.jpg")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   photo_path = Rails.root.join("db/seed_images/Trumpet_Floor.jpg")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
