@@ -39,7 +39,6 @@ end
 
 puts "#{User.count} users created!"
 
-<<<<<<< HEAD
 # Create Instruments with attached photos
 # puts "Creating instruments..."
 # users = User.all
@@ -56,22 +55,6 @@ puts "#{User.count} users created!"
 #   "drums.jpeg",
 #   "piano.jpg"
 # ]
-=======
-puts "Creating instruments..."
-users = User.all
-
-image_files = [
-  "instrument1.jpg",
-  "instrument2.jpg",
-  "kalimba.webp",
-  "violin.avif",
-  "guitar.jpg",
-  "electric guitar.jpg",
-  "trumpet.jpg",
-  "drums.jpeg",
-  "piano.jpg"
-]
->>>>>>> master
 
 # TODO: Create Real Adresses in Berlin from: https://www.generatormix.com/random-address-in-berlin?number=50
 
@@ -103,7 +86,6 @@ def create_instruments_manually
     price: rand(50..500),
     user: users.sample
   )
-<<<<<<< HEAD
   # Attach photos to instruments (using image files from the db folder)
   photo_path = Rails.root.join("db/seed_images/cello.webp")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
@@ -441,10 +423,6 @@ def create_instruments_manually
   )
   # Attach photos to instruments (using image files from the db folder)
   photo_path = Rails.root.join("db/seed_images/Yamaha_Drum_Kit.webp")
-=======
-
-  photo_path = Rails.root.join("db/#{image_files.sample}")
->>>>>>> master
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   puts "Created #{instrument.name} with a photo."
 end
@@ -452,11 +430,8 @@ end
 create_instruments_manually
 puts "#{Instrument.count} instruments created!"
 
-<<<<<<< HEAD
 # Create Bookings
 users = User.all
-=======
->>>>>>> master
 puts "Creating bookings..."
 instruments = Instrument.all
 
