@@ -11,7 +11,6 @@
   </nav>
 
   <div class="tab-content" id="nav-tabPending">
-
     <!-- Booking Requests -->
     <div class="tab-pane fade show active" id="nav-pending" role="tabpanel" aria-labelledby="nav-pending-tab">
       <ul>
@@ -76,8 +75,16 @@
           <% completed_instrument_bookings.each do |booking| %>
             <li>
               Instrument: <%= booking.instrument.name %>,
+              User: <%= booking.user.first_name %>, <%= booking.user.last_name %>
+              <%= booking.user.email %>
               Status: <%= booking.status %>,
-              Period booked: <%= booking.start_date.strftime("%B %d, %Y") %> to <%= booking.end_date.strftime("%B %d, %Y") %>
+              Period booked: <%= booking.start_date.strftime("%B %d, %Y") %> to <%= booking.end_date.strftime("%B %d, %Y") %>,
+              <% if booking.user_review.present? %>
+                Review: <%= booking.user_review.content %>,
+                Rating: <%= booking.user_review.rating %>
+              <% else %>
+                <%= link_to 'Leave a Review', new_booking_user_review_path(booking), class: 'btn btn-link' %>
+              <% end %>
             </li>
           <% end %>
         <% else %>
@@ -85,6 +92,5 @@
         <% end %>
       </ul>
     </div>
-
   </div>
 </div>

@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
   resources :bookings, only: [:index, :show, :edit, :update] do
     resources :booking_reviews, only: [:new, :create]
+    resources :user_reviews, only: [:new, :create]
 
     collection do
       get 'user_bookings', to: 'bookings#user_bookings'
