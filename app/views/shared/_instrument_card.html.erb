@@ -1,11 +1,7 @@
 <div class="instruments-card card h-100">
   <div class="card-body">
     <h5 class="card-title text-left"><%= link_to instrument.name, instrument_path(instrument) %></h5>
-
-    <p class="card-text text-left"><%= instrument.description %></p>
-
     <p class="text-left">€<%= instrument.price %></p>
-
     <% if instrument.photos.attached? %>
       <%= link_to instrument_path(instrument) do %>
         <%= image_tag instrument.photos[0], class: "img-fluid img-small" %>
