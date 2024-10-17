@@ -464,7 +464,7 @@ user_emails.each do |email|
   user = User.find_by(email: email)
 
   # Create 2 completed bookings without reviews
-  2.times do
+  4.times do
     end_date = Faker::Date.between(from: 1.year.ago, to: today - 1.day)
     start_date = Faker::Date.between(from: 1.year.ago, to: end_date)
 
@@ -484,7 +484,7 @@ user_emails.each do |email|
   end
 
   # Create 3 completed bookings with reviews
-  3.times do
+  6.times do
     end_date = Faker::Date.between(from: 1.year.ago, to: today - 1.day)
     start_date = Faker::Date.between(from: 1.year.ago, to: end_date)
 

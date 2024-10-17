@@ -1,0 +1,16 @@
+<div class="card-product">
+  <%= cl_image_tag photos.first.key %>
+  <div class="card-product-infos">
+    <h2><%= instrument %></h2>
+    <p><%= owner %></p>
+    <p><%= start_date %> to <%= end_date %></p>
+    <% if defined?(rating) %>
+      <p><%= rating %></p>
+    <% end %>
+
+    <% if defined?(cancel_link) && cancel_link.present? %>
+      <%= cancel_link %> <!-- Render the cancel link if available -->
+    <% end %>
+
+  </div>
+</div>
