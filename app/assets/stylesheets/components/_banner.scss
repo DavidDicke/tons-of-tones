@@ -4,12 +4,22 @@
 }
 
 .banner-fullscreen {
-  height: 100dvh - $nav-height;
+  height: calc(100dvh - $nav-height);
 }
 
 .banner-square {
   width: 100%;
   aspect-ratio: 1/1;
+}
+
+.banner-wrapper {
+  position: relative;
+}
+
+.banner-category-tag {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
 }
 
 .banner h1 {

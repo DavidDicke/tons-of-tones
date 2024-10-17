@@ -1,0 +1,12 @@
+.container-viewport {
+  height: 100dvh - $nav-height;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.container-scrollable {
+  overflow: scroll;
+  flex-grow: 1;
+  flex-shrink: 1;
+}

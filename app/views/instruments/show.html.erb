@@ -1,44 +1,67 @@
-<div class="">
-  <% if @instrument.photos.attached? %>
-    <% if @instrument.photos.length > 1 %>
-      <%= render "photos_carousel", carousel_id: "show", instrument: @instrument %>
+<div class="container-viewport">
+  <div class="container-scrollable">
+    <div class="banner-wrapper">
+      <% if @instrument.photos.attached? %>
+        <% if @instrument.photos.length > 1 %>
+          <%= render "photos_carousel", carousel_id: "show", instrument: @instrument %>
+        <% else %>
+          <%= cl_image_tag @instrument.photos.first.key, crop: :fill, class: "banner-square" %>
+        <% end %>
+      <% else %>
+        <p>No photos available for this instrument.</p>
+      <% end %>
+      <div class="banner-category-tag">
+        <%= render "category_tag_btn", instrument: @instrument %>
+      </div>
+    </div>
+
+    <div class="container">
+
+
+    <h1><%= @instrument.name %></h1>
+    <p><%= @instrument.price %> EUR</p>
+    <p><%= @instrument.description %></p>
+    <div>
+    <h4>Pick it up here</h4>
+    <%= @instrument.address %>
+    </div>
+
+
+    <div>
+    <h3>Reviews for this Instrument:</h3>
+    <% reviews = @instrument.booking_reviews %>
+    <% if reviews.any? %>
+      <ul>
+        <% reviews.each do |review| %>
+          <li>
+            <strong>Rating:</strong> <%= review.rating %> / 5<br>
+            <strong>Review:</strong> <%= review.content %><br>
+            <strong>By:</strong> <%= "#{review.user.first_name} #{review.user.last_name}" %>
+            <!-- #TODO Link to user profile -->
+          </li>
+        <% end %>
+      </ul>
     <% else %>
-      <%= cl_image_tag @instrument.photos.first.key, crop: :fill, class: "banner-square" %>
+      <p>No reviews yet for this instrument.</p>
     <% end %>
-  <% else %>
-    <p>No photos available for this instrument.</p>
+    </div>
+    <div>
+    <h3>Rented out by</h3>
+    <%= link_to @instrument.user.first_name, user_path(@instrument.user) %>
+    </div>
+    <%= link_to 'Back to Instruments', instruments_path, class: "" %>
+    </div>
+  </div>
+  <% if current_user && current_user != @instrument.user %>
+    <%# <%= render 'instruments/booking_form' %>
+    <div class="booking-cta">
+      <div>
+        <p>XX €</p>
+        <a href="#">10.Okt.-1.Nov.</a>
+      </div>
+      <div>
+        <button Class="btn btn-primary">Book</button>
+      </div>
+    </div>
   <% end %>
 </div>
-
-<h1><%= @instrument.name %></h1>
-<p><%= @instrument.description %></p>
-<p>Address: <%= @instrument.address %></p>
-<p>Category: <%= @instrument.category %></p>
-<p>Price: <%= @instrument.price %> EUR</p>
-
-
-<% if current_user && current_user != @instrument.user %>
-  <%= render 'instruments/booking_form' %>
-<% end %>
-
-<h3>Reviews for this Instrument:</h3>
-<% reviews = @instrument.booking_reviews %>
-<% if reviews.any? %>
-  <ul>
-    <% reviews.each do |review| %>
-      <li>
-        <strong>Rating:</strong> <%= review.rating %> / 5<br>
-        <strong>Review:</strong> <%= review.content %><br>
-        <strong>By:</strong> <%= "#{review.user.first_name} #{review.user.last_name}" %>
-        <!-- #TODO Link to user profile -->
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>No reviews yet for this instrument.</p>
-<% end %>
-<h3>Rented out by</h3>
-<%= link_to @instrument.user.first_name, user_path(@instrument.user) %>
-
-
-<%= link_to 'Back to Instruments', instruments_path, class: "" %>

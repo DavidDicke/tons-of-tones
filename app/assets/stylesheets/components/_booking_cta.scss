@@ -1,0 +1,13 @@
+.booking-cta {
+  background-color: $flute-blue;
+  width: 100%;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  button {
+    height: 100%;
+  }
+  p,a {
+    margin: 0;
+  }
+}
