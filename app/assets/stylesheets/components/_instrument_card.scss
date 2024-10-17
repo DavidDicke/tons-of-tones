@@ -1,34 +1,56 @@
 .instruments-card {
-  background-color: $flute-blue;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
-  border-radius: 15px;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
 
-  .card-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    text-align: left;
+.img-small {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 8px 8px 0 0;
+}
 
-    h5 {
-      font-weight: bold;
-    }
+.card-body {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+}
 
-    .card-text {
-      display: -webkit-box;
-      -webkit-line-clamp: 2; /* Limit to 2 lines */
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      font-weight: normal; /* Ensure normal text */
-      margin-bottom: 1rem;
-    }
+.card-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
 
-    .img-small {
-      max-width: 50%; /* Ensure the image is responsive */
-      height: auto;
-      border-radius: 8px;
-      margin-top: 1rem; /* Ensure proper spacing between text and image */
-    }
-  }
+.card-body p {
+  font-size: 12px;
+  opacity: 0.7;
+  margin: 0;
+}
+
+.card-trip-pricing {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.card-trip-user {
+  position: absolute;
+  right: 16px;
+  top: -20px;
+  width: 40px;
+  border-radius: 50%;
+  border: 2px solid white; // The border makes it look better as an avatar
+}
+
+.card-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;  /* Limit to 1 line */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Show "..." when the text exceeds 1 line */
 }
