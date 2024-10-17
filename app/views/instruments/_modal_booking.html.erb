@@ -5,13 +5,14 @@
         <h4>Confirm Booking</h4>
       </div>
       <div class="modal-body">
-        <%= simple_form_for [instrument, booking] do |f| %>
-          <%= f.input :start_date, as: :string, input_html: { data: { controller: "datepicker", booking_Cta_Target: "startDateModal" } }, placeholder: booking.start_date %>
-          <%= f.input :end_date, as: :string, input_html: { data: { controller: "datepicker", booking_Cta_Target: "endDateModal" } }, placeholder: booking.end_date %>
+        <%= simple_form_for([instrument, booking], data: { controller: "datepicker", datepicker_bookings_value: instrument.bookings.map {|booking| { from: booking.start_date, to: booking.end_date}} }) do |f| %>
+          <%= f.input :start_date, as: :string, input_html: { data: { datepicker_Target: "startDate", booking_Cta_Target: "startDateModal" } }, placeholder: booking.start_date %>
+          <%= f.input :end_date, as: :string, input_html: { data: { datepicker_Target: "endDate", booking_Cta_Target: "endDateModal" } }, placeholder: booking.end_date, class: "endDate" %>
+          <%= f.submit "Book", class: "btn btn-flat" %>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <% end %>
       </div>
       <div class="modal-footer justify-content-start">
-          <%= f.submit "Book", class: "btn btn-flat" %>
-        <% end %>
       </div>
     </div>
   </div>
