@@ -28,6 +28,10 @@ class UserReviewsController < ApplicationController
     end
   end
 
+  def show
+    @user_review = UserReview.find(params[:id])
+  end
+
   private
 
   def user_review_params

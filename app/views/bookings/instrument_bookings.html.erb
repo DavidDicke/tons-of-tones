@@ -1,96 +1,108 @@
 <div>
-  <h1>Instruments on loan</h1>
+  <h2 class="text-center my-4">On Loan</h2>
 
-  <nav>
-    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-      <button class="nav-link active" id="nav-pending-tab" data-bs-toggle="tab" data-bs-target="#nav-pending" type="button" role="tab" aria-controls="nav-pending" aria-selected="true">Booking Requests</button>
-      <button class="nav-link" id="nav-confirmed-tab" data-bs-toggle="tab" data-bs-target="#nav-confirmed" type="button" role="tab" aria-controls="nav-confirmed" aria-selected="false">Confirmed</button>
-      <button class="nav-link" id="nav-cancelled-tab" data-bs-toggle="tab" data-bs-target="#nav-cancelled" type="button" role="tab" aria-controls="nav-cancelled" aria-selected="false">Rejected</button>
-      <button class="nav-link" id="nav-completed-tab" data-bs-toggle="tab" data-bs-target="#nav-completed" type="button" role="tab" aria-controls="nav-completed" aria-selected="false">Completed</button>
-    </div>
+  <nav class="nav nav-pills nav-justified" id="nav-tab" role="tablist">
+    <a class="nav-link active mx-2 my-3 no-italic" id="nav-active-tab" data-bs-toggle="pill" data-bs-target="#nav-active" role="tab" aria-controls="nav-active" aria-selected="true">Active</a>
+    <a class="nav-link mx-2 my-3 no-italic" id="nav-cancelled-tab" data-bs-toggle="pill" data-bs-target="#nav-cancelled" role="tab" aria-controls="nav-cancelled" aria-selected="false">Rejected</a>
+    <a class="nav-link mx-2 my-3 no-italic" id="nav-completed-tab" data-bs-toggle="pill" data-bs-target="#nav-completed" role="tab" aria-controls="nav-completed" aria-selected="false">Completed</a>
   </nav>
 
-  <div class="tab-content" id="nav-tabPending">
-    <!-- Booking Requests -->
-    <div class="tab-pane fade show active" id="nav-pending" role="tabpanel" aria-labelledby="nav-pending-tab">
-      <ul>
-        <% pending_instrument_bookings = @instrument_bookings.select { |booking| booking.status == 'pending' } %>
-        <% if pending_instrument_bookings.any? %>
-          <% pending_instrument_bookings.each do |booking| %>
-            <li>
-              Instrument: <%= booking.instrument.name %>,
-              Status: <%= booking.status %>,
-              Period booked: <%= booking.start_date.strftime("%B %d, %Y") %> to <%= booking.end_date.strftime("%B %d, %Y") %>
-              <%= button_to 'Confirm', booking_path(booking), method: :patch, params: { booking: { status: :confirmed } }, class: 'btn btn-secondary', data: { turbo: true } %>
-              <%= button_to 'Reject', booking_path(booking), method: :patch, params: { booking: { status: :cancelled } }, class: 'btn btn-dark', data: { turbo: true } %>
-            </li>
-          <% end %>
-        <% else %>
-          <li>You don't have any booking requests.</li>
-        <% end %>
-      </ul>
-    </div>
+  <div class="tab-content" id="nav-tabContent">
+    <!-- Active Bookings -->
+    <div class="tab-pane fade show active" id="nav-active" role="tabpanel" aria-labelledby="nav-active-tab">
+      <% active_bookings = @instrument_bookings.select { |booking| booking.status == 'pending' || booking.status == 'confirmed' } %>
+      <% active_bookings.sort_by! { |booking| booking.status == 'pending' ? 0 : 1 } %> <!-- Sort by status: pending first -->
 
-    <!-- Confirmed -->
-    <div class="tab-pane fade" id="nav-confirmed" role="tabpanel" aria-labelledby="nav-confirmed-tab">
-      <ul>
-        <% confirmed_instrument_bookings = @instrument_bookings.select { |booking| booking.status == 'confirmed' } %>
-        <% if confirmed_instrument_bookings.any? %>
-          <% confirmed_instrument_bookings.each do |booking| %>
-            <li>
-              Instrument: <%= booking.instrument.name %>,
-              Status: <%= booking.status %>,
-              Period booked: <%= booking.start_date.strftime("%B %d, %Y") %> to <%= booking.end_date.strftime("%B %d, %Y") %>
-            </li>
+      <% if active_bookings.any? %>
+        <% has_pending = active_bookings.any? { |booking| booking.status == 'pending' } %>
+        <% has_confirmed = active_bookings.any? { |booking| booking.status == 'confirmed' } %>
+
+        <!-- Pending Section -->
+        <% if has_pending %>
+          <h4 class="ms-4 mt-4">Pending</h4>
+          <hr class="mx-4">
+          <% active_bookings.each do |instrument_booking| %>
+            <% if instrument_booking.status == 'pending' %>
+              <div>
+                <% confirm_link = button_to '<i class="fa-solid fa-check"></i>'.html_safe, booking_path(instrument_booking), method: :patch, params: { booking: { status: :confirmed } }, data: { turbo: true }, class: 'btn btn-light p-1' %>
+                <% cancel_link = button_to '<i class="fa-solid fa-trash"></i>'.html_safe, booking_path(instrument_booking), method: :patch, params: { booking: { status: :cancelled } }, data: { turbo: true }, class: 'btn btn-light p-1' %>
+
+                <%= render partial: 'card_product_bookings', locals: {
+                  photos: instrument_booking.instrument.photos,
+                  instrument: link_to(instrument_booking.instrument.name, alternative_booking_path(instrument_booking.id), class: 'no-italic'),
+                  owner: "#{instrument_booking.user.first_name} #{instrument_booking.user.last_name}",
+                  start_date: instrument_booking.start_date.strftime("%d/%m/%Y"),
+                  end_date: instrument_booking.end_date.strftime("%d/%m/%Y"),
+                  confirm_link: confirm_link,
+                  cancel_link: cancel_link
+                } %>
+              </div>
+            <% end %>
           <% end %>
-        <% else %>
-          <li>You don't have any confirmed bookings.</li>
         <% end %>
-      </ul>
+
+        <!-- Confirmed Section -->
+        <% if has_confirmed %>
+          <h4 class="ms-4 mt-5">Confirmed</h4>
+          <hr class="mx-4">
+          <% active_bookings.each do |instrument_booking| %>
+            <% if instrument_booking.status == 'confirmed' %>
+              <div>
+                <%= render partial: 'card_product_bookings', locals: {
+                  photos: instrument_booking.instrument.photos,
+                  instrument: link_to(instrument_booking.instrument.name, alternative_booking_path(instrument_booking.id), class: 'no-italic'),
+                  owner: "#{instrument_booking.user.first_name} #{instrument_booking.user.last_name}",
+                  start_date: instrument_booking.start_date.strftime("%d/%m/%Y"),
+                  end_date: instrument_booking.end_date.strftime("%d/%m/%Y"),
+                } %>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% else %>
+        <p class="ms-4 mt-4">You have no active bookings.</p>
+      <% end %>
     </div>
 
     <!-- Rejected -->
     <div class="tab-pane fade" id="nav-cancelled" role="tabpanel" aria-labelledby="nav-cancelled-tab">
-      <ul>
-        <% cancelled_instrument_bookings = @instrument_bookings.select { |booking| booking.status == 'cancelled' } %>
-        <% if cancelled_instrument_bookings.any? %>
-          <% cancelled_instrument_bookings.each do |booking| %>
-            <li>
-              Instrument: <%= booking.instrument.name %>,
-              Status: <%= booking.status %>,
-              Period booked: <%= booking.start_date.strftime("%B %d, %Y") %> to <%= booking.end_date.strftime("%B %d, %Y") %>
-            </li>
-          <% end %>
-        <% else %>
-          <li>You have not rejected any bookings.</li>
+      <% cancelled_bookings = @instrument_bookings.select { |booking| booking.status == 'cancelled' } %>
+      <% if cancelled_bookings.any? %>
+        <% cancelled_bookings.each do |instrument_booking| %>
+          <%= render partial: 'card_product_bookings', locals: {
+            photos: instrument_booking.instrument.photos,
+            instrument: link_to(instrument_booking.instrument.name, alternative_booking_path(instrument_booking.id), class: 'no-italic'),
+            owner: "#{instrument_booking.user.first_name} #{instrument_booking.user.last_name}",
+            start_date: instrument_booking.start_date.strftime("%d/%m/%Y"),
+            end_date: instrument_booking.end_date.strftime("%d/%m/%Y")
+          } %>
         <% end %>
-      </ul>
+      <% else %>
+        <p class="ms-4 mt-4">You have not rejected any bookings.</p>
+      <% end %>
     </div>
 
     <!-- Completed -->
     <div class="tab-pane fade" id="nav-completed" role="tabpanel" aria-labelledby="nav-completed-tab">
-      <ul>
-        <% completed_instrument_bookings = @instrument_bookings.select { |booking| booking.status == 'completed' } %>
-        <% if completed_instrument_bookings.any? %>
-          <% completed_instrument_bookings.each do |booking| %>
-            <li>
-              Instrument: <%= booking.instrument.name %>,
-              User: <%= booking.user.first_name %>, <%= booking.user.last_name %>
-              <%= booking.user.email %>
-              Status: <%= booking.status %>,
-              Period booked: <%= booking.start_date.strftime("%B %d, %Y") %> to <%= booking.end_date.strftime("%B %d, %Y") %>,
-              <% if booking.user_review.present? %>
-                Review: <%= booking.user_review.content %>,
-                Rating: <%= booking.user_review.rating %>
-              <% else %>
-                <%= link_to 'Leave a Review', new_booking_user_review_path(booking), class: 'btn btn-link' %>
-              <% end %>
-            </li>
-          <% end %>
-        <% else %>
-          <li>You don't have any completed bookings.</li>
+      <% completed_bookings = @instrument_bookings.select { |booking| booking.status == 'completed' } %>
+      <% if completed_bookings.any? %>
+        <% completed_bookings.each do |instrument_booking| %>
+          <%= render partial: 'card_product_bookings', locals: {
+            photos: instrument_booking.instrument.photos,
+            instrument: link_to(instrument_booking.instrument.name, alternative_booking_path(instrument_booking.id), class: 'no-italic'),
+            owner: "#{instrument_booking.user.first_name} #{instrument_booking.user.last_name}",
+            start_date: instrument_booking.start_date.strftime("%d/%m/%Y"),
+            end_date: instrument_booking.end_date.strftime("%d/%m/%Y"),
+            rating: if instrument_booking.user_review.present?
+              link_to '<i class="fa-brands fa-readme"></i> '.html_safe, booking_user_review_path(instrument_booking, instrument_booking.user_review), class: 'btn p-0'
+            else
+              link_to '<i class="fa-solid fa-pen-nib"></i>'.html_safe, new_booking_user_review_path(instrument_booking), class: 'btn p-0'
+            end
+          } %>
         <% end %>
-      </ul>
+      <% else %>
+        <p class="ms-4 mt-4">You have no completed bookings.</p>
+      <% end %>
     </div>
   </div>
 </div>

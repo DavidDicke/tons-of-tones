@@ -4,13 +4,21 @@
     <h2><%= instrument %></h2>
     <p><%= owner %></p>
     <p><%= start_date %> to <%= end_date %></p>
+
     <% if defined?(rating) %>
       <p><%= rating %></p>
     <% end %>
 
-    <% if defined?(cancel_link) && cancel_link.present? %>
-      <%= cancel_link %> <!-- Render the cancel link if available -->
-    <% end %>
+    <div class="d-flex align-items-center">
+      <% if defined?(confirm_link) && confirm_link.present? %>
+        <div class="me-5"> <!-- Add margin-right to confirm link -->
+          <%= confirm_link %>
+        </div> <!-- Render the confirm link if available -->
+      <% end %>
+      <% if defined?(cancel_link) && cancel_link.present? %>
+        <%= cancel_link %> <!-- Render the cancel link if available -->
+      <% end %>
+    </div>
 
   </div>
 </div>
