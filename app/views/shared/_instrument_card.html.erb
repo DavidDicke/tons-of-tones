@@ -7,7 +7,7 @@
     <p class="text-left">€<%= instrument.price %></p>
 
     <% if instrument.photos.attached? %>
-      <%= link_to instrument_path(instrument) do %>
+      <%= link_to instrument_path(instrument, start_date: start_date, end_date: end_date) do %>
         <%= image_tag instrument.photos[0], class: "img-fluid img-small" %>
       <% end %>
     <% end %>

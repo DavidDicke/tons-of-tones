@@ -59,13 +59,15 @@
   </div>
   <% if current_user && current_user != @instrument.user %>
     <%# <%= render 'instruments/booking_form' %>
-    <div class="booking-cta">
+    <div class="booking-cta" data-controller="booking-cta" data-booking-cta-price-value="<%= @instrument.price %>">
       <div>
-        <p>XX €</p>
-        <a href="#">10.Okt.-1.Nov.</a>
+      <%# Add stimulus target %>
+        <h5 data-booking-cta-target="totalPrice" ></h5>
+        <a href="#" data-booking-cta-target="dateRangePrev" data-bs-toggle="modal" data-bs-target="#BookingModal"></a>
       </div>
       <div>
-        <button Class="btn btn-primary">Book</button>
+        <button Class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#BookingModal" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">Book</button>
+        <%= render "modal_booking", instrument: @instrument, booking: @booking %>
       </div>
     </div>
   <% end %>

@@ -7,11 +7,14 @@ class InstrumentsController < ApplicationController
     else
       @instruments = Instrument.all
     end
+    set_dates
   end
 
   def show
     @instrument = Instrument.find(params[:id])
     @booking = Booking.new
+    @booking.start_date = params[:start_date] if params[:start_date]
+    @booking.end_date = params[:end_date] if params[:end_date]
     @booking.user_id = current_user.id if current_user.present?
   end
 
@@ -66,7 +69,18 @@ class InstrumentsController < ApplicationController
     end
   end
 
-
+  def set_dates
+    if params[:start_date]
+      @start_date = params[:start_date]
+    else
+      @start_date = Date.today
+    end
+    if params[:end_date]
+      @end_date = params[:end_date]
+    else
+      @end_date = Date.today + 1
+    end
+  end
 
 
   def instrument_params

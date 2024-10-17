@@ -64,7 +64,7 @@ puts "#{User.count} users created!"
 #     description: Faker::Lorem.paragraph(sentence_count: 2),
 #     category: ['String', 'Keyboard', 'Brass', 'Woodwind', 'Percussion'].sample,
 #     address: Faker::Address.full_address,
-#     price: rand(50..500),
+#     price: rand(2..50),
 #     user: users.sample
 #   )
 
@@ -83,7 +83,7 @@ def create_instruments_manually
     description: Faker::Lorem.paragraph(sentence_count: 2),
     category: "String",
     address: "Berlin",
-    price: rand(50..500),
+    price: rand(2..50),
     user: users.sample
   )
   # Attach photos to instruments (using image files from the db folder)
@@ -96,7 +96,7 @@ def create_instruments_manually
     description: Faker::Lorem.paragraph(sentence_count: 2),
     category: "String",
     address: "Berlin",
-    price: rand(50..500),
+    price: rand(2..50),
     user: users.sample
   )
   # Attach photos to instruments (using image files from the db folder)
@@ -109,7 +109,7 @@ def create_instruments_manually
     description: Faker::Lorem.paragraph(sentence_count: 2),
     category: "String",
     address: "Berlin",
-    price: rand(50..500),
+    price: rand(2..50),
     user: users.sample
   )
   # Attach photos to instruments (using image files from the db folder)
@@ -122,7 +122,7 @@ def create_instruments_manually
     description: Faker::Lorem.paragraph(sentence_count: 2),
     category: "Guitar",
     address: "Berlin",
-    price: rand(50..500),
+    price: rand(2..50),
     user: users.sample
   )
   # Attach photos to instruments (using image files from the db folder)
@@ -135,7 +135,7 @@ def create_instruments_manually
     description: Faker::Lorem.paragraph(sentence_count: 2),
     category: "Guitar",
     address: "Berlin",
-    price: rand(50..500),
+    price: rand(2..50),
     user: users.sample
   )
   # Attach photos to instruments (using image files from the db folder)
@@ -148,7 +148,7 @@ def create_instruments_manually
     description: Faker::Lorem.paragraph(sentence_count: 2),
     category: "Brass",
     address: "Berlin",
-    price: rand(50..500),
+    price: rand(2..50),
     user: users.sample
   )
   # Attach photos to instruments (using image files from the db folder)
@@ -161,7 +161,7 @@ def create_instruments_manually
     description: Faker::Lorem.paragraph(sentence_count: 2),
     category: "Woodwind",
     address: "Berlin",
-    price: rand(50..500),
+    price: rand(2..50),
     user: users.sample
   )
   # Attach photos to instruments (using image files from the db folder)
@@ -174,7 +174,7 @@ def create_instruments_manually
     description: Faker::Lorem.paragraph(sentence_count: 2),
     category: "Drums",
     address: "Berlin",
-    price: rand(50..500),
+    price: rand(2..50),
     user: users.sample
   )
   # Attach photos to instruments (using image files from the db folder)
@@ -187,7 +187,7 @@ def create_instruments_manually
     description: Faker::Lorem.paragraph(sentence_count: 2),
     category: "String",
     address: "Berlin",
-    price: rand(50..500),
+    price: rand(2..50),
     user: users.sample
   )
   # Attach photos to instruments (using image files from the db folder)
@@ -200,7 +200,7 @@ def create_instruments_manually
     description: Faker::Lorem.paragraph(sentence_count: 2),
     category: "Drums",
     address: "Berlin",
-    price: rand(50..500),
+    price: rand(2..50),
     user: users.sample
   )
   # Attach photos to instruments (using image files from the db folder)
@@ -213,7 +213,7 @@ def create_instruments_manually
     description: Faker::Lorem.paragraph(sentence_count: 2),
     category: "Drums",
     address: "Berlin",
-    price: rand(50..500),
+    price: rand(2..50),
     user: users.sample
   )
   # Attach photos to instruments (using image files from the db folder)
@@ -226,7 +226,7 @@ def create_instruments_manually
     description: Faker::Lorem.paragraph(sentence_count: 2),
     category: "Drums",
     address: "Berlin",
-    price: rand(50..500),
+    price: rand(2..50),
     user: users.sample
   )
   # Attach photos to instruments (using image files from the db folder)
@@ -239,7 +239,7 @@ def create_instruments_manually
     description: Faker::Lorem.paragraph(sentence_count: 2),
     category: "Drums",
     address: "Berlin",
-    price: rand(50..500),
+    price: rand(2..50),
     user: users.sample
   )
   # Attach photos to instruments (using image files from the db folder)
@@ -252,7 +252,7 @@ def create_instruments_manually
     description: Faker::Lorem.paragraph(sentence_count: 2),
     category: "Drums",
     address: "Berlin",
-    price: rand(50..500),
+    price: rand(2..50),
     user: users.sample
   )
   # Attach photos to instruments (using image files from the db folder)
@@ -265,7 +265,7 @@ def create_instruments_manually
     description: Faker::Lorem.paragraph(sentence_count: 2),
     category: "Guitars",
     address: "Berlin",
-    price: rand(50..500),
+    price: rand(2..50),
     user: users.sample
   )
   # Attach photos to instruments (using image files from the db folder)
@@ -278,7 +278,7 @@ def create_instruments_manually
     description: Faker::Lorem.paragraph(sentence_count: 2),
     category: "Keys",
     address: "Berlin",
-    price: rand(50..500),
+    price: rand(2..50),
     user: users.sample
   )
   # Attach photos to instruments (using image files from the db folder)
@@ -291,7 +291,7 @@ def create_instruments_manually
     description: Faker::Lorem.paragraph(sentence_count: 2),
     category: "Woodwind",
     address: "Berlin",
-    price: rand(50..500),
+    price: rand(2..50),
     user: users.sample
   )
   # Attach photos to instruments (using image files from the db folder)
@@ -304,7 +304,7 @@ def create_instruments_manually
     description: Faker::Lorem.paragraph(sentence_count: 2),
     category: "String",
     address: "Berlin",
-    price: rand(50..500),
+    price: rand(2..50),
     user: users.sample
   )
   # Attach photos to instruments (using image files from the db folder)
@@ -317,7 +317,7 @@ def create_instruments_manually
     description: Faker::Lorem.paragraph(sentence_count: 2),
     category: "Synthesizer",
     address: "Berlin",
-    price: rand(50..500),
+    price: rand(2..50),
     user: users.sample
   )
   # Attach photos to instruments (using image files from the db folder)
@@ -330,7 +330,7 @@ def create_instruments_manually
     description: Faker::Lorem.paragraph(sentence_count: 2),
     category: "Woodwind",
     address: "Berlin",
-    price: rand(50..500),
+    price: rand(2..50),
     user: users.sample
   )
   # Attach photos to instruments (using image files from the db folder)
@@ -345,7 +345,7 @@ def create_instruments_manually
     description: Faker::Lorem.paragraph(sentence_count: 2),
     category: "Brass",
     address: "Berlin",
-    price: rand(50..500),
+    price: rand(2..50),
     user: users.sample
   )
   # Attach photos to instruments (using image files from the db folder)
@@ -360,7 +360,7 @@ def create_instruments_manually
     description: Faker::Lorem.paragraph(sentence_count: 2),
     category: "Drums",
     address: "Berlin",
-    price: rand(50..500),
+    price: rand(2..50),
     user: users.sample
   )
   # Attach photos to instruments (using image files from the db folder)
@@ -373,7 +373,7 @@ def create_instruments_manually
     description: Faker::Lorem.paragraph(sentence_count: 2),
     category: "Synthesizer",
     address: "Berlin",
-    price: rand(50..500),
+    price: rand(2..50),
     user: users.sample
   )
   # Attach photos to instruments (using image files from the db folder)
@@ -386,7 +386,7 @@ def create_instruments_manually
     description: Faker::Lorem.paragraph(sentence_count: 2),
     category: "Brass",
     address: "Berlin",
-    price: rand(50..500),
+    price: rand(2..50),
     user: users.sample
   )
   # Attach photos to instruments (using image files from the db folder)
@@ -403,7 +403,7 @@ def create_instruments_manually
     description: Faker::Lorem.paragraph(sentence_count: 2),
     category: "Brass",
     address: "Berlin",
-    price: rand(50..500),
+    price: rand(2..50),
     user: users.sample
   )
   # Attach photos to instruments (using image files from the db folder)
@@ -418,7 +418,7 @@ def create_instruments_manually
     description: Faker::Lorem.paragraph(sentence_count: 2),
     category: "Drums",
     address: "Berlin",
-    price: rand(50..500),
+    price: rand(2..50),
     user: users.sample
   )
   # Attach photos to instruments (using image files from the db folder)
@@ -463,8 +463,8 @@ today = Date.today
 user_emails.each do |email|
   user = User.find_by(email: email)
 
-  # Create 2 completed bookings without reviews
-  2.times do
+  # Create 4 completed bookings without reviews
+  4.times do
     end_date = Faker::Date.between(from: 1.year.ago, to: today - 1.day)
     start_date = Faker::Date.between(from: 1.year.ago, to: end_date)
 
@@ -483,8 +483,8 @@ user_emails.each do |email|
     )
   end
 
-  # Create 3 completed bookings with reviews
-  3.times do
+  # Create 6 completed bookings with reviews
+  6.times do
     end_date = Faker::Date.between(from: 1.year.ago, to: today - 1.day)
     start_date = Faker::Date.between(from: 1.year.ago, to: end_date)
 

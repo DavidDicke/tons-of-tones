@@ -1,0 +1,18 @@
+<div class="modal fade p-0" id="BookingModal" tabindex="-1" role="dialog" aria-labelledby="newNavbarLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content h-100">
+      <div class="modal-header">
+        <h4>Confirm Booking</h4>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for [instrument, booking] do |f| %>
+          <%= f.input :start_date, as: :string, input_html: { data: { controller: "datepicker", booking_Cta_Target: "startDateModal" } }, placeholder: booking.start_date %>
+          <%= f.input :end_date, as: :string, input_html: { data: { controller: "datepicker", booking_Cta_Target: "endDateModal" } }, placeholder: booking.end_date %>
+      </div>
+      <div class="modal-footer justify-content-start">
+          <%= f.submit "Book", class: "btn btn-flat" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
