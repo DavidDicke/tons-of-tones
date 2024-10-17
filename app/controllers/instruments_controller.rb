@@ -2,7 +2,11 @@ class InstrumentsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
-    @instruments = Instrument.all
+    if params[:category]
+      @instruments = Instrument.where("category = ?", params[:category])
+    else
+      @instruments = Instrument.all
+    end
   end
 
   def show

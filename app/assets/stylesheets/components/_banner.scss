@@ -4,7 +4,8 @@
 }
 
 .banner-fullscreen {
-  height: calc(100dvh - $nav-height);
+  // Navbar Height should be absolute, then calc(100dvh - ¢nav-height) should be used
+  height: 100dvh - $nav-height;
 }
 
 .banner-square {
