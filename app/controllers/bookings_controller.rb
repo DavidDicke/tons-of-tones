@@ -25,6 +25,11 @@ class BookingsController < ApplicationController
     @booking = @instrument.bookings.new(booking_params)
     @booking.user_id = current_user.id if current_user.present?
 
+    if @booking.start_date.blank? || @booking.end_date.blank?
+      flash[:alert] = "Both start and end dates must be provided."
+      render 'instruments/show', status: :unprocessable_entity and return
+    end
+
     if @booking.end_date < @booking.start_date
       flash[:alert] = "End date cannot be before start date."
       render 'instruments/show', status: :unprocessable_entity and return
