@@ -1,31 +1,44 @@
+// .card-product {
+//   overflow: hidden;
+//   height: 120px; /*
+//   background: white;
+//   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+//   display: flex;
+//   align-items: stretch; /*
+//   border-radius: 4px;
+//   margin: 15px;
+// }
+
 .card-product {
-  overflow: hidden;
-  height: 120px;
-  background: white;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
   display: flex;
-  align-items: center;
+  align-items: stretch; /* all columns are the same height */
+  background: white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
   margin: 15px;
+  overflow: hidden;
+  height: 120px;
 }
+
+// .card-product img {
+//   height: 100%;
+//   width: 120px;
+//   object-fit: cover;
+// }
 
 .card-product img {
+  width: 120px; /*
   height: 100%;
-  width: 120px;
-  object-fit: cover;
-}
-// .card-product h2 {
-//   font-size: 16px;
-//   font-weight: bold;
-//   margin: 0;
-// }
-.card-product h2 {
-  font-size: 15px;
-  font-weight: bold;
-  margin-top: 10px;
+  object-fit: cover; /*  */
 }
 
-.card-product p {
+.details h2 {
+  font-size: 15px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.details p {
   font-size: 12px;
   line-height: 1.4;
   opacity: .7;
@@ -33,6 +46,52 @@
   margin-top: 8px;
 }
 
-.card-product .card-product-infos {
+// .par-and-icons {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: stretch; /*  */
+//   padding-left: 8px;
+//   margin-top: 8px; /*  */
+// }
+
+// .par {
+//   flex-grow: 1; /*  */
+//   padding-right: 10px; /*  */
+//   overflow: hidden; /*  */
+// }
+
+// .icons {
+//   width: 100px; /*  */
+//   text-align: right; /*  */
+//   display: flex;
+//   flex-direction: column; /*  */
+//   justify-content: center; /*  */
+// }
+
+// .icons p {
+//   margin-bottom: 5px; /*  */
+// }
+
+.card-product-infos {
+  display: flex;
+  flex-grow: 1;
   padding: 16px;
+  justify-content: space-between;
+}
+
+.details {
+  display: flex;
+  flex-grow: 1;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.icons {
+  width: 100px;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
