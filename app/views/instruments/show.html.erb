@@ -1,45 +1,75 @@
-<h1>Instruments#show</h1>
-<p>Find me in app/views/instruments/show.html.erb</p>
+<div class="container-viewport">
+  <div class="container-scrollable">
+    <div class="banner-wrapper">
+      <% if @instrument.photos.attached? %>
+        <% if @instrument.photos.length > 1 %>
+          <%= render "photos_carousel", carousel_id: "show", instrument: @instrument %>
+        <% else %>
+          <%= cl_image_tag @instrument.photos.first.key, crop: :fill, class: "banner-square" %>
+        <% end %>
+      <% else %>
+        <p>No photos available for this instrument.</p>
+      <% end %>
+      <div class="banner-category-tag">
+        <%= render "instruments/category_tag_btn", instrument: @instrument %>
+      </div>
+    </div>
 
-<h1><%= @instrument.name %></h1>
-<p><%= @instrument.description %></p>
-<p>Address: <%= @instrument.address %></p>
-<p>Category: <%= @instrument.category %></p>
-<p>Price: <%= @instrument.price %> EUR</p>
+    <div class="container">
 
-<h3>Photos</h3>
-<% if @instrument.photos.attached? %>
-  <div class="">
-    <% @instrument.photos.each do |photo| %>
-      <%= cl_image_tag photo.key, width: 400, height: 300, crop: :fill, class: "" %>
+    <div class="pt-3">
+      <h1><%= @instrument.name %></h1>
+    </div>
+    <div class="py-3 d-flex align-items-end">
+      <h3 class="text-primary me-1"><%= @instrument.price %> €</h3><h6> per day</h6>
+    </div>
+    <div class="pt-3 border-top border-secondary">
+      <p><%= @instrument.description %></p>
+    </div>
+    <div class="pt-4 border-top border-secondary">
+      <h4>Pick it up here</h4>
+      <%= @instrument.address %>
+    </div>
+
+
+    <div class="pt-4">
+    <h4>What other users think</h4>
+    <% reviews = @instrument.booking_reviews %>
+    <% if reviews.any? %>
+      <ul>
+        <% reviews.each do |review| %>
+          <li>
+            <strong>Rating:</strong> <%= review.rating %> / 5<br>
+            <strong>Review:</strong> <%= review.content %><br>
+            <strong>By:</strong> <%= "#{review.user.first_name} #{review.user.last_name}" %>
+            <!-- #TODO Link to user profile -->
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>No reviews yet for this instrument.</p>
     <% end %>
+    </div>
+    <div class="pt-4">
+      <h4>Rented out by</h4>
+      <%= render "users/card_user", user: @instrument.user %>
+      <%# <%= link_to @instrument.user.first_name, user_path(@instrument.user) %>
+    </div>
+    <%= link_to 'Back to Instruments', instruments_path, class: "" %>
+    </div>
   </div>
-<% else %>
-  <p>No photos available for this instrument.</p>
-<% end %>
-
-<% if current_user && current_user != @instrument.user %>
-  <%= render 'instruments/booking_form' %>
-<% end %>
-
-<h3>Reviews for this Instrument:</h3>
-<% reviews = @instrument.booking_reviews %>
-<% if reviews.any? %>
-  <ul>
-    <% reviews.each do |review| %>
-      <li>
-        <strong>Rating:</strong> <%= review.rating %> / 5<br>
-        <strong>Review:</strong> <%= review.content %><br>
-        <strong>By:</strong> <%= "#{review.user.first_name} #{review.user.last_name}" %>
-        <!-- #TODO Link to user profile -->
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>No reviews yet for this instrument.</p>
-<% end %>
-<h3>Rented out by</h3>
-<%= link_to @instrument.user.first_name, user_path(@instrument.user) %>
-
-
-<%= link_to 'Back to Instruments', instruments_path, class: "" %>
+  <% if current_user && current_user != @instrument.user %>
+    <%# <%= render 'instruments/booking_form' %>
+    <div class="booking-cta" data-controller="booking-cta" data-booking-cta-price-value="<%= @instrument.price %>">
+      <div>
+      <%# Add stimulus target %>
+        <h5 data-booking-cta-target="totalPrice" ></h5>
+        <a href="#" data-booking-cta-target="dateRangePrev" data-bs-toggle="modal" data-bs-target="#BookingModal"></a>
+      </div>
+      <div>
+        <button Class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#BookingModal" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">Book</button>
+        <%= render "instruments/modal_booking", instrument: @instrument, booking: @booking %>
+      </div>
+    </div>
+  <% end %>
+</div>

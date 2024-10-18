@@ -1,0 +1,12 @@
+<%# User should be given as an attribute %>
+<div class="card-user">
+  <% if current_user.photo.attached? %>
+    <%= cl_image_tag(user.photo.key, alt: "User Profile Picture") %>
+  <% else %>
+    <%= image_tag "avatar-placeholder.png", class: "avatar", alt: "dropdown menu" %>
+  <% end %>
+  <div class="card-user-infos">
+    <h2><%= user.first_name  %> <%= user.last_name  %></h2>
+    <p>*****</p>
+  </div>
+</div>
