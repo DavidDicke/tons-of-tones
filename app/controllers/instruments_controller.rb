@@ -2,11 +2,9 @@ class InstrumentsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
-    if params[:category]
-      @instruments = Instrument.where("category = ?", params[:category])
-    else
-      @instruments = Instrument.all
-    end
+    @instruments = Instrument.all
+    filter_categories
+    filter_search
     set_dates
   end
 
@@ -82,6 +80,22 @@ class InstrumentsController < ApplicationController
     end
   end
 
+  def filter_dates
+
+  end
+
+  def filter_categories
+    if params[:category].present?
+      @instruments = Instrument.where("category = ?", params[:category])
+    end
+  end
+
+  def filter_search
+    if params[:query].present?
+      sql_query = "name @@ :query OR description @@ :query OR category @@ :query"
+      @instruments = Instrument.where(sql_query, query: "%#{params[:query]}%")
+    end
+  end
 
   def instrument_params
     params.require(:instrument).permit(:name, :description, :address, :price, :category, photos: [])

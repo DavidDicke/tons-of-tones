@@ -77,3 +77,5 @@ end
 gem 'devise'
 
 gem 'cloudinary'
+
+gem "pg_search"

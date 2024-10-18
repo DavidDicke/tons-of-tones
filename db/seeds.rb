@@ -272,7 +272,20 @@ def create_instruments_manually
   photo_path = Rails.root.join("db/seed_images/E_Guitar_Gibson_Les_Paul.webp")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   puts "Created #{instrument.name} with a photo."
-# Create Electric Organ
+# Create E Guitar Telecaster
+instrument = Instrument.create!(
+  name: "Fender Telecaster",
+  description: Faker::Lorem.paragraph(sentence_count: 2),
+  category: "Guitars",
+  address: "Berlin",
+  price: rand(2..50),
+  user: users.sample
+)
+# Attach photos to instruments (using image files from the db folder)
+photo_path = Rails.root.join("db/seed_images/E_Guitar_Telcaster.webp")
+instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+puts "Created #{instrument.name} with a photo."
+  # Create Electric Organ
   instrument = Instrument.create!(
     name: "Vintage Electric Organ",
     description: Faker::Lorem.paragraph(sentence_count: 2),
