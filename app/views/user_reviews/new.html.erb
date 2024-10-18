@@ -14,7 +14,8 @@
       <%= f.input :content, as: :text, placeholder: "How did they handle your instrument?", label: false, input_html: { rows: 8 } %>
       <%= f.input :rating, as: :select, collection: (1..5), required: true, label: false, input_html: { data: { controller: "star-rating" } } %>
       <%= f.submit "Submit", class: "btn btn-primary mt-2 mb-4 mr-4", data: { turbo: true } %>
-      <%= link_to 'Cancel', instrument_bookings_bookings_path, class: 'btn btn-secondary mt-2 mb-4' %>
+      <%# <%= link_to 'Cancel', instrument_bookings_bookings_path, class: 'btn btn-secondary mt-2 mb-4' %>
+      <button onclick="window.history.back()" class="btn btn-secondary mt-2 mb-4">Cancel</button>
     <% end %>
     <%= cl_image_tag @booking.instrument.photos.first.key, style: "width: 100%; height: auto; border-radius: 0.5rem;" %>
   </div>

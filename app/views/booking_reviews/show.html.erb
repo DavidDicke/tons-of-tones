@@ -1,8 +1,23 @@
-<h2>Review</h2>
+<div id="review_show">
+  <div class="rounded p-3 pb-10">
+    <h5 class="pt-3 pb-3">Your Review</h5>
 
-<p><strong>Rating:</strong> <%= @booking_review.rating %> / 5</p>
+    <p>
+      <strong>Rating:</strong>
+      <% @booking_review.rating.times do %>
+        <i class="fas fa-star star-yellow"></i>
+      <% end %>
+      <% (5 - @booking_review.rating).times do %>
+        <i class="fas fa-star"></i>
+      <% end %>
+      / 5
+    </p>
 
-<p><strong>Review:</strong> <%= @booking_review.content %></p>
+    <p><strong>Comments:</strong></p>
+    <p><%= @booking_review.content %></p>
 
+    <%= cl_image_tag @booking_review.booking.instrument.photos.first.key, style: "width: 100%; height: auto; border-radius: 0.5rem;" %>
 
-<%= link_to 'Back to Instruments Borrowed', user_bookings_bookings_path, class: 'btn btn-flat' %>
+    <button onclick="window.history.back()" class="btn btn-secondary mt-4">Back to Bookings</button>
+  </div>
+</div>

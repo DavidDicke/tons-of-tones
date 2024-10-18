@@ -24,7 +24,7 @@
           <% active_bookings.each do |user_booking| %>
             <% if user_booking.status == 'pending' %>
               <div>
-                <% cancel_link = button_to '<i class="fa-solid fa-trash"></i>'.html_safe, booking_path(user_booking), method: :patch, params: { booking: { status: :cancelled } }, data: { turbo: true }, class: 'btn btn-light p-1' %>
+                <% cancel_link = button_to '<i class="fa-solid fa-trash"></i>'.html_safe, booking_path(user_booking), method: :patch, params: { booking: { status: :cancelled } }, data: { turbo: true }, class: 'btn p-1' %>
 
                 <%= render partial: 'card_product_bookings', locals: {
                   photos: user_booking.instrument.photos,

@@ -24,8 +24,8 @@
           <% active_bookings.each do |instrument_booking| %>
             <% if instrument_booking.status == 'pending' %>
               <div>
-                <% confirm_link = button_to '<i class="fa-solid fa-check"></i>'.html_safe, booking_path(instrument_booking), method: :patch, params: { booking: { status: :confirmed } }, data: { turbo: true }, class: 'btn btn-light p-1' %>
-                <% cancel_link = button_to '<i class="fa-solid fa-trash"></i>'.html_safe, booking_path(instrument_booking), method: :patch, params: { booking: { status: :cancelled } }, data: { turbo: true }, class: 'btn btn-light p-1' %>
+                <% confirm_link = button_to '<i class="fa-solid fa-check"></i>'.html_safe, booking_path(instrument_booking), method: :patch, params: { booking: { status: :confirmed } }, data: { turbo: true }, class: 'btn p-0' %>
+                <% cancel_link = button_to '<i class="fa-solid fa-trash"></i>'.html_safe, booking_path(instrument_booking), method: :patch, params: { booking: { status: :cancelled } }, data: { turbo: true }, class: 'btn p-0' %>
 
                 <%= render partial: 'card_product_bookings', locals: {
                   photos: instrument_booking.instrument.photos,
