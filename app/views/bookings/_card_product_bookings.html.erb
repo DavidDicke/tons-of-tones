@@ -1,0 +1,23 @@
+<div class="card-product">
+  <%= cl_image_tag photos.first.key %>
+  <div class="card-product-infos">
+    <h2><%= instrument %></h2>
+    <p><%= owner %></p>
+    <p><%= start_date %> to <%= end_date %></p>
+
+    <div class="d-flex justify-content-between">
+      <% if defined?(rating) %>
+        <p ><%= rating %></p>
+      <% end %>
+
+      <% if defined?(confirm_link) && confirm_link.present? %>
+        <p ><%= confirm_link %></p>
+      <% end %>
+
+      <% if defined?(cancel_link) && cancel_link.present? %>
+        <p ><%= cancel_link %></p>
+      <% end %>
+    </div>
+
+  </div>
+</div>

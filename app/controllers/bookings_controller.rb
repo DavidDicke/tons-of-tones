@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:show, :update]
+  before_action :set_booking, only: [:show, :update, :show_alternative]
   before_action :update_completed_bookings
 
 
@@ -13,6 +13,11 @@ class BookingsController < ApplicationController
 
   def show
     @instrument = @booking.instrument
+  end
+
+  def show_alternative
+    @instrument = @booking.instrument
+    render :show_alternative
   end
 
   def create
