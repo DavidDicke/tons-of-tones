@@ -22,8 +22,9 @@ Rails.application.routes.draw do
   end
 
   resources :bookings, only: [:index, :show, :edit, :update] do
-    resources :booking_reviews, only: [:new, :create]
-    resources :user_reviews, only: [:new, :create]
+    get 'alternative', on: :member, to: 'bookings#show_alternative'
+    resources :booking_reviews, only: [:new, :create, :show]
+    resources :user_reviews, only: [:new, :create, :show]
 
     collection do
       get 'user_bookings', to: 'bookings#user_bookings'

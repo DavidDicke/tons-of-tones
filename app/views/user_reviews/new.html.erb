@@ -1,13 +1,22 @@
-<h2>Rate the User's Performance</h2>
-
-<%= simple_form_for [@booking, @user_review] do |f| %>
-  <%= f.input :content, placeholder: "Share Your Experience with the Rental" %>
-
-  <%= f.input :rating,
-              label: "Rating",
-              as: :select,
-              collection: (0..5).to_a,
-              prompt: 'Select a rating' %>
-
-  <%= f.submit "Add Review", class: "btn btn-flat" %>
-<% end %>
+<div id="review_form" class="col-12 col-sm-6">
+  <div class="bg-white rounded p-3">
+    <h5 class="pt-3 pb-3">Rate the Renter</h5>
+    <%= simple_form_for [@booking, @user_review] do |f| %>
+      <% if @user_review.errors.any? %>
+        <div class="alert alert-danger">
+          <ul>
+            <% @user_review.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <%= f.input :content, as: :text, placeholder: "How did they handle your instrument?", label: false, input_html: { rows: 8 } %>
+      <%= f.input :rating, as: :select, collection: (1..5), required: true, label: false, input_html: { data: { controller: "star-rating" } } %>
+      <%= f.submit "Submit", class: "btn btn-primary mt-2 mb-4 mr-4", data: { turbo: true } %>
+      <%# <%= link_to 'Cancel', instrument_bookings_bookings_path, class: 'btn btn-secondary mt-2 mb-4' %>
+      <button onclick="window.history.back()" class="btn btn-secondary mt-2 mb-4">Cancel</button>
+    <% end %>
+    <%= cl_image_tag @booking.instrument.photos.first.key, style: "width: 100%; height: auto; border-radius: 0.5rem;" %>
+  </div>
+</div>

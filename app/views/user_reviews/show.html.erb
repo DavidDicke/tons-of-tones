@@ -1,0 +1,23 @@
+<div id="review_show">
+  <div class="rounded p-3 pb-10">
+    <h5 class="pt-3 pb-3">Your review for <%= @user_review.booking.user.first_name %></h5>
+
+    <p>
+      <strong>Rating:</strong>
+      <% @user_review.rating.times do %>
+        <i class="fas fa-star star-yellow"></i>
+      <% end %>
+      <% (5 - @user_review.rating).times do %>
+        <i class="fas fa-star"></i>
+      <% end %>
+      / 5
+    </p>
+
+    <p><strong>Comments:</strong></p>
+    <p><%= @user_review.content %></p>
+
+    <%= cl_image_tag @user_review.booking.instrument.photos.first.key, style: "width: 100%; height: auto; border-radius: 0.5rem;" %>
+
+    <button onclick="window.history.back()" class="btn btn-secondary mt-4">Back to Bookings</button>
+  </div>
+</div>

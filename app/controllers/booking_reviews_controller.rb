@@ -22,9 +22,13 @@ class BookingReviewsController < ApplicationController
       if @booking_review.save
         redirect_to user_bookings_bookings_path, notice: 'Review added successfully.'
       else
-        render 'new'
+        render :new, status: :unprocessable_entity
       end
     end
+  end
+
+  def show
+    @booking_review = BookingReview.find(params[:id])
   end
 
   private
