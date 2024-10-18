@@ -52,7 +52,8 @@
     </div>
     <div class="pt-4">
       <h4>Rented out by</h4>
-      <%= link_to @instrument.user.first_name, user_path(@instrument.user) %>
+      <%= render "users/card_user", user: @instrument.user %>
+      <%# <%= link_to @instrument.user.first_name, user_path(@instrument.user) %>
     </div>
     <%= link_to 'Back to Instruments', instruments_path, class: "" %>
     </div>

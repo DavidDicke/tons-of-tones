@@ -3,8 +3,9 @@ class InstrumentsController < ApplicationController
 
   def index
     @instruments = Instrument.all
-    filter_categories
     filter_search
+    filter_dates
+    filter_categories
     set_dates
   end
 
@@ -81,7 +82,19 @@ class InstrumentsController < ApplicationController
   end
 
   def filter_dates
-
+    if params[:start_date].present? && params[:end_date].present?
+      start_date = Date.parse(params[:start_date])
+      end_date = Date.parse(params[:end_date])
+      # range_b.begin <= range_a.end && range_a.begin <= range_b.end
+      selected_instruments = @instruments.select do |instrument|
+        instrument.bookings.count do |booking|
+          booking.start_date <= end_date && booking.end_date >= start_date
+        end.zero?
+      end
+      @instruments = selected_instruments
+      # sql_query = "end_date < :start_date OR start_date > :end_date"
+      # @instruments.joins(:bookings).where(sql_query, start_date: params[:start_date], end_date: params[:end_date])
+    end
   end
 
   def filter_categories
