@@ -1,13 +1,25 @@
-<h2>How was your experience?</h2>
+<%# <h2>How was your experience?</h2>
 
 <%= simple_form_for [@booking, @booking_review] do |f| %>
-  <%= f.input :content, placeholder: "How did you like the instrument?" %>
+ <%#  <%= f.input :content, placeholder: "How did you like the instrument?" %>
 
-  <%= f.input :rating,
+ <%#  <%= f.input :rating,
               label: "Rating",
               as: :select,
               collection: (0..5).to_a,
               prompt: 'Select a rating' %>
 
-  <%= f.submit "Add Review", class: "btn btn-flat" %>
-<% end %>
+ <%#  <%= f.submit "Add Review", class: "btn btn-flat" %>
+<%# <% end %>
+
+
+<div class="col-12 col-sm-6">
+  <div class="bg-white rounded p-3">
+    <h5 class="pt-3 pb-3">How was your experience?</h5> <!-- Added Bootstrap padding class -->
+    <%= simple_form_for [@booking, @booking_review] do |f| %>
+      <%= f.input :content, as: :text, placeholder: "How did you like the instrument?", label: false, input_html: { rows: 8 } %>
+      <%= f.input :rating, as: :select, collection: (1..5), required: true, label: false, input_html: { data: { controller: "star-rating" } } %>
+      <%= f.submit "Add Review", class: "btn btn-flat mt-2" %>
+    <% end %>
+  </div>
+</div>
