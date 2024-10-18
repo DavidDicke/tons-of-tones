@@ -28,7 +28,7 @@ User.create!(
   last_name: "Elgazzar"
 )
 
-10.times do
+15.times do
   User.create!(
     email: Faker::Internet.email,
     password: 'password123',
@@ -39,41 +39,12 @@ end
 
 puts "#{User.count} users created!"
 
-# Create Instruments with attached photos
-# puts "Creating instruments..."
-# users = User.all
 
-# Image files in the db/ folder
-# image_files = [
-#   "instrument1.jpg",
-#   "instrument2.jpg",
-#   "kalimba.webp",
-#   "violin.avif",
-#   "guitar.jpg",
-#   "electric guitar.jpg",
-#   "trumpet.jpg",
-#   "drums.jpeg",
-#   "piano.jpg"
-# ]
 
 # TODO: Create Real Adresses in Berlin from: https://www.generatormix.com/random-address-in-berlin?number=50
 
-# 50.times do
-#   instrument = Instrument.create!(
-#     name: Faker::Music.instrument,
-#     description: Faker::Lorem.paragraph(sentence_count: 2),
-#     category: ['String', 'Keyboard', 'Brass', 'Woodwind', 'Percussion'].sample,
-#     address: Faker::Address.full_address,
-#     price: rand(50..500),
-#     user: users.sample
-#   )
 
-#   # Attach photos to instruments (using image files from the db folder)
-#   photo_path = Rails.root.join("db/#{image_files.sample}")
-#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
 
-#   puts "Created #{instrument.name} with a photo."
-# end
 def create_instruments_manually
   puts "Creating instruments..."
   users = User.all
@@ -435,7 +406,7 @@ users = User.all
 puts "Creating bookings..."
 instruments = Instrument.all
 
-100.times do
+50.times do
   start_date = Faker::Date.between(from: Date.today, to: 1.month.from_now)
   end_date = start_date + rand(1..10).days
 
@@ -456,61 +427,795 @@ instruments = Instrument.all
   )
 end
 
-# Additional bookings for:
-user_emails = ["pguelfi@gmail.com", "post@david-dicke.de", "momoelgazzar@gmail.com"]
-today = Date.today
 
-user_emails.each do |email|
-  user = User.find_by(email: email)
+# Additional bookings for: "pguelfi@gmail.com", "post@david-dicke.de", "momoelgazzar@gmail.com"
 
-  # Create 2 completed bookings without reviews
-  4.times do
-    end_date = Faker::Date.between(from: 1.year.ago, to: today - 1.day)
-    start_date = Faker::Date.between(from: 1.year.ago, to: end_date)
+# 1 Completed borrowing::
 
-    instrument = instruments.sample
-    booking_user = users.reject { |u| u == instrument.user }.sample
+2.times do
+  user_email = "pguelfi@gmail.com"
+  user = User.find_by(email: user_email)
+  today = Date.today
 
-    total_price = (end_date - start_date).to_i * instrument.price
+  end_date = Faker::Date.between(from: 1.year.ago, to: today - 1.day)
+  start_date = Faker::Date.between(from: 1.year.ago, to: end_date)
 
-    Booking.create!(
-      instrument: instrument,
-      user: booking_user,
-      start_date: start_date,
-      end_date: end_date,
-      total_price: total_price,
-      status: "completed"
-    )
-  end
+  # Reject instruments belonging to the user
+  available_instruments = instruments.reject { |instrument| instrument.user == user }
 
-  # Create 3 completed bookings with reviews
-  6.times do
-    end_date = Faker::Date.between(from: 1.year.ago, to: today - 1.day)
-    start_date = Faker::Date.between(from: 1.year.ago, to: end_date)
+  # Ensure there's at least one available instrument
+  next if available_instruments.empty?
 
-    instrument = instruments.sample
-    booking_user = users.reject { |u| u == instrument.user }.sample
+  instrument = available_instruments.sample
 
-    total_price = (end_date - start_date).to_i * instrument.price
+  total_price = (end_date - start_date).to_i * instrument.price
 
-    booking = Booking.create!(
-      instrument: instrument,
-      user: booking_user,
-      start_date: start_date,
-      end_date: end_date,
-      total_price: total_price,
-      status: "completed"
-    )
+  Booking.create!(
+    instrument: instrument,
+    user: user,  # Use the current user for the booking
+    start_date: start_date,
+    end_date: end_date,
+    total_price: total_price,
+    status: "completed"
+  )
+end
 
-    # Create a review for each completed booking
+# 2 Completed lending:
+
+2.times do
+  # Define the user email for the instrument owner
+  user_email = "pguelfi@gmail.com"
+  instrument_owner = User.find_by(email: user_email)
+  today = Date.today
+
+  end_date = Faker::Date.between(from: 1.year.ago, to: today - 1.day)
+  start_date = Faker::Date.between(from: 1.year.ago, to: end_date)
+
+  # Select an instrument belonging to the user (instrument owner)
+  instrument = Instrument.find_by(user: instrument_owner)
+
+  # Ensure that the instrument exists
+  next if instrument.nil?
+
+  # Select a booking user who is not the instrument owner
+  booking_user = users.reject { |u| u == instrument.user }.sample
+
+  total_price = (end_date - start_date).to_i * instrument.price
+
+  Booking.create!(
+    instrument: instrument,
+    user: booking_user,  # Use a different user for the booking
+    start_date: start_date,
+    end_date: end_date,
+    total_price: total_price,
+    status: "completed"
+  )
+end
+
+# 3 Pending borrowing:
+2.times do
+  user_email = "pguelfi@gmail.com"
+  user = User.find_by(email: user_email)
+  today = Date.today
+
+  # Generate future dates for the booking
+  start_date = Faker::Date.between(from: today + 1.day, to: today + 1.month)
+  end_date = start_date + rand(1..10).days
+
+  # Reject instruments belonging to the user
+  available_instruments = instruments.reject { |instrument| instrument.user == user }
+
+  # Ensure there's at least one available instrument
+  next if available_instruments.empty?
+
+  instrument = available_instruments.sample
+
+  total_price = (end_date - start_date).to_i * instrument.price
+
+  Booking.create!(
+    instrument: instrument,
+    user: user,  # Use the current user for the booking
+    start_date: start_date,
+    end_date: end_date,
+    total_price: total_price,
+    status: "pending"  # Set status to pending
+  )
+end
+
+# 4 Pending lending
+
+2.times do
+  # Define the user email for the instrument owner
+  user_email = "pguelfi@gmail.com"
+  instrument_owner = User.find_by(email: user_email)
+  today = Date.today
+
+  # Generate future dates for the booking
+  start_date = Faker::Date.between(from: today + 1.day, to: today + 1.month)
+  end_date = start_date + rand(1..10).days
+
+  # Select an instrument belonging to the user (instrument owner)
+  instrument = Instrument.find_by(user: instrument_owner)
+
+  # Ensure that the instrument exists
+  next if instrument.nil?
+
+  # Select a booking user who is not the instrument owner
+  booking_user = users.reject { |u| u == instrument.user }.sample
+
+  total_price = (end_date - start_date).to_i * instrument.price
+
+  Booking.create!(
+    instrument: instrument,
+    user: booking_user,  # Use a different user for the booking
+    start_date: start_date,
+    end_date: end_date,
+    total_price: total_price,
+    status: "pending"  # Set status to pending
+  )
+end
+
+# 5 Confirmed borrowing:
+2.times do
+  user_email = "pguelfi@gmail.com"
+  user = User.find_by(email: user_email)
+  today = Date.today
+
+  # Generate future dates for the booking
+  start_date = Faker::Date.between(from: today + 1.day, to: today + 1.month)
+  end_date = start_date + rand(1..10).days
+
+  # Reject instruments belonging to the user
+  available_instruments = instruments.reject { |instrument| instrument.user == user }
+
+  # Ensure there's at least one available instrument
+  next if available_instruments.empty?
+
+  instrument = available_instruments.sample
+
+  total_price = (end_date - start_date).to_i * instrument.price
+
+  Booking.create!(
+    instrument: instrument,
+    user: user,  # Use the current user for the booking
+    start_date: start_date,
+    end_date: end_date,
+    total_price: total_price,
+    status: "confirmed"  # Set status to pending
+  )
+end
+
+# 6 Confirmed lending
+
+2.times do
+  # Define the user email for the instrument owner
+  user_email = "pguelfi@gmail.com"
+  instrument_owner = User.find_by(email: user_email)
+  today = Date.today
+
+  # Generate future dates for the booking
+  start_date = Faker::Date.between(from: today + 1.day, to: today + 1.month)
+  end_date = start_date + rand(1..10).days
+
+  # Select an instrument belonging to the user (instrument owner)
+  instrument = Instrument.find_by(user: instrument_owner)
+
+  # Ensure that the instrument exists
+  next if instrument.nil?
+
+  # Select a booking user who is not the instrument owner
+  booking_user = users.reject { |u| u == instrument.user }.sample
+
+  total_price = (end_date - start_date).to_i * instrument.price
+
+  Booking.create!(
+    instrument: instrument,
+    user: booking_user,  # Use a different user for the booking
+    start_date: start_date,
+    end_date: end_date,
+    total_price: total_price,
+    status: "confirmed"  # Set status to pending
+  )
+end
+
+
+# 7 Cancelled borrowing:
+2.times do
+  user_email = "pguelfi@gmail.com"
+  user = User.find_by(email: user_email)
+  today = Date.today
+
+  # Generate future dates for the booking
+  start_date = Faker::Date.between(from: today + 1.day, to: today + 1.month)
+  end_date = start_date + rand(1..10).days
+
+  # Reject instruments belonging to the user
+  available_instruments = instruments.reject { |instrument| instrument.user == user }
+
+  # Ensure there's at least one available instrument
+  next if available_instruments.empty?
+
+  instrument = available_instruments.sample
+
+  total_price = (end_date - start_date).to_i * instrument.price
+
+  Booking.create!(
+    instrument: instrument,
+    user: user,  # Use the current user for the booking
+    start_date: start_date,
+    end_date: end_date,
+    total_price: total_price,
+    status: "cancelled"  # Set status to pending
+  )
+end
+
+# 8 Cancelled lending
+
+2.times do
+  # Define the user email for the instrument owner
+  user_email = "pguelfi@gmail.com"
+  instrument_owner = User.find_by(email: user_email)
+  today = Date.today
+
+  # Generate future dates for the booking
+  start_date = Faker::Date.between(from: today + 1.day, to: today + 1.month)
+  end_date = start_date + rand(1..10).days
+
+  # Select an instrument belonging to the user (instrument owner)
+  instrument = Instrument.find_by(user: instrument_owner)
+
+  # Ensure that the instrument exists
+  next if instrument.nil?
+
+  # Select a booking user who is not the instrument owner
+  booking_user = users.reject { |u| u == instrument.user }.sample
+
+  total_price = (end_date - start_date).to_i * instrument.price
+
+  Booking.create!(
+    instrument: instrument,
+    user: booking_user,  # Use a different user for the booking
+    start_date: start_date,
+    end_date: end_date,
+    total_price: total_price,
+    status: "confirmed"  # Set status to pending
+  )
+end
+
+
+
+# 1 Completed borrowing::
+
+2.times do
+  user_email = "post@david-dicke.de"
+  user = User.find_by(email: user_email)
+  today = Date.today
+
+  end_date = Faker::Date.between(from: 1.year.ago, to: today - 1.day)
+  start_date = Faker::Date.between(from: 1.year.ago, to: end_date)
+
+  # Reject instruments belonging to the user
+  available_instruments = instruments.reject { |instrument| instrument.user == user }
+
+  # Ensure there's at least one available instrument
+  next if available_instruments.empty?
+
+  instrument = available_instruments.sample
+
+  total_price = (end_date - start_date).to_i * instrument.price
+
+  Booking.create!(
+    instrument: instrument,
+    user: user,  # Use the current user for the booking
+    start_date: start_date,
+    end_date: end_date,
+    total_price: total_price,
+    status: "completed"
+  )
+end
+
+# 2 Completed lending:
+
+2.times do
+  # Define the user email for the instrument owner
+  user_email = "post@david-dicke.de"
+  instrument_owner = User.find_by(email: user_email)
+  today = Date.today
+
+  end_date = Faker::Date.between(from: 1.year.ago, to: today - 1.day)
+  start_date = Faker::Date.between(from: 1.year.ago, to: end_date)
+
+  # Select an instrument belonging to the user (instrument owner)
+  instrument = Instrument.find_by(user: instrument_owner)
+
+  # Ensure that the instrument exists
+  next if instrument.nil?
+
+  # Select a booking user who is not the instrument owner
+  booking_user = users.reject { |u| u == instrument.user }.sample
+
+  total_price = (end_date - start_date).to_i * instrument.price
+
+  Booking.create!(
+    instrument: instrument,
+    user: booking_user,  # Use a different user for the booking
+    start_date: start_date,
+    end_date: end_date,
+    total_price: total_price,
+    status: "completed"
+  )
+end
+
+# 3 Pending borrowing:
+2.times do
+  user_email = "post@david-dicke.de"
+  user = User.find_by(email: user_email)
+  today = Date.today
+
+  # Generate future dates for the booking
+  start_date = Faker::Date.between(from: today + 1.day, to: today + 1.month)
+  end_date = start_date + rand(1..10).days
+
+  # Reject instruments belonging to the user
+  available_instruments = instruments.reject { |instrument| instrument.user == user }
+
+  # Ensure there's at least one available instrument
+  next if available_instruments.empty?
+
+  instrument = available_instruments.sample
+
+  total_price = (end_date - start_date).to_i * instrument.price
+
+  Booking.create!(
+    instrument: instrument,
+    user: user,  # Use the current user for the booking
+    start_date: start_date,
+    end_date: end_date,
+    total_price: total_price,
+    status: "pending"  # Set status to pending
+  )
+end
+
+# 4 Pending lending
+
+2.times do
+  # Define the user email for the instrument owner
+  user_email = "post@david-dicke.de"
+  instrument_owner = User.find_by(email: user_email)
+  today = Date.today
+
+  # Generate future dates for the booking
+  start_date = Faker::Date.between(from: today + 1.day, to: today + 1.month)
+  end_date = start_date + rand(1..10).days
+
+  # Select an instrument belonging to the user (instrument owner)
+  instrument = Instrument.find_by(user: instrument_owner)
+
+  # Ensure that the instrument exists
+  next if instrument.nil?
+
+  # Select a booking user who is not the instrument owner
+  booking_user = users.reject { |u| u == instrument.user }.sample
+
+  total_price = (end_date - start_date).to_i * instrument.price
+
+  Booking.create!(
+    instrument: instrument,
+    user: booking_user,  # Use a different user for the booking
+    start_date: start_date,
+    end_date: end_date,
+    total_price: total_price,
+    status: "pending"  # Set status to pending
+  )
+end
+
+# 5 Confirmed borrowing:
+2.times do
+  user_email = "post@david-dicke.de"
+  user = User.find_by(email: user_email)
+  today = Date.today
+
+  # Generate future dates for the booking
+  start_date = Faker::Date.between(from: today + 1.day, to: today + 1.month)
+  end_date = start_date + rand(1..10).days
+
+  # Reject instruments belonging to the user
+  available_instruments = instruments.reject { |instrument| instrument.user == user }
+
+  # Ensure there's at least one available instrument
+  next if available_instruments.empty?
+
+  instrument = available_instruments.sample
+
+  total_price = (end_date - start_date).to_i * instrument.price
+
+  Booking.create!(
+    instrument: instrument,
+    user: user,  # Use the current user for the booking
+    start_date: start_date,
+    end_date: end_date,
+    total_price: total_price,
+    status: "confirmed"  # Set status to pending
+  )
+end
+
+# 6 Confirmed lending
+
+2.times do
+  # Define the user email for the instrument owner
+  user_email = "post@david-dicke.de"
+  instrument_owner = User.find_by(email: user_email)
+  today = Date.today
+
+  # Generate future dates for the booking
+  start_date = Faker::Date.between(from: today + 1.day, to: today + 1.month)
+  end_date = start_date + rand(1..10).days
+
+  # Select an instrument belonging to the user (instrument owner)
+  instrument = Instrument.find_by(user: instrument_owner)
+
+  # Ensure that the instrument exists
+  next if instrument.nil?
+
+  # Select a booking user who is not the instrument owner
+  booking_user = users.reject { |u| u == instrument.user }.sample
+
+  total_price = (end_date - start_date).to_i * instrument.price
+
+  Booking.create!(
+    instrument: instrument,
+    user: booking_user,  # Use a different user for the booking
+    start_date: start_date,
+    end_date: end_date,
+    total_price: total_price,
+    status: "confirmed"  # Set status to pending
+  )
+end
+
+
+# 7 Cancelled borrowing:
+2.times do
+  user_email = "post@david-dicke.de"
+  user = User.find_by(email: user_email)
+  today = Date.today
+
+  # Generate future dates for the booking
+  start_date = Faker::Date.between(from: today + 1.day, to: today + 1.month)
+  end_date = start_date + rand(1..10).days
+
+  # Reject instruments belonging to the user
+  available_instruments = instruments.reject { |instrument| instrument.user == user }
+
+  # Ensure there's at least one available instrument
+  next if available_instruments.empty?
+
+  instrument = available_instruments.sample
+
+  total_price = (end_date - start_date).to_i * instrument.price
+
+  Booking.create!(
+    instrument: instrument,
+    user: user,  # Use the current user for the booking
+    start_date: start_date,
+    end_date: end_date,
+    total_price: total_price,
+    status: "cancelled"  # Set status to pending
+  )
+end
+
+# 8 Cancelled lending
+
+2.times do
+  # Define the user email for the instrument owner
+  user_email = "post@david-dicke.de"
+  instrument_owner = User.find_by(email: user_email)
+  today = Date.today
+
+  # Generate future dates for the booking
+  start_date = Faker::Date.between(from: today + 1.day, to: today + 1.month)
+  end_date = start_date + rand(1..10).days
+
+  # Select an instrument belonging to the user (instrument owner)
+  instrument = Instrument.find_by(user: instrument_owner)
+
+  # Ensure that the instrument exists
+  next if instrument.nil?
+
+  # Select a booking user who is not the instrument owner
+  booking_user = users.reject { |u| u == instrument.user }.sample
+
+  total_price = (end_date - start_date).to_i * instrument.price
+
+  Booking.create!(
+    instrument: instrument,
+    user: booking_user,  # Use a different user for the booking
+    start_date: start_date,
+    end_date: end_date,
+    total_price: total_price,
+    status: "confirmed"  # Set status to pending
+  )
+end
+
+
+
+# 1 Completed borrowing::
+
+2.times do
+  user_email = "momoelgazzar@gmail.com"
+  user = User.find_by(email: user_email)
+  today = Date.today
+
+  end_date = Faker::Date.between(from: 1.year.ago, to: today - 1.day)
+  start_date = Faker::Date.between(from: 1.year.ago, to: end_date)
+
+  # Reject instruments belonging to the user
+  available_instruments = instruments.reject { |instrument| instrument.user == user }
+
+  # Ensure there's at least one available instrument
+  next if available_instruments.empty?
+
+  instrument = available_instruments.sample
+
+  total_price = (end_date - start_date).to_i * instrument.price
+
+  Booking.create!(
+    instrument: instrument,
+    user: user,  # Use the current user for the booking
+    start_date: start_date,
+    end_date: end_date,
+    total_price: total_price,
+    status: "completed"
+  )
+end
+
+# 2 Completed lending:
+
+2.times do
+  # Define the user email for the instrument owner
+  user_email = "momoelgazzar@gmail.com"
+  instrument_owner = User.find_by(email: user_email)
+  today = Date.today
+
+  end_date = Faker::Date.between(from: 1.year.ago, to: today - 1.day)
+  start_date = Faker::Date.between(from: 1.year.ago, to: end_date)
+
+  # Select an instrument belonging to the user (instrument owner)
+  instrument = Instrument.find_by(user: instrument_owner)
+
+  # Ensure that the instrument exists
+  next if instrument.nil?
+
+  # Select a booking user who is not the instrument owner
+  booking_user = users.reject { |u| u == instrument.user }.sample
+
+  total_price = (end_date - start_date).to_i * instrument.price
+
+  Booking.create!(
+    instrument: instrument,
+    user: booking_user,  # Use a different user for the booking
+    start_date: start_date,
+    end_date: end_date,
+    total_price: total_price,
+    status: "completed"
+  )
+end
+
+# 3 Pending borrowing:
+2.times do
+  user_email = "momoelgazzar@gmail.com"
+  user = User.find_by(email: user_email)
+  today = Date.today
+
+  # Generate future dates for the booking
+  start_date = Faker::Date.between(from: today + 1.day, to: today + 1.month)
+  end_date = start_date + rand(1..10).days
+
+  # Reject instruments belonging to the user
+  available_instruments = instruments.reject { |instrument| instrument.user == user }
+
+  # Ensure there's at least one available instrument
+  next if available_instruments.empty?
+
+  instrument = available_instruments.sample
+
+  total_price = (end_date - start_date).to_i * instrument.price
+
+  Booking.create!(
+    instrument: instrument,
+    user: user,  # Use the current user for the booking
+    start_date: start_date,
+    end_date: end_date,
+    total_price: total_price,
+    status: "pending"  # Set status to pending
+  )
+end
+
+# 4 Pending lending
+
+2.times do
+  # Define the user email for the instrument owner
+  user_email = "momoelgazzar@gmail.com"
+  instrument_owner = User.find_by(email: user_email)
+  today = Date.today
+
+  # Generate future dates for the booking
+  start_date = Faker::Date.between(from: today + 1.day, to: today + 1.month)
+  end_date = start_date + rand(1..10).days
+
+  # Select an instrument belonging to the user (instrument owner)
+  instrument = Instrument.find_by(user: instrument_owner)
+
+  # Ensure that the instrument exists
+  next if instrument.nil?
+
+  # Select a booking user who is not the instrument owner
+  booking_user = users.reject { |u| u == instrument.user }.sample
+
+  total_price = (end_date - start_date).to_i * instrument.price
+
+  Booking.create!(
+    instrument: instrument,
+    user: booking_user,  # Use a different user for the booking
+    start_date: start_date,
+    end_date: end_date,
+    total_price: total_price,
+    status: "pending"  # Set status to pending
+  )
+end
+
+# 5 Confirmed borrowing:
+2.times do
+  user_email = "momoelgazzar@gmail.com"
+  user = User.find_by(email: user_email)
+  today = Date.today
+
+  # Generate future dates for the booking
+  start_date = Faker::Date.between(from: today + 1.day, to: today + 1.month)
+  end_date = start_date + rand(1..10).days
+
+  # Reject instruments belonging to the user
+  available_instruments = instruments.reject { |instrument| instrument.user == user }
+
+  # Ensure there's at least one available instrument
+  next if available_instruments.empty?
+
+  instrument = available_instruments.sample
+
+  total_price = (end_date - start_date).to_i * instrument.price
+
+  Booking.create!(
+    instrument: instrument,
+    user: user,  # Use the current user for the booking
+    start_date: start_date,
+    end_date: end_date,
+    total_price: total_price,
+    status: "confirmed"  # Set status to pending
+  )
+end
+
+# 6 Confirmed lending
+
+2.times do
+  # Define the user email for the instrument owner
+  user_email = "momoelgazzar@gmail.com"
+  instrument_owner = User.find_by(email: user_email)
+  today = Date.today
+
+  # Generate future dates for the booking
+  start_date = Faker::Date.between(from: today + 1.day, to: today + 1.month)
+  end_date = start_date + rand(1..10).days
+
+  # Select an instrument belonging to the user (instrument owner)
+  instrument = Instrument.find_by(user: instrument_owner)
+
+  # Ensure that the instrument exists
+  next if instrument.nil?
+
+  # Select a booking user who is not the instrument owner
+  booking_user = users.reject { |u| u == instrument.user }.sample
+
+  total_price = (end_date - start_date).to_i * instrument.price
+
+  Booking.create!(
+    instrument: instrument,
+    user: booking_user,  # Use a different user for the booking
+    start_date: start_date,
+    end_date: end_date,
+    total_price: total_price,
+    status: "confirmed"  # Set status to pending
+  )
+end
+
+
+# 7 Cancelled borrowing:
+2.times do
+  user_email = "momoelgazzar@gmail.com"
+  user = User.find_by(email: user_email)
+  today = Date.today
+
+  # Generate future dates for the booking
+  start_date = Faker::Date.between(from: today + 1.day, to: today + 1.month)
+  end_date = start_date + rand(1..10).days
+
+  # Reject instruments belonging to the user
+  available_instruments = instruments.reject { |instrument| instrument.user == user }
+
+  # Ensure there's at least one available instrument
+  next if available_instruments.empty?
+
+  instrument = available_instruments.sample
+
+  total_price = (end_date - start_date).to_i * instrument.price
+
+  Booking.create!(
+    instrument: instrument,
+    user: user,  # Use the current user for the booking
+    start_date: start_date,
+    end_date: end_date,
+    total_price: total_price,
+    status: "cancelled"  # Set status to pending
+  )
+end
+
+# 8 Cancelled lending
+
+2.times do
+  # Define the user email for the instrument owner
+  user_email = "momoelgazzar@gmail.com"
+  instrument_owner = User.find_by(email: user_email)
+  today = Date.today
+
+  # Generate future dates for the booking
+  start_date = Faker::Date.between(from: today + 1.day, to: today + 1.month)
+  end_date = start_date + rand(1..10).days
+
+  # Select an instrument belonging to the user (instrument owner)
+  instrument = Instrument.find_by(user: instrument_owner)
+
+  # Ensure that the instrument exists
+  next if instrument.nil?
+
+  # Select a booking user who is not the instrument owner
+  booking_user = users.reject { |u| u == instrument.user }.sample
+
+  total_price = (end_date - start_date).to_i * instrument.price
+
+  Booking.create!(
+    instrument: instrument,
+    user: booking_user,  # Use a different user for the booking
+    start_date: start_date,
+    end_date: end_date,
+    total_price: total_price,
+    status: "confirmed"  # Set status to pending
+  )
+end
+
+
+
+  # Reviews for 50% of completed bookings
+  completed_bookings = Booking.where(status: 1)
+
+  # Randomly select 50% of the completed bookings
+  bookings_to_review = completed_bookings.sample(completed_bookings.count / 2)
+
+  bookings_to_review.each do |booking|
     BookingReview.create!(
       content: Faker::Lorem.sentence,
       rating: rand(1..5),
-      user: user,
+      user: booking.user, # The user who rented the instrument (created the booking)
       booking: booking
     )
   end
-end
+
+  bookings_to_review.each do |booking|
+    UserReview.create!(
+      content: Faker::Lorem.sentence,
+      rating: rand(1..5),
+      user: booking.instrument.user, # The owner of the instrument reviewing the renter
+      booking: booking
+    )
+  end
+
 
 puts "#{Booking.count} bookings created!"
 puts "#{BookingReview.count} reviews created!"
