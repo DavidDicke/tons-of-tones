@@ -253,7 +253,7 @@ instrument = Instrument.create!(
   user: users.sample
 )
 # Attach photos to instruments (using image files from the db folder)
-photo_path = Rails.root.join("db/seed_images/E_Guitar_Telcaster.webp")
+photo_path = Rails.root.join("db/seed_images/E_Guitar_Telecaster.webp")
 instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
 puts "Created #{instrument.name} with a photo."
   # Create Electric Organ
