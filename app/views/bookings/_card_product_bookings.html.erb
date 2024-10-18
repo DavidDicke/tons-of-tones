@@ -11,12 +11,12 @@
 
     <div class="d-flex align-items-center">
       <% if defined?(confirm_link) && confirm_link.present? %>
-        <div class="me-5"> <!-- Add margin-right to confirm link -->
+        <div class="me-5">
           <%= confirm_link %>
-        </div> <!-- Render the confirm link if available -->
+        </div>
       <% end %>
       <% if defined?(cancel_link) && cancel_link.present? %>
-        <%= cancel_link %> <!-- Render the cancel link if available -->
+        <%= cancel_link %>
       <% end %>
     </div>
 
