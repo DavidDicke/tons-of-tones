@@ -20,7 +20,7 @@ class BookingReviewsController < ApplicationController
       @booking_review.user = current_user
 
       if @booking_review.save
-        redirect_to user_bookings_bookings_path, notice: 'Review added successfully.'
+        redirect_to booking_booking_review_path(@booking, @booking_review), notice: 'Review added successfully.'
       else
         render :new, status: :unprocessable_entity
       end

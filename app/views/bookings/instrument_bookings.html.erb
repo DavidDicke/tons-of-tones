@@ -94,9 +94,9 @@
             start_date: instrument_booking.start_date.strftime("%d/%m/%Y"),
             end_date: instrument_booking.end_date.strftime("%d/%m/%Y"),
             rating: if instrument_booking.user_review.present?
-              button_to '<i class="fa-brands fa-readme"></i>'.html_safe, booking_user_review_path(instrument_booking, instrument_booking.user_review), class: 'btn'
+              link_to '<i class="fa-brands fa-readme"></i>'.html_safe, booking_user_review_path(instrument_booking, instrument_booking.user_review), class: 'btn'
             else
-              button_to '<i class="fa-solid fa-pen-nib"></i>'.html_safe, new_booking_user_review_path(instrument_booking), class: 'btn'
+              link_to '<i class="fa-solid fa-pen-nib"></i>'.html_safe, new_booking_user_review_path(instrument_booking), class: 'btn'
             end
           } %>
         <% end %>

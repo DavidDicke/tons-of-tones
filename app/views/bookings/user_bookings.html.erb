@@ -92,9 +92,9 @@
             start_date: user_booking.start_date.strftime("%d/%m/%Y"),
             end_date: user_booking.end_date.strftime("%d/%m/%Y"),
             rating: if user_booking.booking_review.present?
-              button_to '<i class="fa-brands fa-readme"></i>'.html_safe, booking_booking_review_path(user_booking, user_booking.booking_review), class: 'btn'
+              link_to '<i class="fa-brands fa-readme"></i>'.html_safe, booking_booking_review_path(user_booking, user_booking.booking_review), class: 'btn'
             else
-              button_to '<i class="fa-solid fa-pen-nib"></i>'.html_safe, new_booking_booking_review_path(user_booking), class: 'btn'
+              link_to '<i class="fa-solid fa-pen-nib"></i>'.html_safe, new_booking_booking_review_path(user_booking), class: 'btn'
             end
           } %>
         <% end %>
