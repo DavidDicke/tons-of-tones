@@ -95,3 +95,25 @@
   flex-direction: column;
   justify-content: center;
 }
+
+@media (max-width: 600px) {
+  .card-product {
+    flex-direction: row; /* keep it row */
+    height: auto; /* allow height to adjust */
+  }
+
+  .card-product-infos {
+    flex-direction: row; /* keep icons next to details */
+    align-items: center; /* vertically align */
+    justify-content: space-between; /* ensure space is used */
+  }
+
+  .icons {
+    width: auto; /* allow icons to resize */
+    margin-left: 10px; /* space between details and icons */
+  }
+
+  .details {
+    flex: 1; /* take up available space */
+  }
+}
