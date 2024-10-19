@@ -30,7 +30,7 @@
                 <%= render partial: 'card_product_bookings', locals: {
                   photos: instrument_booking.instrument.photos,
                   instrument: link_to(instrument_booking.instrument.name, alternative_booking_path(instrument_booking.id), class: 'no-italic'),
-                  owner: "#{instrument_booking.user.first_name} #{instrument_booking.user.last_name}",
+                  owner: link_to("#{instrument_booking.user.first_name} #{instrument_booking.user.last_name}", user_path(instrument_booking.user)),
                   start_date: instrument_booking.start_date.strftime("%d/%m/%Y"),
                   end_date: instrument_booking.end_date.strftime("%d/%m/%Y"),
                   confirm_link: confirm_link,
@@ -51,7 +51,7 @@
                 <%= render partial: 'card_product_bookings', locals: {
                   photos: instrument_booking.instrument.photos,
                   instrument: link_to(instrument_booking.instrument.name, alternative_booking_path(instrument_booking.id), class: 'no-italic'),
-                  owner: "#{instrument_booking.user.first_name} #{instrument_booking.user.last_name}",
+                  owner: link_to("#{instrument_booking.user.first_name} #{instrument_booking.user.last_name}", user_path(instrument_booking.user)),
                   start_date: instrument_booking.start_date.strftime("%d/%m/%Y"),
                   end_date: instrument_booking.end_date.strftime("%d/%m/%Y"),
                 } %>
@@ -72,7 +72,7 @@
           <%= render partial: 'card_product_bookings', locals: {
             photos: instrument_booking.instrument.photos,
             instrument: link_to(instrument_booking.instrument.name, alternative_booking_path(instrument_booking.id), class: 'no-italic'),
-            owner: "#{instrument_booking.user.first_name} #{instrument_booking.user.last_name}",
+            owner: link_to("#{instrument_booking.user.first_name} #{instrument_booking.user.last_name}", user_path(instrument_booking.user)),
             start_date: instrument_booking.start_date.strftime("%d/%m/%Y"),
             end_date: instrument_booking.end_date.strftime("%d/%m/%Y")
           } %>
@@ -90,7 +90,7 @@
           <%= render partial: 'card_product_bookings', locals: {
             photos: instrument_booking.instrument.photos,
             instrument: link_to(instrument_booking.instrument.name, alternative_booking_path(instrument_booking.id), class: 'no-italic'),
-            owner: "#{instrument_booking.user.first_name} #{instrument_booking.user.last_name}",
+            owner: link_to("#{instrument_booking.user.first_name} #{instrument_booking.user.last_name}", user_path(instrument_booking.user)),
             start_date: instrument_booking.start_date.strftime("%d/%m/%Y"),
             end_date: instrument_booking.end_date.strftime("%d/%m/%Y"),
             rating: if instrument_booking.user_review.present?

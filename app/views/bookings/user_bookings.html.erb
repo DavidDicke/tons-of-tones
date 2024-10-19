@@ -29,7 +29,7 @@
                 <%= render partial: 'card_product_bookings', locals: {
                   photos: user_booking.instrument.photos,
                   instrument: link_to(user_booking.instrument.name, alternative_booking_path(user_booking.id), class: 'no-italic'),
-                  owner: "#{user_booking.instrument.user.first_name} #{user_booking.instrument.user.last_name}",
+                  owner: link_to("#{user_booking.instrument.user.first_name} #{user_booking.instrument.user.last_name}", user_path(user_booking.instrument.user)),
                   start_date: user_booking.start_date.strftime("%d/%m/%Y"),
                   end_date: user_booking.end_date.strftime("%d/%m/%Y"),
                   cancel_link: cancel_link
@@ -49,7 +49,7 @@
                 <%= render partial: 'card_product_bookings', locals: {
                   photos: user_booking.instrument.photos,
                   instrument: link_to(user_booking.instrument.name, alternative_booking_path(user_booking.id), class: 'no-italic'),
-                  owner: "#{user_booking.instrument.user.first_name} #{user_booking.instrument.user.last_name}",
+                  owner: link_to("#{user_booking.instrument.user.first_name} #{user_booking.instrument.user.last_name}", user_path(user_booking.instrument.user)),
                   start_date: user_booking.start_date.strftime("%d/%m/%Y"),
                   end_date: user_booking.end_date.strftime("%d/%m/%Y"),
                 } %>
@@ -70,7 +70,7 @@
           <%= render partial: 'card_product_bookings', locals: {
             photos: user_booking.instrument.photos,
             instrument: link_to(user_booking.instrument.name, alternative_booking_path(user_booking.id), class: 'no-italic'),
-            owner: "#{user_booking.instrument.user.first_name} #{user_booking.instrument.user.last_name}",
+            owner: link_to("#{user_booking.instrument.user.first_name} #{user_booking.instrument.user.last_name}", user_path(user_booking.instrument.user)),
             start_date: user_booking.start_date.strftime("%d/%m/%Y"),
             end_date: user_booking.end_date.strftime("%d/%m/%Y")
           } %>
@@ -88,7 +88,7 @@
           <%= render partial: 'card_product_bookings', locals: {
             photos: user_booking.instrument.photos,
             instrument: link_to(user_booking.instrument.name, alternative_booking_path(user_booking.id), class: 'no-italic'),
-            owner: "#{user_booking.instrument.user.first_name} #{user_booking.instrument.user.last_name}",
+            owner: link_to("#{user_booking.instrument.user.first_name} #{user_booking.instrument.user.last_name}", user_path(user_booking.instrument.user)),
             start_date: user_booking.start_date.strftime("%d/%m/%Y"),
             end_date: user_booking.end_date.strftime("%d/%m/%Y"),
             rating: if user_booking.booking_review.present?
