@@ -54,335 +54,706 @@ puts "#{User.count} users created!"
 
 
 
+# def create_instruments_manually
+#   puts "Creating instruments..."
+#   users = User.all
+# # Create Cello
+#   instrument = Instrument.create!(
+#     name: "Beautiful Cello",
+#     description: Faker::Lorem.paragraph(sentence_count: 2),
+#     category: "String",
+#     address: "Berlin",
+#     price: rand(2..50),
+#     user: users.sample
+#   )
+#   # Attach photos to instruments (using image files from the db folder)
+#   photo_path = Rails.root.join("db/seed_images/Cello.webp")
+#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+#   puts "Created #{instrument.name} with a photo."
+# # Create Violin 1
+#   instrument = Instrument.create!(
+#     name: "Wonderful Violin",
+#     description: Faker::Lorem.paragraph(sentence_count: 2),
+#     category: "String",
+#     address: "Berlin",
+#     price: rand(2..50),
+#     user: users.sample
+#   )
+#   # Attach photos to instruments (using image files from the db folder)
+#   photo_path = Rails.root.join("db/seed_images/Violin.jpg")
+#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+#   puts "Created #{instrument.name} with a photo."
+# # Create Violin 2
+#   instrument = Instrument.create!(
+#     name: "Magical Violin",
+#     description: Faker::Lorem.paragraph(sentence_count: 2),
+#     category: "String",
+#     address: "Berlin",
+#     price: rand(2..50),
+#     user: users.sample
+#   )
+#   # Attach photos to instruments (using image files from the db folder)
+#   photo_path = Rails.root.join("db/seed_images/Violin.webp")
+#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+#   puts "Created #{instrument.name} with a photo."
+# # Create Acoustic Guitar 1
+#   instrument = Instrument.create!(
+#     name: "Acoustic Western Guitar",
+#     description: Faker::Lorem.paragraph(sentence_count: 2),
+#     category: "Guitar",
+#     address: "Berlin",
+#     price: rand(2..50),
+#     user: users.sample
+#   )
+#   # Attach photos to instruments (using image files from the db folder)
+#   photo_path = Rails.root.join("db/seed_images/Acoustic_Guitar_Park.webp")
+#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+#   puts "Created #{instrument.name} with a photo."
+# # Create Acoustic Guitar 1
+#   instrument = Instrument.create!(
+#     name: "Acoustic Classical Guitar",
+#     description: Faker::Lorem.paragraph(sentence_count: 2),
+#     category: "Guitar",
+#     address: "Berlin",
+#     price: rand(2..50),
+#     user: users.sample
+#   )
+#   # Attach photos to instruments (using image files from the db folder)
+#   photo_path = Rails.root.join("db/seed_images/Acoustic_Guitar_Stage.jpg")
+#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+#   puts "Created #{instrument.name} with a photo."
+# # Create Alphorn
+#    instrument = Instrument.create!(
+#     name: "Original Swiss Alphorn",
+#     description: Faker::Lorem.paragraph(sentence_count: 2),
+#     category: "Brass",
+#     address: "Berlin",
+#     price: rand(2..50),
+#     user: users.sample
+#   )
+#   # Attach photos to instruments (using image files from the db folder)
+#   photo_path = Rails.root.join("db/seed_images/Alphorn.jpg")
+#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+#   puts "Created #{instrument.name} with a photo."
+# # Create Clarinet
+#    instrument = Instrument.create!(
+#     name: "Brand new Clarinet",
+#     description: Faker::Lorem.paragraph(sentence_count: 2),
+#     category: "Woodwind",
+#     address: "Berlin",
+#     price: rand(2..50),
+#     user: users.sample
+#   )
+#   # Attach photos to instruments (using image files from the db folder)
+#   photo_path = Rails.root.join("db/seed_images/Clarinet.jpg")
+#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+#   puts "Created #{instrument.name} with a photo."
+# # Create Congas
+#    instrument = Instrument.create!(
+#     name: "Congas from Cuba",
+#     description: Faker::Lorem.paragraph(sentence_count: 2),
+#     category: "Drums",
+#     address: "Berlin",
+#     price: rand(2..50),
+#     user: users.sample
+#   )
+#   # Attach photos to instruments (using image files from the db folder)
+#   photo_path = Rails.root.join("db/seed_images/Congas.webp")
+#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+#   puts "Created #{instrument.name} with a photo."
+# # Create Double Bass
+#    instrument = Instrument.create!(
+#     name: "Jazzy Double Bass",
+#     description: Faker::Lorem.paragraph(sentence_count: 2),
+#     category: "String",
+#     address: "Berlin",
+#     price: rand(2..50),
+#     user: users.sample
+#   )
+#   # Attach photos to instruments (using image files from the db folder)
+#   photo_path = Rails.root.join("db/seed_images/Double_Bass.webp")
+#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+#   puts "Created #{instrument.name} with a photo."
+# # Create Djembe Drum
+#   instrument = Instrument.create!(
+#     name: "Nice Djembe Drum",
+#     description: Faker::Lorem.paragraph(sentence_count: 2),
+#     category: "Drums",
+#     address: "Berlin",
+#     price: rand(2..50),
+#     user: users.sample
+#   )
+#   # Attach photos to instruments (using image files from the db folder)
+#   photo_path = Rails.root.join("db/seed_images/Drum_Djembe.jpg")
+#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+#   puts "Created #{instrument.name} with a photo."
+# # Create Drummachine Digitakt
+#   instrument = Instrument.create!(
+#     name: "Drummachine Digitakt",
+#     description: Faker::Lorem.paragraph(sentence_count: 2),
+#     category: "Drums",
+#     address: "Berlin",
+#     price: rand(2..50),
+#     user: users.sample
+#   )
+#   # Attach photos to instruments (using image files from the db folder)
+#   photo_path = Rails.root.join("db/seed_images/Drummachine_Digitakt.jpg")
+#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+#   puts "Created #{instrument.name} with a photo."
+# # Create Drummachine Roland
+#   instrument = Instrument.create!(
+#     name: "Drummachine Roland",
+#     description: Faker::Lorem.paragraph(sentence_count: 2),
+#     category: "Drums",
+#     address: "Berlin",
+#     price: rand(2..50),
+#     user: users.sample
+#   )
+#   # Attach photos to instruments (using image files from the db folder)
+#   photo_path = Rails.root.join("db/seed_images/Drummachine_Roland.jpg")
+#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+#   puts "Created #{instrument.name} with a photo."
+# # Create Drummachine NoName
+#   instrument = Instrument.create!(
+#     name: "Drummachine - Really Fun",
+#     description: Faker::Lorem.paragraph(sentence_count: 2),
+#     category: "Drums",
+#     address: "Berlin",
+#     price: rand(2..50),
+#     user: users.sample
+#   )
+#   # Attach photos to instruments (using image files from the db folder)
+#   photo_path = Rails.root.join("db/seed_images/Drummachine.jpg")
+#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+#   puts "Created #{instrument.name} with a photo."
+# # Create Drum Traditional
+#   instrument = Instrument.create!(
+#     name: "Set of Traditional Drums",
+#     description: Faker::Lorem.paragraph(sentence_count: 2),
+#     category: "Drums",
+#     address: "Berlin",
+#     price: rand(2..50),
+#     user: users.sample
+#   )
+#   # Attach photos to instruments (using image files from the db folder)
+#   photo_path = Rails.root.join("db/seed_images/Drums_Traditional.jpg")
+#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+#   puts "Created #{instrument.name} with a photo."
+# # Create E Guitar Gibson
+#   instrument = Instrument.create!(
+#     name: "Gibson Les Paul",
+#     description: Faker::Lorem.paragraph(sentence_count: 2),
+#     category: "Guitars",
+#     address: "Berlin",
+#     price: rand(2..50),
+#     user: users.sample
+#   )
+#   # Attach photos to instruments (using image files from the db folder)
+#   photo_path = Rails.root.join("db/seed_images/E_Guitar_Gibson_Les_Paul.webp")
+#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+#   puts "Created #{instrument.name} with a photo."
+# # Create E Guitar Telecaster
+# instrument = Instrument.create!(
+#   name: "Fender Telecaster",
+#   description: Faker::Lorem.paragraph(sentence_count: 2),
+#   category: "Guitars",
+#   address: "Berlin",
+#   price: rand(2..50),
+#   user: users.sample
+# )
+# # Attach photos to instruments (using image files from the db folder)
+# photo_path = Rails.root.join("db/seed_images/E_Guitar_Telecaster.webp")
+# instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+# puts "Created #{instrument.name} with a photo."
+#   # Create Electric Organ
+#   instrument = Instrument.create!(
+#     name: "Vintage Electric Organ",
+#     description: Faker::Lorem.paragraph(sentence_count: 2),
+#     category: "Keys",
+#     address: "Berlin",
+#     price: rand(2..50),
+#     user: users.sample
+#   )
+#   # Attach photos to instruments (using image files from the db folder)
+#   photo_path = Rails.root.join("db/seed_images/Electric_Organ.webp")
+#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+#   puts "Created #{instrument.name} with a photo."
+# # Create Flute
+#   instrument = Instrument.create!(
+#     name: "High Quality Flute",
+#     description: Faker::Lorem.paragraph(sentence_count: 2),
+#     category: "Woodwind",
+#     address: "Berlin",
+#     price: rand(2..50),
+#     user: users.sample
+#   )
+#   # Attach photos to instruments (using image files from the db folder)
+#   photo_path = Rails.root.join("db/seed_images/Flute.jpg")
+#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+#   puts "Created #{instrument.name} with a photo."
+# # Create Harp
+#   instrument = Instrument.create!(
+#     name: "Beautiful old Harp",
+#     description: Faker::Lorem.paragraph(sentence_count: 2),
+#     category: "String",
+#     address: "Berlin",
+#     price: rand(2..50),
+#     user: users.sample
+#   )
+#   # Attach photos to instruments (using image files from the db folder)
+#   photo_path = Rails.root.join("db/seed_images/Harp.webp")
+#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+#   puts "Created #{instrument.name} with a photo."
+# # Create Roland Synthesizer
+#   instrument = Instrument.create!(
+#     name: "Classical Roland Synthesizer",
+#     description: Faker::Lorem.paragraph(sentence_count: 2),
+#     category: "Synthesizer",
+#     address: "Berlin",
+#     price: rand(2..50),
+#     user: users.sample
+#   )
+#   # Attach photos to instruments (using image files from the db folder)
+#   photo_path = Rails.root.join("db/seed_images/Roland_Synthesizer.webp")
+#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+#   puts "Created #{instrument.name} with a photo."
+# # Create Tenor Saxophone
+#   instrument = Instrument.create!(
+#     name: "Warm Selmer Tenor Saxophone",
+#     description: Faker::Lorem.paragraph(sentence_count: 2),
+#     category: "Woodwind",
+#     address: "Berlin",
+#     price: rand(2..50),
+#     user: users.sample
+#   )
+#   # Attach photos to instruments (using image files from the db folder)
+#   photo_path = Rails.root.join("db/seed_images/Saxophone_Spree.webp")
+#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+#   photo_path = Rails.root.join("db/seed_images/Saxophone.jpg")
+#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+#   puts "Created #{instrument.name} with a photo."
+# # Create Sousaphone
+#   instrument = Instrument.create!(
+#     name: "Sousaphone Tuba",
+#     description: Faker::Lorem.paragraph(sentence_count: 2),
+#     category: "Brass",
+#     address: "Berlin",
+#     price: rand(2..50),
+#     user: users.sample
+#   )
+#   # Attach photos to instruments (using image files from the db folder)
+#   photo_path = Rails.root.join("db/seed_images/Sousaphone_Europe.jpg")
+#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+#   photo_path = Rails.root.join("db/seed_images/Sousaphone.jpg")
+#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+#   puts "Created #{instrument.name} with a photo."
+# # Create Steeldrum
+#   instrument = Instrument.create!(
+#     name: "Modern Steeldrum",
+#     description: Faker::Lorem.paragraph(sentence_count: 2),
+#     category: "Drums",
+#     address: "Berlin",
+#     price: rand(2..50),
+#     user: users.sample
+#   )
+#   # Attach photos to instruments (using image files from the db folder)
+#   photo_path = Rails.root.join("db/seed_images/Steeldrum.jpg")
+#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+#   puts "Created #{instrument.name} with a photo."
+# # Create Korg Synthesizer
+#   instrument = Instrument.create!(
+#     name: "Classic Korg Synthesizer",
+#     description: Faker::Lorem.paragraph(sentence_count: 2),
+#     category: "Synthesizer",
+#     address: "Berlin",
+#     price: rand(2..50),
+#     user: users.sample
+#   )
+#   # Attach photos to instruments (using image files from the db folder)
+#   photo_path = Rails.root.join("db/seed_images/Synthesizer_Korg.webp")
+#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+#   puts "Created #{instrument.name} with a photo."
+# # Create Trumpet
+#   instrument = Instrument.create!(
+#     name: "Wonderful Trumpet",
+#     description: Faker::Lorem.paragraph(sentence_count: 2),
+#     category: "Brass",
+#     address: "Berlin",
+#     price: rand(2..50),
+#     user: users.sample
+#   )
+#   # Attach photos to instruments (using image files from the db folder)
+#   photo_path = Rails.root.join("db/seed_images/Trumpet_red.jpg")
+#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+#   photo_path = Rails.root.join("db/seed_images/Trumpet_Floor.jpg")
+#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+#   photo_path = Rails.root.join("db/seed_images/Trumpet_Bed.jpg")
+#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+#   puts "Created #{instrument.name} with a photo."
+# # Create Tuba
+#   instrument = Instrument.create!(
+#     name: "Vintage Tuba",
+#     description: Faker::Lorem.paragraph(sentence_count: 2),
+#     category: "Brass",
+#     address: "Berlin",
+#     price: rand(2..50),
+#     user: users.sample
+#   )
+#   # Attach photos to instruments (using image files from the db folder)
+#   photo_path = Rails.root.join("db/seed_images/Tuba.jpg")
+#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+#   photo_path = Rails.root.join("db/seed_images/Tuba_Brassband.jpg")
+#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+#   puts "Created #{instrument.name} with a photo."
+# # Create Drum Kit
+#   instrument = Instrument.create!(
+#     name: "Yamaha Drum Kit",
+#     description: Faker::Lorem.paragraph(sentence_count: 2),
+#     category: "Drums",
+#     address: "Berlin",
+#     price: rand(2..50),
+#     user: users.sample
+#   )
+#   # Attach photos to instruments (using image files from the db folder)
+#   photo_path = Rails.root.join("db/seed_images/Yamaha_Drum_Kit.webp")
+#   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+#   puts "Created #{instrument.name} with a photo."
+# end
+
+# Manual Instruments Seed with descriptions by chatgpt:
+
+
 def create_instruments_manually
   puts "Creating instruments..."
   users = User.all
-# Create Cello
+
+  # Create Cello
   instrument = Instrument.create!(
     name: "Beautiful Cello",
-    description: Faker::Lorem.paragraph(sentence_count: 2),
+    description: "A rich-sounding cello perfect for orchestral performances and solo recitals. Deep, resonant tones.",
     category: "String",
     address: "Berlin",
     price: rand(2..50),
     user: users.sample
   )
-  # Attach photos to instruments (using image files from the db folder)
   photo_path = Rails.root.join("db/seed_images/Cello.webp")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   puts "Created #{instrument.name} with a photo."
-# Create Violin 1
+
+  # Create Violin 1
   instrument = Instrument.create!(
     name: "Wonderful Violin",
-    description: Faker::Lorem.paragraph(sentence_count: 2),
+    description: "This violin delivers an exquisite, warm sound. Ideal for both beginners and professionals.",
     category: "String",
     address: "Berlin",
     price: rand(2..50),
     user: users.sample
   )
-  # Attach photos to instruments (using image files from the db folder)
   photo_path = Rails.root.join("db/seed_images/Violin.jpg")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   puts "Created #{instrument.name} with a photo."
-# Create Violin 2
+
+  # Create Violin 2
   instrument = Instrument.create!(
     name: "Magical Violin",
-    description: Faker::Lorem.paragraph(sentence_count: 2),
+    description: "A handcrafted violin with impeccable sound clarity. A magical choice for any performance.",
     category: "String",
     address: "Berlin",
     price: rand(2..50),
     user: users.sample
   )
-  # Attach photos to instruments (using image files from the db folder)
   photo_path = Rails.root.join("db/seed_images/Violin.webp")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   puts "Created #{instrument.name} with a photo."
-# Create Acoustic Guitar 1
+
+  # Create Acoustic Western Guitar
   instrument = Instrument.create!(
     name: "Acoustic Western Guitar",
-    description: Faker::Lorem.paragraph(sentence_count: 2),
+    description: "A Western guitar with bright, resonant tones—great for folk and country music.",
     category: "Guitar",
     address: "Berlin",
     price: rand(2..50),
     user: users.sample
   )
-  # Attach photos to instruments (using image files from the db folder)
   photo_path = Rails.root.join("db/seed_images/Acoustic_Guitar_Park.webp")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   puts "Created #{instrument.name} with a photo."
-# Create Acoustic Guitar 1
+
+  # Create Acoustic Classical Guitar
   instrument = Instrument.create!(
     name: "Acoustic Classical Guitar",
-    description: Faker::Lorem.paragraph(sentence_count: 2),
+    description: "A classic guitar with warm, mellow tones, perfect for classical and flamenco.",
     category: "Guitar",
     address: "Berlin",
     price: rand(2..50),
     user: users.sample
   )
-  # Attach photos to instruments (using image files from the db folder)
   photo_path = Rails.root.join("db/seed_images/Acoustic_Guitar_Stage.jpg")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   puts "Created #{instrument.name} with a photo."
-# Create Alphorn
-   instrument = Instrument.create!(
+
+  # Create Alphorn
+  instrument = Instrument.create!(
     name: "Original Swiss Alphorn",
-    description: Faker::Lorem.paragraph(sentence_count: 2),
+    description: "Traditional Swiss Alphorn with deep, majestic sounds. Perfect for outdoor performances.",
     category: "Brass",
     address: "Berlin",
     price: rand(2..50),
     user: users.sample
   )
-  # Attach photos to instruments (using image files from the db folder)
   photo_path = Rails.root.join("db/seed_images/Alphorn.jpg")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   puts "Created #{instrument.name} with a photo."
-# Create Clarinet
-   instrument = Instrument.create!(
+
+  # Create Clarinet
+  instrument = Instrument.create!(
     name: "Brand new Clarinet",
-    description: Faker::Lorem.paragraph(sentence_count: 2),
+    description: "A brand new clarinet with clear, rich tones for both beginners and experts.",
     category: "Woodwind",
     address: "Berlin",
     price: rand(2..50),
     user: users.sample
   )
-  # Attach photos to instruments (using image files from the db folder)
   photo_path = Rails.root.join("db/seed_images/Clarinet.jpg")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   puts "Created #{instrument.name} with a photo."
-# Create Congas
-   instrument = Instrument.create!(
+
+  # Create Congas
+  instrument = Instrument.create!(
     name: "Congas from Cuba",
-    description: Faker::Lorem.paragraph(sentence_count: 2),
+    description: "Handmade Cuban congas with authentic, earthy beats. Great for Latin rhythms.",
     category: "Drums",
     address: "Berlin",
     price: rand(2..50),
     user: users.sample
   )
-  # Attach photos to instruments (using image files from the db folder)
   photo_path = Rails.root.join("db/seed_images/Congas.webp")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   puts "Created #{instrument.name} with a photo."
-# Create Double Bass
-   instrument = Instrument.create!(
+
+  # Create Double Bass
+  instrument = Instrument.create!(
     name: "Jazzy Double Bass",
-    description: Faker::Lorem.paragraph(sentence_count: 2),
+    description: "A jazzy double bass, delivering rich, smooth lows. Perfect for jazz or orchestral use.",
     category: "String",
     address: "Berlin",
     price: rand(2..50),
     user: users.sample
   )
-  # Attach photos to instruments (using image files from the db folder)
   photo_path = Rails.root.join("db/seed_images/Double_Bass.webp")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   puts "Created #{instrument.name} with a photo."
-# Create Djembe Drum
+
+  # Create Djembe Drum
   instrument = Instrument.create!(
     name: "Nice Djembe Drum",
-    description: Faker::Lorem.paragraph(sentence_count: 2),
+    description: "This djembe offers powerful, deep tones. Handcrafted and ideal for drum circles.",
     category: "Drums",
     address: "Berlin",
     price: rand(2..50),
     user: users.sample
   )
-  # Attach photos to instruments (using image files from the db folder)
   photo_path = Rails.root.join("db/seed_images/Drum_Djembe.jpg")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   puts "Created #{instrument.name} with a photo."
-# Create Drummachine Digitakt
+
+  # Create Drummachine Digitakt
   instrument = Instrument.create!(
     name: "Drummachine Digitakt",
-    description: Faker::Lorem.paragraph(sentence_count: 2),
+    description: "A versatile, all-in-one drum machine with an array of electronic beats.",
     category: "Drums",
     address: "Berlin",
     price: rand(2..50),
     user: users.sample
   )
-  # Attach photos to instruments (using image files from the db folder)
   photo_path = Rails.root.join("db/seed_images/Drummachine_Digitakt.jpg")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   puts "Created #{instrument.name} with a photo."
-# Create Drummachine Roland
+
+  # Create Drummachine Roland
   instrument = Instrument.create!(
     name: "Drummachine Roland",
-    description: Faker::Lorem.paragraph(sentence_count: 2),
+    description: "Classic Roland drum machine. Iconic sounds for electronic music enthusiasts.",
     category: "Drums",
     address: "Berlin",
     price: rand(2..50),
     user: users.sample
   )
-  # Attach photos to instruments (using image files from the db folder)
   photo_path = Rails.root.join("db/seed_images/Drummachine_Roland.jpg")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   puts "Created #{instrument.name} with a photo."
-# Create Drummachine NoName
+
+  # Create Drummachine NoName
   instrument = Instrument.create!(
     name: "Drummachine - Really Fun",
-    description: Faker::Lorem.paragraph(sentence_count: 2),
+    description: "A budget-friendly drummachine, offering fun beats and endless creativity.",
     category: "Drums",
     address: "Berlin",
     price: rand(2..50),
     user: users.sample
   )
-  # Attach photos to instruments (using image files from the db folder)
   photo_path = Rails.root.join("db/seed_images/Drummachine.jpg")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   puts "Created #{instrument.name} with a photo."
-# Create Drum Traditional
+
+  # Create Traditional Drum Set
   instrument = Instrument.create!(
     name: "Set of Traditional Drums",
-    description: Faker::Lorem.paragraph(sentence_count: 2),
+    description: "A beautiful set of traditional drums, crafted for deep, resonant rhythms.",
     category: "Drums",
     address: "Berlin",
     price: rand(2..50),
     user: users.sample
   )
-  # Attach photos to instruments (using image files from the db folder)
   photo_path = Rails.root.join("db/seed_images/Drums_Traditional.jpg")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   puts "Created #{instrument.name} with a photo."
-# Create E Guitar Gibson
+
+  # Create E Guitar Gibson
   instrument = Instrument.create!(
     name: "Gibson Les Paul",
-    description: Faker::Lorem.paragraph(sentence_count: 2),
-    category: "Guitars",
+    description: "A legendary Gibson Les Paul with signature rock tones. Perfect for stage performances.",
+    category: "Guitar",
     address: "Berlin",
     price: rand(2..50),
     user: users.sample
   )
-  # Attach photos to instruments (using image files from the db folder)
   photo_path = Rails.root.join("db/seed_images/E_Guitar_Gibson_Les_Paul.webp")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   puts "Created #{instrument.name} with a photo."
-# Create E Guitar Telecaster
-instrument = Instrument.create!(
-  name: "Fender Telecaster",
-  description: Faker::Lorem.paragraph(sentence_count: 2),
-  category: "Guitars",
-  address: "Berlin",
-  price: rand(2..50),
-  user: users.sample
-)
-# Attach photos to instruments (using image files from the db folder)
-photo_path = Rails.root.join("db/seed_images/E_Guitar_Telecaster.webp")
-instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
-puts "Created #{instrument.name} with a photo."
+
+  # Create E Guitar Telecaster
+  instrument = Instrument.create!(
+    name: "Fender Telecaster",
+    description: "A Fender Telecaster delivering sharp, twangy tones. Perfect for rock and country.",
+    category: "Guitar",
+    address: "Berlin",
+    price: rand(2..50),
+    user: users.sample
+  )
+  photo_path = Rails.root.join("db/seed_images/E_Guitar_Telecaster.webp")
+  instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
+  puts "Created #{instrument.name} with a photo."
+
   # Create Electric Organ
   instrument = Instrument.create!(
     name: "Vintage Electric Organ",
-    description: Faker::Lorem.paragraph(sentence_count: 2),
+    description: "Vintage electric organ with lush, warm tones. Perfect for jazz and soul music.",
     category: "Keys",
     address: "Berlin",
     price: rand(2..50),
     user: users.sample
   )
-  # Attach photos to instruments (using image files from the db folder)
   photo_path = Rails.root.join("db/seed_images/Electric_Organ.webp")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   puts "Created #{instrument.name} with a photo."
-# Create Flute
+
+
+
+  # Create Flute
   instrument = Instrument.create!(
     name: "High Quality Flute",
-    description: Faker::Lorem.paragraph(sentence_count: 2),
+    description: "A premium flute with smooth and clear tones, suitable for orchestral performances or soloists.",
     category: "Woodwind",
     address: "Berlin",
     price: rand(2..50),
     user: users.sample
   )
-  # Attach photos to instruments (using image files from the db folder)
   photo_path = Rails.root.join("db/seed_images/Flute.jpg")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   puts "Created #{instrument.name} with a photo."
-# Create Harp
+
+  # Create Harp
   instrument = Instrument.create!(
     name: "Beautiful old Harp",
-    description: Faker::Lorem.paragraph(sentence_count: 2),
+    description: "A vintage harp with a heavenly sound, ideal for classical music or soothing performances.",
     category: "String",
     address: "Berlin",
     price: rand(2..50),
     user: users.sample
   )
-  # Attach photos to instruments (using image files from the db folder)
   photo_path = Rails.root.join("db/seed_images/Harp.webp")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   puts "Created #{instrument.name} with a photo."
-# Create Roland Synthesizer
+
+  # Create Roland Synthesizer
   instrument = Instrument.create!(
     name: "Classical Roland Synthesizer",
-    description: Faker::Lorem.paragraph(sentence_count: 2),
+    description: "A versatile Roland synthesizer, perfect for electronic music production and live performances.",
     category: "Synthesizer",
     address: "Berlin",
     price: rand(2..50),
     user: users.sample
   )
-  # Attach photos to instruments (using image files from the db folder)
   photo_path = Rails.root.join("db/seed_images/Roland_Synthesizer.webp")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   puts "Created #{instrument.name} with a photo."
-# Create Tenor Saxophone
+
+  # Create Tenor Saxophone
   instrument = Instrument.create!(
     name: "Warm Selmer Tenor Saxophone",
-    description: Faker::Lorem.paragraph(sentence_count: 2),
+    description: "A Selmer tenor saxophone with rich, warm tones, perfect for jazz and classical music.",
     category: "Woodwind",
     address: "Berlin",
     price: rand(2..50),
     user: users.sample
   )
-  # Attach photos to instruments (using image files from the db folder)
   photo_path = Rails.root.join("db/seed_images/Saxophone_Spree.webp")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   photo_path = Rails.root.join("db/seed_images/Saxophone.jpg")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   puts "Created #{instrument.name} with a photo."
-# Create Sousaphone
+
+  # Create Sousaphone
   instrument = Instrument.create!(
     name: "Sousaphone Tuba",
-    description: Faker::Lorem.paragraph(sentence_count: 2),
+    description: "A large, powerful brass instrument with deep tones, perfect for marching bands and orchestras.",
     category: "Brass",
     address: "Berlin",
     price: rand(2..50),
     user: users.sample
   )
-  # Attach photos to instruments (using image files from the db folder)
   photo_path = Rails.root.join("db/seed_images/Sousaphone_Europe.jpg")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   photo_path = Rails.root.join("db/seed_images/Sousaphone.jpg")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   puts "Created #{instrument.name} with a photo."
-# Create Steeldrum
+
+  # Create Steeldrum
   instrument = Instrument.create!(
     name: "Modern Steeldrum",
-    description: Faker::Lorem.paragraph(sentence_count: 2),
+    description: "A handcrafted steeldrum with a melodious and vibrant tone, perfect for Caribbean rhythms.",
     category: "Drums",
     address: "Berlin",
     price: rand(2..50),
     user: users.sample
   )
-  # Attach photos to instruments (using image files from the db folder)
   photo_path = Rails.root.join("db/seed_images/Steeldrum.jpg")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   puts "Created #{instrument.name} with a photo."
-# Create Korg Synthesizer
+
+  # Create Korg Synthesizer
   instrument = Instrument.create!(
     name: "Classic Korg Synthesizer",
-    description: Faker::Lorem.paragraph(sentence_count: 2),
+    description: "A classic Korg synthesizer known for its versatility and rich soundscapes.",
     category: "Synthesizer",
     address: "Berlin",
     price: rand(2..50),
     user: users.sample
   )
-  # Attach photos to instruments (using image files from the db folder)
   photo_path = Rails.root.join("db/seed_images/Synthesizer_Korg.webp")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   puts "Created #{instrument.name} with a photo."
-# Create Trumpet
+
+  # Create Trumpet
   instrument = Instrument.create!(
     name: "Wonderful Trumpet",
-    description: Faker::Lorem.paragraph(sentence_count: 2),
+    description: "A bright and bold trumpet with a crisp sound, suitable for jazz, classical, and marching bands.",
     category: "Brass",
     address: "Berlin",
     price: rand(2..50),
     user: users.sample
   )
-  # Attach photos to instruments (using image files from the db folder)
   photo_path = Rails.root.join("db/seed_images/Trumpet_red.jpg")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   photo_path = Rails.root.join("db/seed_images/Trumpet_Floor.jpg")
@@ -390,35 +761,36 @@ puts "Created #{instrument.name} with a photo."
   photo_path = Rails.root.join("db/seed_images/Trumpet_Bed.jpg")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   puts "Created #{instrument.name} with a photo."
-# Create Tuba
+
+  # Create Tuba
   instrument = Instrument.create!(
     name: "Vintage Tuba",
-    description: Faker::Lorem.paragraph(sentence_count: 2),
+    description: "A rich-sounding vintage tuba that delivers deep and resonant notes, ideal for brass ensembles.",
     category: "Brass",
     address: "Berlin",
     price: rand(2..50),
     user: users.sample
   )
-  # Attach photos to instruments (using image files from the db folder)
   photo_path = Rails.root.join("db/seed_images/Tuba.jpg")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   photo_path = Rails.root.join("db/seed_images/Tuba_Brassband.jpg")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   puts "Created #{instrument.name} with a photo."
-# Create Drum Kit
+
+  # Create Drum Kit
   instrument = Instrument.create!(
     name: "Yamaha Drum Kit",
-    description: Faker::Lorem.paragraph(sentence_count: 2),
+    description: "A high-quality Yamaha drum kit, providing powerful and balanced tones for any genre.",
     category: "Drums",
     address: "Berlin",
     price: rand(2..50),
     user: users.sample
   )
-  # Attach photos to instruments (using image files from the db folder)
   photo_path = Rails.root.join("db/seed_images/Yamaha_Drum_Kit.webp")
   instrument.photos.attach(io: File.open(photo_path), filename: File.basename(photo_path))
   puts "Created #{instrument.name} with a photo."
 end
+
 
 create_instruments_manually
 puts "#{Instrument.count} instruments created!"
