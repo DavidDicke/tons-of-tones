@@ -50,7 +50,7 @@ puts "#{User.count} users created!"
 
 
 
-# TODO: Create Real Adresses in Berlin from: https://www.generatormix.com/random-address-in-berlin?number=50
+# TODO: Create Real Adresses in Weserstr. 21,  Berlin, Germany from: https://www.generatormix.com/random-address-in-Weserstr. 21,  Berlin, Germany?number=50
 
 
 
@@ -62,7 +62,7 @@ puts "#{User.count} users created!"
 #     name: "Beautiful Cello",
 #     description: Faker::Lorem.paragraph(sentence_count: 2),
 #     category: "String",
-#     address: "Berlin",
+#     address: "Weserstr. 21,  Berlin, Germany",
 #     price: rand(2..50),
 #     user: users.sample
 #   )
@@ -75,7 +75,7 @@ puts "#{User.count} users created!"
 #     name: "Wonderful Violin",
 #     description: Faker::Lorem.paragraph(sentence_count: 2),
 #     category: "String",
-#     address: "Berlin",
+#     address: "Weserstr. 21,  Berlin, Germany",
 #     price: rand(2..50),
 #     user: users.sample
 #   )
@@ -88,7 +88,7 @@ puts "#{User.count} users created!"
 #     name: "Magical Violin",
 #     description: Faker::Lorem.paragraph(sentence_count: 2),
 #     category: "String",
-#     address: "Berlin",
+#     address: "Weserstr. 21,  Berlin, Germany",
 #     price: rand(2..50),
 #     user: users.sample
 #   )
@@ -101,7 +101,7 @@ puts "#{User.count} users created!"
 #     name: "Acoustic Western Guitar",
 #     description: Faker::Lorem.paragraph(sentence_count: 2),
 #     category: "Guitar",
-#     address: "Berlin",
+#     address: "Weserstr. 21,  Berlin, Germany",
 #     price: rand(2..50),
 #     user: users.sample
 #   )
@@ -114,7 +114,7 @@ puts "#{User.count} users created!"
 #     name: "Acoustic Classical Guitar",
 #     description: Faker::Lorem.paragraph(sentence_count: 2),
 #     category: "Guitar",
-#     address: "Berlin",
+#     address: "Weserstr. 21,  Berlin, Germany",
 #     price: rand(2..50),
 #     user: users.sample
 #   )
@@ -127,7 +127,7 @@ puts "#{User.count} users created!"
 #     name: "Original Swiss Alphorn",
 #     description: Faker::Lorem.paragraph(sentence_count: 2),
 #     category: "Brass",
-#     address: "Berlin",
+#     address: "Weserstr. 21,  Berlin, Germany",
 #     price: rand(2..50),
 #     user: users.sample
 #   )
@@ -140,7 +140,7 @@ puts "#{User.count} users created!"
 #     name: "Brand new Clarinet",
 #     description: Faker::Lorem.paragraph(sentence_count: 2),
 #     category: "Woodwind",
-#     address: "Berlin",
+#     address: "Weserstr. 21,  Berlin, Germany",
 #     price: rand(2..50),
 #     user: users.sample
 #   )
@@ -153,7 +153,7 @@ puts "#{User.count} users created!"
 #     name: "Congas from Cuba",
 #     description: Faker::Lorem.paragraph(sentence_count: 2),
 #     category: "Drums",
-#     address: "Berlin",
+#     address: "Weserstr. 21,  Berlin, Germany",
 #     price: rand(2..50),
 #     user: users.sample
 #   )
@@ -166,7 +166,7 @@ puts "#{User.count} users created!"
 #     name: "Jazzy Double Bass",
 #     description: Faker::Lorem.paragraph(sentence_count: 2),
 #     category: "String",
-#     address: "Berlin",
+#     address: "Weserstr. 21,  Berlin, Germany",
 #     price: rand(2..50),
 #     user: users.sample
 #   )
@@ -179,7 +179,7 @@ puts "#{User.count} users created!"
 #     name: "Nice Djembe Drum",
 #     description: Faker::Lorem.paragraph(sentence_count: 2),
 #     category: "Drums",
-#     address: "Berlin",
+#     address: "Weserstr. 21,  Berlin, Germany",
 #     price: rand(2..50),
 #     user: users.sample
 #   )
@@ -192,7 +192,7 @@ puts "#{User.count} users created!"
 #     name: "Drummachine Digitakt",
 #     description: Faker::Lorem.paragraph(sentence_count: 2),
 #     category: "Drums",
-#     address: "Berlin",
+#     address: "Weserstr. 21,  Berlin, Germany",
 #     price: rand(2..50),
 #     user: users.sample
 #   )
@@ -205,7 +205,7 @@ puts "#{User.count} users created!"
 #     name: "Drummachine Roland",
 #     description: Faker::Lorem.paragraph(sentence_count: 2),
 #     category: "Drums",
-#     address: "Berlin",
+#     address: "Weserstr. 21,  Berlin, Germany",
 #     price: rand(2..50),
 #     user: users.sample
 #   )
@@ -218,7 +218,7 @@ puts "#{User.count} users created!"
 #     name: "Drummachine - Really Fun",
 #     description: Faker::Lorem.paragraph(sentence_count: 2),
 #     category: "Drums",
-#     address: "Berlin",
+#     address: "Weserstr. 21,  Berlin, Germany",
 #     price: rand(2..50),
 #     user: users.sample
 #   )
@@ -231,7 +231,7 @@ puts "#{User.count} users created!"
 #     name: "Set of Traditional Drums",
 #     description: Faker::Lorem.paragraph(sentence_count: 2),
 #     category: "Drums",
-#     address: "Berlin",
+#     address: "Weserstr. 21,  Berlin, Germany",
 #     price: rand(2..50),
 #     user: users.sample
 #   )
@@ -244,7 +244,7 @@ puts "#{User.count} users created!"
 #     name: "Gibson Les Paul",
 #     description: Faker::Lorem.paragraph(sentence_count: 2),
 #     category: "Guitars",
-#     address: "Berlin",
+#     address: "Weserstr. 21,  Berlin, Germany",
 #     price: rand(2..50),
 #     user: users.sample
 #   )
@@ -257,7 +257,7 @@ puts "#{User.count} users created!"
 #   name: "Fender Telecaster",
 #   description: Faker::Lorem.paragraph(sentence_count: 2),
 #   category: "Guitars",
-#   address: "Berlin",
+#   address: "Weserstr. 21,  Berlin, Germany",
 #   price: rand(2..50),
 #   user: users.sample
 # )
@@ -270,7 +270,7 @@ puts "#{User.count} users created!"
 #     name: "Vintage Electric Organ",
 #     description: Faker::Lorem.paragraph(sentence_count: 2),
 #     category: "Keys",
-#     address: "Berlin",
+#     address: "Weserstr. 21,  Berlin, Germany",
 #     price: rand(2..50),
 #     user: users.sample
 #   )
@@ -283,7 +283,7 @@ puts "#{User.count} users created!"
 #     name: "High Quality Flute",
 #     description: Faker::Lorem.paragraph(sentence_count: 2),
 #     category: "Woodwind",
-#     address: "Berlin",
+#     address: "Weserstr. 21,  Berlin, Germany",
 #     price: rand(2..50),
 #     user: users.sample
 #   )
@@ -296,7 +296,7 @@ puts "#{User.count} users created!"
 #     name: "Beautiful old Harp",
 #     description: Faker::Lorem.paragraph(sentence_count: 2),
 #     category: "String",
-#     address: "Berlin",
+#     address: "Weserstr. 21,  Berlin, Germany",
 #     price: rand(2..50),
 #     user: users.sample
 #   )
@@ -309,7 +309,7 @@ puts "#{User.count} users created!"
 #     name: "Classical Roland Synthesizer",
 #     description: Faker::Lorem.paragraph(sentence_count: 2),
 #     category: "Synthesizer",
-#     address: "Berlin",
+#     address: "Weserstr. 21,  Berlin, Germany",
 #     price: rand(2..50),
 #     user: users.sample
 #   )
@@ -322,7 +322,7 @@ puts "#{User.count} users created!"
 #     name: "Warm Selmer Tenor Saxophone",
 #     description: Faker::Lorem.paragraph(sentence_count: 2),
 #     category: "Woodwind",
-#     address: "Berlin",
+#     address: "Weserstr. 21,  Berlin, Germany",
 #     price: rand(2..50),
 #     user: users.sample
 #   )
@@ -337,7 +337,7 @@ puts "#{User.count} users created!"
 #     name: "Sousaphone Tuba",
 #     description: Faker::Lorem.paragraph(sentence_count: 2),
 #     category: "Brass",
-#     address: "Berlin",
+#     address: "Weserstr. 21,  Berlin, Germany",
 #     price: rand(2..50),
 #     user: users.sample
 #   )
@@ -352,7 +352,7 @@ puts "#{User.count} users created!"
 #     name: "Modern Steeldrum",
 #     description: Faker::Lorem.paragraph(sentence_count: 2),
 #     category: "Drums",
-#     address: "Berlin",
+#     address: "Weserstr. 21,  Berlin, Germany",
 #     price: rand(2..50),
 #     user: users.sample
 #   )
@@ -365,7 +365,7 @@ puts "#{User.count} users created!"
 #     name: "Classic Korg Synthesizer",
 #     description: Faker::Lorem.paragraph(sentence_count: 2),
 #     category: "Synthesizer",
-#     address: "Berlin",
+#     address: "Weserstr. 21,  Berlin, Germany",
 #     price: rand(2..50),
 #     user: users.sample
 #   )
@@ -378,7 +378,7 @@ puts "#{User.count} users created!"
 #     name: "Wonderful Trumpet",
 #     description: Faker::Lorem.paragraph(sentence_count: 2),
 #     category: "Brass",
-#     address: "Berlin",
+#     address: "Weserstr. 21,  Berlin, Germany",
 #     price: rand(2..50),
 #     user: users.sample
 #   )
@@ -395,7 +395,7 @@ puts "#{User.count} users created!"
 #     name: "Vintage Tuba",
 #     description: Faker::Lorem.paragraph(sentence_count: 2),
 #     category: "Brass",
-#     address: "Berlin",
+#     address: "Weserstr. 21,  Berlin, Germany",
 #     price: rand(2..50),
 #     user: users.sample
 #   )
@@ -410,7 +410,7 @@ puts "#{User.count} users created!"
 #     name: "Yamaha Drum Kit",
 #     description: Faker::Lorem.paragraph(sentence_count: 2),
 #     category: "Drums",
-#     address: "Berlin",
+#     address: "Weserstr. 21,  Berlin, Germany",
 #     price: rand(2..50),
 #     user: users.sample
 #   )
@@ -432,7 +432,7 @@ def create_instruments_manually
     name: "Beautiful Cello",
     description: "A rich-sounding cello perfect for orchestral performances and solo recitals. Deep, resonant tones.",
     category: "String",
-    address: "Berlin",
+    address: "Weserstr. 21,  Berlin, Germany",
     price: rand(2..50),
     user: users.sample
   )
@@ -445,7 +445,7 @@ def create_instruments_manually
     name: "Wonderful Violin",
     description: "This violin delivers an exquisite, warm sound. Ideal for both beginners and professionals.",
     category: "String",
-    address: "Berlin",
+    address: "Weserstr. 21,  Berlin, Germany",
     price: rand(2..50),
     user: users.sample
   )
@@ -458,7 +458,7 @@ def create_instruments_manually
     name: "Magical Violin",
     description: "A handcrafted violin with impeccable sound clarity. A magical choice for any performance.",
     category: "String",
-    address: "Berlin",
+    address: "Weserstr. 21,  Berlin, Germany",
     price: rand(2..50),
     user: users.sample
   )
@@ -471,7 +471,7 @@ def create_instruments_manually
     name: "Acoustic Western Guitar",
     description: "A Western guitar with bright, resonant tones—great for folk and country music.",
     category: "Guitar",
-    address: "Berlin",
+    address: "Weserstr. 21,  Berlin, Germany",
     price: rand(2..50),
     user: users.sample
   )
@@ -484,7 +484,7 @@ def create_instruments_manually
     name: "Acoustic Classical Guitar",
     description: "A classic guitar with warm, mellow tones, perfect for classical and flamenco.",
     category: "Guitar",
-    address: "Berlin",
+    address: "Weserstr. 21,  Berlin, Germany",
     price: rand(2..50),
     user: users.sample
   )
@@ -497,7 +497,7 @@ def create_instruments_manually
     name: "Original Swiss Alphorn",
     description: "Traditional Swiss Alphorn with deep, majestic sounds. Perfect for outdoor performances.",
     category: "Brass",
-    address: "Berlin",
+    address: "Weserstr. 21,  Berlin, Germany",
     price: rand(2..50),
     user: users.sample
   )
@@ -510,7 +510,7 @@ def create_instruments_manually
     name: "Brand new Clarinet",
     description: "A brand new clarinet with clear, rich tones for both beginners and experts.",
     category: "Woodwind",
-    address: "Berlin",
+    address: "Weserstr. 21,  Berlin, Germany",
     price: rand(2..50),
     user: users.sample
   )
@@ -523,7 +523,7 @@ def create_instruments_manually
     name: "Congas from Cuba",
     description: "Handmade Cuban congas with authentic, earthy beats. Great for Latin rhythms.",
     category: "Drums",
-    address: "Berlin",
+    address: "Weserstr. 21,  Berlin, Germany",
     price: rand(2..50),
     user: users.sample
   )
@@ -536,7 +536,7 @@ def create_instruments_manually
     name: "Jazzy Double Bass",
     description: "A jazzy double bass, delivering rich, smooth lows. Perfect for jazz or orchestral use.",
     category: "String",
-    address: "Berlin",
+    address: "Weserstr. 21,  Berlin, Germany",
     price: rand(2..50),
     user: users.sample
   )
@@ -549,7 +549,7 @@ def create_instruments_manually
     name: "Nice Djembe Drum",
     description: "This djembe offers powerful, deep tones. Handcrafted and ideal for drum circles.",
     category: "Drums",
-    address: "Berlin",
+    address: "Weserstr. 21,  Berlin, Germany",
     price: rand(2..50),
     user: users.sample
   )
@@ -562,7 +562,7 @@ def create_instruments_manually
     name: "Drummachine Digitakt",
     description: "A versatile, all-in-one drum machine with an array of electronic beats.",
     category: "Drums",
-    address: "Berlin",
+    address: "Weserstr. 21,  Berlin, Germany",
     price: rand(2..50),
     user: users.sample
   )
@@ -575,7 +575,7 @@ def create_instruments_manually
     name: "Drummachine Roland",
     description: "Classic Roland drum machine. Iconic sounds for electronic music enthusiasts.",
     category: "Drums",
-    address: "Berlin",
+    address: "Weserstr. 21,  Berlin, Germany",
     price: rand(2..50),
     user: users.sample
   )
@@ -588,7 +588,7 @@ def create_instruments_manually
     name: "Drummachine - Really Fun",
     description: "A budget-friendly drummachine, offering fun beats and endless creativity.",
     category: "Drums",
-    address: "Berlin",
+    address: "Weserstr. 21,  Berlin, Germany",
     price: rand(2..50),
     user: users.sample
   )
@@ -601,7 +601,7 @@ def create_instruments_manually
     name: "Set of Traditional Drums",
     description: "A beautiful set of traditional drums, crafted for deep, resonant rhythms.",
     category: "Drums",
-    address: "Berlin",
+    address: "Weserstr. 21,  Berlin, Germany",
     price: rand(2..50),
     user: users.sample
   )
@@ -614,7 +614,7 @@ def create_instruments_manually
     name: "Gibson Les Paul",
     description: "A legendary Gibson Les Paul with signature rock tones. Perfect for stage performances.",
     category: "Guitar",
-    address: "Berlin",
+    address: "Weserstr. 21,  Berlin, Germany",
     price: rand(2..50),
     user: users.sample
   )
@@ -627,7 +627,7 @@ def create_instruments_manually
     name: "Fender Telecaster",
     description: "A Fender Telecaster delivering sharp, twangy tones. Perfect for rock and country.",
     category: "Guitar",
-    address: "Berlin",
+    address: "Weserstr. 21,  Berlin, Germany",
     price: rand(2..50),
     user: users.sample
   )
@@ -640,7 +640,7 @@ def create_instruments_manually
     name: "Vintage Electric Organ",
     description: "Vintage electric organ with lush, warm tones. Perfect for jazz and soul music.",
     category: "Keys",
-    address: "Berlin",
+    address: "Weserstr. 21,  Berlin, Germany",
     price: rand(2..50),
     user: users.sample
   )
@@ -655,7 +655,7 @@ def create_instruments_manually
     name: "High Quality Flute",
     description: "A premium flute with smooth and clear tones, suitable for orchestral performances or soloists.",
     category: "Woodwind",
-    address: "Berlin",
+    address: "Weserstr. 21,  Berlin, Germany",
     price: rand(2..50),
     user: users.sample
   )
@@ -668,7 +668,7 @@ def create_instruments_manually
     name: "Beautiful old Harp",
     description: "A vintage harp with a heavenly sound, ideal for classical music or soothing performances.",
     category: "String",
-    address: "Berlin",
+    address: "Weserstr. 21,  Berlin, Germany",
     price: rand(2..50),
     user: users.sample
   )
@@ -681,7 +681,7 @@ def create_instruments_manually
     name: "Classical Roland Synthesizer",
     description: "A versatile Roland synthesizer, perfect for electronic music production and live performances.",
     category: "Synthesizer",
-    address: "Berlin",
+    address: "Weserstr. 21,  Berlin, Germany",
     price: rand(2..50),
     user: users.sample
   )
@@ -694,7 +694,7 @@ def create_instruments_manually
     name: "Warm Selmer Tenor Saxophone",
     description: "A Selmer tenor saxophone with rich, warm tones, perfect for jazz and classical music.",
     category: "Woodwind",
-    address: "Berlin",
+    address: "Weserstr. 21,  Berlin, Germany",
     price: rand(2..50),
     user: users.sample
   )
@@ -709,7 +709,7 @@ def create_instruments_manually
     name: "Sousaphone Tuba",
     description: "A large, powerful brass instrument with deep tones, perfect for marching bands and orchestras.",
     category: "Brass",
-    address: "Berlin",
+    address: "Weserstr. 21,  Berlin, Germany",
     price: rand(2..50),
     user: users.sample
   )
@@ -724,7 +724,7 @@ def create_instruments_manually
     name: "Modern Steeldrum",
     description: "A handcrafted steeldrum with a melodious and vibrant tone, perfect for Caribbean rhythms.",
     category: "Drums",
-    address: "Berlin",
+    address: "Weserstr. 21,  Berlin, Germany",
     price: rand(2..50),
     user: users.sample
   )
@@ -737,7 +737,7 @@ def create_instruments_manually
     name: "Classic Korg Synthesizer",
     description: "A classic Korg synthesizer known for its versatility and rich soundscapes.",
     category: "Synthesizer",
-    address: "Berlin",
+    address: "Weserstr. 21,  Berlin, Germany",
     price: rand(2..50),
     user: users.sample
   )
@@ -750,7 +750,7 @@ def create_instruments_manually
     name: "Wonderful Trumpet",
     description: "A bright and bold trumpet with a crisp sound, suitable for jazz, classical, and marching bands.",
     category: "Brass",
-    address: "Berlin",
+    address: "Weserstr. 21,  Berlin, Germany",
     price: rand(2..50),
     user: users.sample
   )
@@ -767,7 +767,7 @@ def create_instruments_manually
     name: "Vintage Tuba",
     description: "A rich-sounding vintage tuba that delivers deep and resonant notes, ideal for brass ensembles.",
     category: "Brass",
-    address: "Berlin",
+    address: "Weserstr. 21,  Berlin, Germany",
     price: rand(2..50),
     user: users.sample
   )
@@ -782,7 +782,7 @@ def create_instruments_manually
     name: "Yamaha Drum Kit",
     description: "A high-quality Yamaha drum kit, providing powerful and balanced tones for any genre.",
     category: "Drums",
-    address: "Berlin",
+    address: "Weserstr. 21,  Berlin, Germany",
     price: rand(2..50),
     user: users.sample
   )
