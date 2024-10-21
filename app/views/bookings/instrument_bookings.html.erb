@@ -24,13 +24,13 @@
           <% active_bookings.each do |instrument_booking| %>
             <% if instrument_booking.status == 'pending' %>
               <div>
-                <% confirm_link = button_to '<i class="fa-solid fa-check"></i>'.html_safe, booking_path(instrument_booking), method: :patch, params: { booking: { status: :confirmed } }, data: { turbo: true }, class: 'btn p-0' %>
-                <% cancel_link = button_to '<i class="fa-solid fa-trash"></i>'.html_safe, booking_path(instrument_booking), method: :patch, params: { booking: { status: :cancelled } }, data: { turbo: true }, class: 'btn p-0' %>
+                <% confirm_link = button_to '<i class="fa-solid fa-check"></i>'.html_safe, booking_path(instrument_booking), method: :patch, params: { booking: { status: :confirmed } }, data: { turbo: true }, class: 'btn' %>
+                <% cancel_link = button_to '<i class="fa-solid fa-ban"></i>'.html_safe, booking_path(instrument_booking), method: :patch, params: { booking: { status: :cancelled } }, data: { turbo: true }, class: 'btn' %>
 
                 <%= render partial: 'card_product_bookings', locals: {
                   photos: instrument_booking.instrument.photos,
                   instrument: link_to(instrument_booking.instrument.name, alternative_booking_path(instrument_booking.id), class: 'no-italic'),
-                  owner: "#{instrument_booking.user.first_name} #{instrument_booking.user.last_name}",
+                  owner: link_to("#{instrument_booking.user.first_name} #{instrument_booking.user.last_name}", user_path(instrument_booking.user)),
                   start_date: instrument_booking.start_date.strftime("%d/%m/%Y"),
                   end_date: instrument_booking.end_date.strftime("%d/%m/%Y"),
                   confirm_link: confirm_link,
@@ -51,7 +51,7 @@
                 <%= render partial: 'card_product_bookings', locals: {
                   photos: instrument_booking.instrument.photos,
                   instrument: link_to(instrument_booking.instrument.name, alternative_booking_path(instrument_booking.id), class: 'no-italic'),
-                  owner: "#{instrument_booking.user.first_name} #{instrument_booking.user.last_name}",
+                  owner: link_to("#{instrument_booking.user.first_name} #{instrument_booking.user.last_name}", user_path(instrument_booking.user)),
                   start_date: instrument_booking.start_date.strftime("%d/%m/%Y"),
                   end_date: instrument_booking.end_date.strftime("%d/%m/%Y"),
                 } %>
@@ -72,7 +72,7 @@
           <%= render partial: 'card_product_bookings', locals: {
             photos: instrument_booking.instrument.photos,
             instrument: link_to(instrument_booking.instrument.name, alternative_booking_path(instrument_booking.id), class: 'no-italic'),
-            owner: "#{instrument_booking.user.first_name} #{instrument_booking.user.last_name}",
+            owner: link_to("#{instrument_booking.user.first_name} #{instrument_booking.user.last_name}", user_path(instrument_booking.user)),
             start_date: instrument_booking.start_date.strftime("%d/%m/%Y"),
             end_date: instrument_booking.end_date.strftime("%d/%m/%Y")
           } %>
@@ -90,13 +90,13 @@
           <%= render partial: 'card_product_bookings', locals: {
             photos: instrument_booking.instrument.photos,
             instrument: link_to(instrument_booking.instrument.name, alternative_booking_path(instrument_booking.id), class: 'no-italic'),
-            owner: "#{instrument_booking.user.first_name} #{instrument_booking.user.last_name}",
+            owner: link_to("#{instrument_booking.user.first_name} #{instrument_booking.user.last_name}", user_path(instrument_booking.user)),
             start_date: instrument_booking.start_date.strftime("%d/%m/%Y"),
             end_date: instrument_booking.end_date.strftime("%d/%m/%Y"),
             rating: if instrument_booking.user_review.present?
-              link_to '<i class="fa-brands fa-readme"></i> '.html_safe, booking_user_review_path(instrument_booking, instrument_booking.user_review), class: 'btn p-0'
+              link_to '<i class="fa-brands fa-readme"></i>'.html_safe, booking_user_review_path(instrument_booking, instrument_booking.user_review), class: 'btn'
             else
-              link_to '<i class="fa-solid fa-pen-nib"></i>'.html_safe, new_booking_user_review_path(instrument_booking), class: 'btn p-0'
+              link_to '<i class="fa-solid fa-pen-nib"></i>'.html_safe, new_booking_user_review_path(instrument_booking), class: 'btn'
             end
           } %>
         <% end %>

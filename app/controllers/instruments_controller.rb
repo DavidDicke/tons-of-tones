@@ -15,6 +15,12 @@ class InstrumentsController < ApplicationController
     @booking.start_date = params[:start_date] if params[:start_date]
     @booking.end_date = params[:end_date] if params[:end_date]
     @booking.user_id = current_user.id if current_user.present?
+
+    # Add marker for map:
+    @markers = [{
+    lat: @instrument.latitude,
+    lng: @instrument.longitude
+  }]
   end
 
   def new
@@ -52,9 +58,9 @@ class InstrumentsController < ApplicationController
   def destroy
     @instrument = Instrument.find(params[:id])
     if @instrument.destroy
-      redirect_to my_instruments_instruments_path, notice: 'Instrument successfully deleted.'
+      redirect_to user_path(current_user), notice: 'Instrument successfully deleted.'
     else
-      redirect_to instrument_path(@instrument), alert: 'Unable to delete the instrument.'
+      redirect_to user_path(current_user), alert: 'Unable to delete the instrument.'
     end
   end
 
