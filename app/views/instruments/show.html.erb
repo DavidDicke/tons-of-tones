@@ -16,64 +16,57 @@
     </div>
 
     <div class="container">
+      <div class="pt-3">
+        <h1><%= @instrument.name %></h1>
+      </div>
+      <div class="py-3 d-flex align-items-end">
+        <h3 class="text-primary me-1"><%= @instrument.price %> €</h3><h6> per day</h6>
+      </div>
+      <div class="pt-3 border-top border-secondary">
+        <p><%= @instrument.description %></p>
+      </div>
+      <div class="pt-4 border-top border-secondary">
+        <h4>Pick it up here</h4>
+        <div style="width: 100%; height: 200px;"
+             data-controller="map"
+             data-map-markers-value="<%= @markers.to_json %>"
+             data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+        <%= @instrument.address %>
+      </div>
 
-    <div class="pt-3">
-      <h1><%= @instrument.name %></h1>
-    </div>
-    <div class="py-3 d-flex align-items-end">
-      <h3 class="text-primary me-1"><%= @instrument.price %> €</h3><h6> per day</h6>
-    </div>
-    <div class="pt-3 border-top border-secondary">
-      <p><%= @instrument.description %></p>
-    </div>
-    <div class="pt-4 border-top border-secondary">
-      <h4>Pick it up here</h4>
-      <%# Add map div here: %>
-      <div style="width: 100%; height: 200px;"
-           data-controller="map"
-           data-map-markers-value="<%= @markers.to_json %>"
-           data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-
-      <%= @instrument.address %>
-    </div>
-
-
-    <div class="pt-4">
-    <h4>What other users think</h4>
-    <% reviews = @instrument.booking_reviews %>
-    <% if reviews.any? %>
-      <ul>
-        <% reviews.each do |review| %>
-          <li>
-            <strong>Rating:</strong> <%= review.rating %> / 5<br>
-            <strong>Review:</strong> <%= review.content %><br>
-            <strong>By:</strong> <%= "#{review.user.first_name} #{review.user.last_name}" %>
-            <!-- #TODO Link to user profile -->
-          </li>
+      <div class="col-12 col-sm-6 mb-5 pt-5">
+        <h5>What other users think</h5>
+        <% if @instrument.booking_reviews.empty? %>
+          <small><em class="text-muted">No reviews written for this instrument yet.</em></small>
         <% end %>
-      </ul>
-    <% else %>
-      <p>No reviews yet for this instrument.</p>
-    <% end %>
-    </div>
-    <div class="pt-4">
-      <h4>Rented out by</h4>
-      <%= render "users/card_user", user: @instrument.user %>
-      <%# <%= link_to @instrument.user.first_name, user_path(@instrument.user) %>
-    </div>
-    <%= link_to 'Back to Instruments', instruments_path, class: "" %>
+        <% @instrument.booking_reviews.each do |review| %>
+          <div>
+            <% review.rating.times do %>
+              <i class="fas fa-star star-yellow"></i>
+            <% end %>
+            <small><em class="text-muted"><%= distance_of_time_in_words_to_now(review.created_at) %> ago</em></small>
+            <p class="mb-0"><%= review.content %></p>
+          </div>
+          <hr>
+        <% end %>
+      </div>
+
+      <div class="pt-4">
+        <h4>Rented out by</h4>
+        <%= link_to render("users/card_user", user: @instrument.user), user_path(@instrument.user) %>
+      </div>
+      <%= link_to 'Back to Instruments', instruments_path, class: "" %>
     </div>
   </div>
+
   <% if current_user && current_user != @instrument.user %>
-    <%# <%= render 'instruments/booking_form' %>
     <div class="booking-cta" data-controller="booking-cta" data-booking-cta-price-value="<%= @instrument.price %>">
       <div>
-      <%# Add stimulus target %>
-        <h5 data-booking-cta-target="totalPrice" ></h5>
+        <h5 data-booking-cta-target="totalPrice"></h5>
         <a href="#" data-booking-cta-target="dateRangePrev" data-bs-toggle="modal" data-bs-target="#BookingModal"></a>
       </div>
       <div>
-        <button Class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#BookingModal" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">Book</button>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#BookingModal" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">Book</button>
         <%= render "instruments/modal_booking", instrument: @instrument, booking: @booking %>
       </div>
     </div>

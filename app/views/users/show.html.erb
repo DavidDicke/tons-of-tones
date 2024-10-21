@@ -46,7 +46,7 @@
       </div>
 
       <!-- Reviews by me -->
-      <div class="col-12 col-sm-6 mb-4">
+      <div class="col-12 col-sm-6 mb-5">
         <h5>Reviews by me</h5>
         <% if @reviews_by_me.empty? %>
           <small><em class="text-muted">No reviews written by <%= @user.first_name %> yet.</em></small>
@@ -87,7 +87,7 @@
 
   <% else %>
     <!-- Display instruments first and reviews below -->
-    <div class="instruments">
+    <div class="instruments pb-5">
       <h5>My Instruments</h5>
 
       <% if @user.instruments.any? %>
@@ -110,7 +110,7 @@
 
     <div class="row">
       <!-- Reviews about me -->
-      <div class="col-12 col-sm-6 mb-4">
+      <div class="col-12 col-sm-6 mb-5">
         <h5>Reviews about me</h5>
         <% if @reviews_about_me.empty? %>
           <small><em class="text-muted">No reviews about <%= @user.first_name %> yet.</em></small>
