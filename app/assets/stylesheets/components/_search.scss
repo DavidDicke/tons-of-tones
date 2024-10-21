@@ -1,0 +1,47 @@
+.container-search {
+  background-color: white;
+  border-radius: 1rem;
+  margin: 2rem;
+  padding: 1rem;
+  input[type=date] {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  input[type=text]::placeholder {
+    color: gray;
+  }
+}
+.search-btns {
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  * {
+    width: calc(50% - 0.25rem);
+  }
+}
+.search-dates {
+  display: flex;
+  gap: 0.5rem;
+  div {
+    width: calc(50% - 0.25rem);
+  }
+}
+.search-input-toggler {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+.search-toggle-btn {
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  i {
+    margin-right: 1.5rem;
+    font-size: 2rem;
+  }
+  p, h5 {
+    margin: 0;
+  }
+
+}

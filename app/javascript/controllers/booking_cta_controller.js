@@ -9,11 +9,19 @@ export default class extends Controller {
     month: "short",
     day: "numeric"
   }
-  const startDate = new Date(this.startDateModalTarget.value)
-  const endDate = new Date(this.endDateModalTarget.value)
+  let endDate = this.endDateModalTarget.value
+  let startDate = this.startDateModalTarget.value
+
+  if ( startDate === "" || endDate === "" ) {
+    this.dateRangePrevTarget.innerText = "Define Booking Period"
+    this.totalPriceTarget.innerText = `${ this.priceValue } €`
+  } else {
+  startDate = new Date(startDate)
+  endDate = new Date(endDate)
   const duration = (endDate - startDate) / (1000 * 60 * 60 * 24)
   this.dateRangePrevTarget.innerText = `${startDate.toLocaleDateString("en-US", options)} - ${endDate.toLocaleDateString("en-US", options)}`
   this.totalPriceTarget.innerText = `${ duration * this.priceValue } €`
+  }
   }
 }
 // toLocaleDateString("en-US", options)} -

@@ -1,22 +1,16 @@
 <div class="modal-body">
   <h4 class="mt-3 mb-5">Hello <%= current_user.first_name %> <%= current_user.last_name %></h4>
   <div class="my-3">
-    <a href="">TODO: Favourites</a>
-  </div>
-  <div class="my-3">
     <%= link_to 'On Loan', instrument_bookings_bookings_path %>
   </div>
   <div class="my-3">
     <%= link_to 'Borrowed', user_bookings_bookings_path %>
   </div>
-  <div class="my-3">
-    <%= link_to "My Instruments", my_instruments_instruments_path%>
-  </div>
-  <div class="my-3">
+  <div class="mt-5 mb-3">
     <%= link_to "List an Instrument", new_instrument_path %>
   </div>
   <div class="my-3">
-    <%= link_to "Manage Account", edit_user_registration_path %>
+    <%= link_to "Manage Account", user_path(current_user) %>
   </div>
   <div class="h-10 border-top border-secondary my-5"></div>
   <div class="my-3">
