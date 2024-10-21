@@ -1,0 +1,14 @@
+<div class="card-product">
+  <%= cl_image_tag photos.first.key if photos.any? %>
+  <div class="card-product-infos">
+    <div class="details">
+      <h2><%= instrument %></h2>
+    </div>
+
+    <div class="icons">
+      <%= rating if defined?(rating) %>
+      <%= edit_link if defined?(edit_link) && edit_link.present? %>
+      <%= delete_link if defined?(delete_link) && delete_link.present? %>
+    </div>
+  </div>
+</div>

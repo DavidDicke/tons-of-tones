@@ -24,12 +24,12 @@
           <% active_bookings.each do |user_booking| %>
             <% if user_booking.status == 'pending' %>
               <div>
-                <% cancel_link = button_to '<i class="fa-solid fa-trash"></i>'.html_safe, booking_path(user_booking), method: :patch, params: { booking: { status: :cancelled } }, data: { turbo: true }, class: 'btn p-1' %>
+                <% cancel_link = button_to '<i class="fa-solid fa-ban"></i>'.html_safe, booking_path(user_booking), method: :patch, params: { booking: { status: :cancelled } }, data: { turbo: true }, class: 'btn' %>
 
                 <%= render partial: 'card_product_bookings', locals: {
                   photos: user_booking.instrument.photos,
                   instrument: link_to(user_booking.instrument.name, alternative_booking_path(user_booking.id), class: 'no-italic'),
-                  owner: "#{user_booking.instrument.user.first_name} #{user_booking.instrument.user.last_name}",
+                  owner: link_to("#{user_booking.instrument.user.first_name} #{user_booking.instrument.user.last_name}", user_path(user_booking.instrument.user)),
                   start_date: user_booking.start_date.strftime("%d/%m/%Y"),
                   end_date: user_booking.end_date.strftime("%d/%m/%Y"),
                   cancel_link: cancel_link
@@ -49,7 +49,7 @@
                 <%= render partial: 'card_product_bookings', locals: {
                   photos: user_booking.instrument.photos,
                   instrument: link_to(user_booking.instrument.name, alternative_booking_path(user_booking.id), class: 'no-italic'),
-                  owner: "#{user_booking.instrument.user.first_name} #{user_booking.instrument.user.last_name}",
+                  owner: link_to("#{user_booking.instrument.user.first_name} #{user_booking.instrument.user.last_name}", user_path(user_booking.instrument.user)),
                   start_date: user_booking.start_date.strftime("%d/%m/%Y"),
                   end_date: user_booking.end_date.strftime("%d/%m/%Y"),
                 } %>
@@ -70,7 +70,7 @@
           <%= render partial: 'card_product_bookings', locals: {
             photos: user_booking.instrument.photos,
             instrument: link_to(user_booking.instrument.name, alternative_booking_path(user_booking.id), class: 'no-italic'),
-            owner: "#{user_booking.instrument.user.first_name} #{user_booking.instrument.user.last_name}",
+            owner: link_to("#{user_booking.instrument.user.first_name} #{user_booking.instrument.user.last_name}", user_path(user_booking.instrument.user)),
             start_date: user_booking.start_date.strftime("%d/%m/%Y"),
             end_date: user_booking.end_date.strftime("%d/%m/%Y")
           } %>
@@ -88,13 +88,13 @@
           <%= render partial: 'card_product_bookings', locals: {
             photos: user_booking.instrument.photos,
             instrument: link_to(user_booking.instrument.name, alternative_booking_path(user_booking.id), class: 'no-italic'),
-            owner: "#{user_booking.instrument.user.first_name} #{user_booking.instrument.user.last_name}",
+            owner: link_to("#{user_booking.instrument.user.first_name} #{user_booking.instrument.user.last_name}", user_path(user_booking.instrument.user)),
             start_date: user_booking.start_date.strftime("%d/%m/%Y"),
             end_date: user_booking.end_date.strftime("%d/%m/%Y"),
             rating: if user_booking.booking_review.present?
-              link_to '<i class="fa-brands fa-readme"></i> '.html_safe, booking_booking_review_path(user_booking, user_booking.booking_review), class: 'btn p-0'
+              link_to '<i class="fa-brands fa-readme"></i>'.html_safe, booking_booking_review_path(user_booking, user_booking.booking_review), class: 'btn'
             else
-              link_to '<i class="fa-solid fa-pen-nib"></i>'.html_safe, new_booking_booking_review_path(user_booking), class: 'btn p-0'
+              link_to '<i class="fa-solid fa-pen-nib"></i>'.html_safe, new_booking_booking_review_path(user_booking), class: 'btn'
             end
           } %>
         <% end %>

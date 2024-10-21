@@ -7,35 +7,44 @@ Instrument.destroy_all
 User.destroy_all
 
 puts "Creating users..."
-User.create!(
+# Create the first user and attach a photo
+user1 = User.create!(
   email: "pguelfi@gmail.com",
   password: '123456',
   first_name: "Pablo",
   last_name: "Guelfi"
 )
+photo_path = Rails.root.join("db/seed_images/p-guelfi.jpg")
+user1.photo.attach(io: File.open(photo_path), filename: File.basename(photo_path))
 
-User.create!(
+# Create the second user and attach a photo
+user2 = User.create!(
   email: "post@david-dicke.de",
   password: '123456',
   first_name: "David",
   last_name: "Dicke"
 )
+photo_path = Rails.root.join("db/seed_images/David.jpeg")
+user2.photo.attach(io: File.open(photo_path), filename: File.basename(photo_path))
 
-User.create!(
+# Create the third user and attach a photo
+user3 = User.create!(
   email: "momoelgazzar@gmail.com",
   password: '123456',
   first_name: "Mohamed",
   last_name: "Elgazzar"
 )
+photo_path = Rails.root.join("db/seed_images/Mohamed.jpeg")
+user3.photo.attach(io: File.open(photo_path), filename: File.basename(photo_path))
 
-15.times do
-  User.create!(
-    email: Faker::Internet.email,
-    password: 'password123',
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name
-  )
-end
+# 10.times do
+#   User.create!(
+#     email: Faker::Internet.email,
+#     password: 'password123',
+#     first_name: Faker::Name.first_name,
+#     last_name: Faker::Name.last_name
+#   )
+# end
 
 puts "#{User.count} users created!"
 
@@ -791,26 +800,26 @@ users = User.all
 puts "Creating bookings..."
 instruments = Instrument.all
 
-50.times do
-  start_date = Faker::Date.between(from: Date.today, to: 1.month.from_now)
-  end_date = start_date + rand(1..10).days
+# 50.times do
+#   start_date = Faker::Date.between(from: Date.today, to: 1.month.from_now)
+#   end_date = start_date + rand(1..10).days
 
-  instrument = instruments.sample
+#   instrument = instruments.sample
 
-  # Ensure the user is not the owner of the selected instrument
-  booking_user = users.reject { |user| user == instrument.user }.sample
+#   # Ensure the user is not the owner of the selected instrument
+#   booking_user = users.reject { |user| user == instrument.user }.sample
 
-  total_price = (end_date - start_date).to_i * instrument.price
+#   total_price = (end_date - start_date).to_i * instrument.price
 
-  Booking.create!(
-    instrument: instrument,
-    user: booking_user,
-    start_date: start_date,
-    end_date: end_date,
-    total_price: total_price,
-    status: Booking.statuses.keys.reject { |s| s == "completed" }.sample
-  )
-end
+#   Booking.create!(
+#     instrument: instrument,
+#     user: booking_user,
+#     start_date: start_date,
+#     end_date: end_date,
+#     total_price: total_price,
+#     status: Booking.statuses.keys.reject { |s| s == "completed" }.sample
+#   )
+# end
 
 
 # Additional bookings for: "pguelfi@gmail.com", "post@david-dicke.de", "momoelgazzar@gmail.com"
@@ -826,7 +835,7 @@ end
   start_date = Faker::Date.between(from: 1.year.ago, to: end_date)
 
   # Reject instruments belonging to the user
-  available_instruments = instruments.reject { |instrument| instrument.user == user }
+  available_instruments = Instrument.all.reject { |instrument| instrument.user == user }
 
   # Ensure there's at least one available instrument
   next if available_instruments.empty?
@@ -888,7 +897,7 @@ end
   end_date = start_date + rand(1..10).days
 
   # Reject instruments belonging to the user
-  available_instruments = instruments.reject { |instrument| instrument.user == user }
+  available_instruments = Instrument.all.reject { |instrument| instrument.user == user }
 
   # Ensure there's at least one available instrument
   next if available_instruments.empty?
@@ -951,7 +960,7 @@ end
   end_date = start_date + rand(1..10).days
 
   # Reject instruments belonging to the user
-  available_instruments = instruments.reject { |instrument| instrument.user == user }
+  available_instruments = Instrument.all.reject { |instrument| instrument.user == user }
 
   # Ensure there's at least one available instrument
   next if available_instruments.empty?
@@ -1015,7 +1024,7 @@ end
   end_date = start_date + rand(1..10).days
 
   # Reject instruments belonging to the user
-  available_instruments = instruments.reject { |instrument| instrument.user == user }
+  available_instruments = Instrument.all.reject { |instrument| instrument.user == user }
 
   # Ensure there's at least one available instrument
   next if available_instruments.empty?
@@ -1080,7 +1089,7 @@ end
   start_date = Faker::Date.between(from: 1.year.ago, to: end_date)
 
   # Reject instruments belonging to the user
-  available_instruments = instruments.reject { |instrument| instrument.user == user }
+  available_instruments = Instrument.all.reject { |instrument| instrument.user == user }
 
   # Ensure there's at least one available instrument
   next if available_instruments.empty?
@@ -1142,7 +1151,7 @@ end
   end_date = start_date + rand(1..10).days
 
   # Reject instruments belonging to the user
-  available_instruments = instruments.reject { |instrument| instrument.user == user }
+  available_instruments = Instrument.all.reject { |instrument| instrument.user == user }
 
   # Ensure there's at least one available instrument
   next if available_instruments.empty?
@@ -1205,7 +1214,7 @@ end
   end_date = start_date + rand(1..10).days
 
   # Reject instruments belonging to the user
-  available_instruments = instruments.reject { |instrument| instrument.user == user }
+  available_instruments = Instrument.all.reject { |instrument| instrument.user == user }
 
   # Ensure there's at least one available instrument
   next if available_instruments.empty?
@@ -1269,7 +1278,7 @@ end
   end_date = start_date + rand(1..10).days
 
   # Reject instruments belonging to the user
-  available_instruments = instruments.reject { |instrument| instrument.user == user }
+  available_instruments = Instrument.all.reject { |instrument| instrument.user == user }
 
   # Ensure there's at least one available instrument
   next if available_instruments.empty?
@@ -1334,7 +1343,7 @@ end
   start_date = Faker::Date.between(from: 1.year.ago, to: end_date)
 
   # Reject instruments belonging to the user
-  available_instruments = instruments.reject { |instrument| instrument.user == user }
+  available_instruments = Instrument.all.reject { |instrument| instrument.user == user }
 
   # Ensure there's at least one available instrument
   next if available_instruments.empty?
@@ -1396,7 +1405,7 @@ end
   end_date = start_date + rand(1..10).days
 
   # Reject instruments belonging to the user
-  available_instruments = instruments.reject { |instrument| instrument.user == user }
+  available_instruments = Instrument.all.reject { |instrument| instrument.user == user }
 
   # Ensure there's at least one available instrument
   next if available_instruments.empty?
@@ -1459,7 +1468,7 @@ end
   end_date = start_date + rand(1..10).days
 
   # Reject instruments belonging to the user
-  available_instruments = instruments.reject { |instrument| instrument.user == user }
+  available_instruments = Instrument.all.reject { |instrument| instrument.user == user }
 
   # Ensure there's at least one available instrument
   next if available_instruments.empty?
@@ -1523,7 +1532,7 @@ end
   end_date = start_date + rand(1..10).days
 
   # Reject instruments belonging to the user
-  available_instruments = instruments.reject { |instrument| instrument.user == user }
+  available_instruments = Instrument.all.reject { |instrument| instrument.user == user }
 
   # Ensure there's at least one available instrument
   next if available_instruments.empty?
@@ -1583,24 +1592,39 @@ end
   # Randomly select 50% of the completed bookings
   bookings_to_review = completed_bookings.sample(completed_bookings.count / 2)
 
+  # Define an array of generic review texts for BookingReview (about the instrument)
+  review_texts = [
+    "The instrument was in excellent condition and exceeded my expectations. I would highly recommend it to anyone looking for quality!",
+    "I had a fantastic experience using this instrument. It was easy to handle and sounded great throughout my booking period.",
+    "This instrument was perfect for my needs. It performed well and was very well maintained. I would definitely rent it again!",
+    "I was very pleased with this instrument. It met all my requirements and made my experience enjoyable. Thank you!"
+  ]
+
+  # Define an array of generic review texts for UserReview (about the renter)
+  user_review_texts = [
+    "The renter took great care of the instrument and returned it in perfect condition. I would happily rent to them again!",
+    "I had a positive experience with this renter. They communicated well and treated the instrument with respect.",
+    "The instrument was returned on time and in excellent shape. I highly recommend this renter!",
+    "This renter was reliable and responsible. I appreciate how well they handled the instrument during the rental period."
+  ]
+
   bookings_to_review.each do |booking|
+    # Create a BookingReview for the instrument
     BookingReview.create!(
-      content: Faker::Lorem.sentence,
+      content: review_texts.sample, # Sample a random review text about the instrument
       rating: rand(1..5),
       user: booking.user, # The user who rented the instrument (created the booking)
       booking: booking
     )
-  end
 
-  bookings_to_review.each do |booking|
+    # Create a UserReview for the renter
     UserReview.create!(
-      content: Faker::Lorem.sentence,
+      content: user_review_texts.sample, # Sample a random review text about the renter
       rating: rand(1..5),
       user: booking.instrument.user, # The owner of the instrument reviewing the renter
       booking: booking
     )
   end
-
 
 puts "#{Booking.count} bookings created!"
 puts "#{BookingReview.count} reviews created!"
