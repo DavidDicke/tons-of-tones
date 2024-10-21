@@ -36,3 +36,14 @@ $nav-height: 80px;
   display: flex;
   align-items: center; /* This ensures vertical centering */
 }
+.navbar-toggler-icon {
+  position: relative;
+}
+.navbar-notification {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: $violin-red;
+  border-radius: 50%;
+  color: white;
+}

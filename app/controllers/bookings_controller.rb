@@ -20,6 +20,11 @@ class BookingsController < ApplicationController
     render :show_alternative
   end
 
+  def get_booking_update
+    @new_bookings = Booking.where(user: current_user, status: 1)
+    format.json
+  end
+
   def create
     @instrument = Instrument.find(params[:instrument_id])
     @booking = @instrument.bookings.new(booking_params)
