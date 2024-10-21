@@ -17,7 +17,7 @@
           <span><%= average_rating.round(1) %></span>
         </div>
       <% else %>
-        <div></div>
+        <div>No ratings yet</div> <!-- Customize this message if needed -->
       <% end %>
 
       <h1><%= @user.first_name %> <%= @user.last_name %></h1>
@@ -32,16 +32,17 @@
         <h5>Reviews about me</h5>
         <% if @reviews_about_me.empty? %>
           <small><em class="text-muted">No reviews about <%= @user.first_name %> yet.</em></small>
-        <% end %>
-        <% @reviews_about_me.each do |review| %>
-          <div>
-            <% review.rating.times do %>
-              <i class="fas fa-star star-yellow"></i>
-            <% end %>
-            <small><em class="text-muted"><%= distance_of_time_in_words_to_now(review.created_at) %> ago</em></small>
-            <p class="mb-0"><%= review.content %></p>
-          </div>
-          <hr>
+        <% else %>
+          <% @reviews_about_me.each do |review| %>
+            <div>
+              <% review.rating.times do %>
+                <i class="fas fa-star star-yellow"></i>
+              <% end %>
+              <small><em class="text-muted"><%= distance_of_time_in_words_to_now(review.created_at) %> ago</em></small>
+              <p class="mb-0"><%= review.content %></p>
+            </div>
+            <hr>
+          <% end %>
         <% end %>
       </div>
 
@@ -50,16 +51,17 @@
         <h5>Reviews by me</h5>
         <% if @reviews_by_me.empty? %>
           <small><em class="text-muted">No reviews written by <%= @user.first_name %> yet.</em></small>
-        <% end %>
-        <% @reviews_by_me.each do |review| %>
-          <div>
-            <% review.rating.times do %>
-              <i class="fas fa-star star-yellow"></i>
-            <% end %>
-            <small><em class="text-muted"><%= distance_of_time_in_words_to_now(review.created_at) %> ago</em></small>
-            <p class="mb-0"><%= review.content %></p>
-          </div>
-          <hr>
+        <% else %>
+          <% @reviews_by_me.each do |review| %>
+            <div>
+              <% review.rating.times do %>
+                <i class="fas fa-star star-yellow"></i>
+              <% end %>
+              <small><em class="text-muted"><%= distance_of_time_in_words_to_now(review.created_at) %> ago</em></small>
+              <p class="mb-0"><%= review.content %></p>
+            </div>
+            <hr>
+          <% end %>
         <% end %>
       </div>
     </div>
@@ -129,16 +131,17 @@
         <h5>Reviews about me</h5>
         <% if @reviews_about_me.empty? %>
           <small><em class="text-muted">No reviews about <%= @user.first_name %> yet.</em></small>
-        <% end %>
-        <% @reviews_about_me.each do |review| %>
-          <div>
-            <% review.rating.times do %>
-              <i class="fas fa-star star-yellow"></i>
-            <% end %>
-            <small><em class="text-muted"><%= distance_of_time_in_words_to_now(review.created_at) %> ago</em></small>
-            <p class="mb-0"><%= review.content %></p>
-          </div>
-          <hr>
+        <% else %>
+          <% @reviews_about_me.each do |review| %>
+            <div>
+              <% review.rating.times do %>
+                <i class="fas fa-star star-yellow"></i>
+              <% end %>
+              <small><em class="text-muted"><%= distance_of_time_in_words_to_now(review.created_at) %> ago</em></small>
+              <p class="mb-0"><%= review.content %></p>
+            </div>
+            <hr>
+          <% end %>
         <% end %>
       </div>
 
@@ -147,16 +150,17 @@
         <h5>Reviews by me</h5>
         <% if @reviews_by_me.empty? %>
           <small><em class="text-muted">No reviews written by <%= @user.first_name %> yet.</em></small>
-        <% end %>
-        <% @reviews_by_me.each do |review| %>
-          <div>
-            <% review.rating.times do %>
-              <i class="fas fa-star star-yellow"></i>
-            <% end %>
-            <small><em class="text-muted"><%= distance_of_time_in_words_to_now(review.created_at) %> ago</em></small>
-            <p class="mb-0"><%= review.content %></p>
-          </div>
-          <hr>
+        <% else %>
+          <% @reviews_by_me.each do |review| %>
+            <div>
+              <% review.rating.times do %>
+                <i class="fas fa-star star-yellow"></i>
+              <% end %>
+              <small><em class="text-muted"><%= distance_of_time_in_words_to_now(review.created_at) %> ago</em></small>
+              <p class="mb-0"><%= review.content %></p>
+            </div>
+            <hr>
+          <% end %>
         <% end %>
       </div>
     </div>

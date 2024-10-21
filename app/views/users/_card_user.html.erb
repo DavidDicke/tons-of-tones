@@ -6,7 +6,18 @@
     <%= image_tag "avatar-placeholder.png", class: "avatar", alt: "dropdown menu" %>
   <% end %>
   <div class="card-user-infos">
-    <h2><%= user.first_name  %> <%= user.last_name  %></h2>
-    <p>*****</p>
+    <h2><%= user.first_name %> <%= user.last_name %></h2>
+
+    <% reviews_about_me = user.bookings.includes(:user_review).map(&:user_review).compact %>
+    <% if reviews_about_me.any? %>
+      <% total_rating = reviews_about_me.sum(&:rating) %>
+      <% average_rating = total_rating.to_f / reviews_about_me.size %>
+      <div class="user-rating">
+        <i class="fas fa-star star-yellow"></i>
+        <span><%= average_rating.round(1) %></span>
+      </div>
+    <% else %>
+      <div>No ratings yet</div>
+    <% end %>
   </div>
 </div>
