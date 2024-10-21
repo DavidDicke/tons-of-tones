@@ -3,13 +3,9 @@
     <div class="row w-100 align-items-center mx-0">
       <div class="col-3 p-0">
         <div class="w-100">
-          <% if user_signed_in? %>
-            <%= link_to user_path(current_user) do %>
-              <% if current_user.photo.attached? %>
-                <%= cl_image_tag(current_user.photo.key, class: "avatar", alt: "User Profile Picture") %>
-              <% else %>
-                <%= image_tag "avatar-placeholder.png", class: "avatar", alt: "dropdown menu" %>
-              <% end %>
+          <% if nav_back %>
+            <%= link_to nav_back do %>
+              <i class="fa-solid fa-chevron-left"></i>
             <% end %>
           <% end %>
         </div>

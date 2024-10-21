@@ -15,4 +15,15 @@ module ApplicationHelper
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
   end
+
+
+  def nav_back
+    if request.path.include?("instruments/") && request.path.exclude?("new")
+      instruments_path
+    elsif request.path.include?("instruments") && request.path.exclude?("new")
+      root_path
+    elsif request.path.include?("bookings") && request.path.exclude?("_bookings")
+      instrument_path(@instrument)
+    end
+  end
 end

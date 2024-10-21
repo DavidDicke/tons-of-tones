@@ -77,13 +77,9 @@ class InstrumentsController < ApplicationController
   def set_dates
     if params[:start_date]
       @start_date = params[:start_date]
-    else
-      @start_date = Date.today
     end
     if params[:end_date]
       @end_date = params[:end_date]
-    else
-      @end_date = Date.today + 1
     end
   end
 
@@ -94,7 +90,7 @@ class InstrumentsController < ApplicationController
       # range_b.begin <= range_a.end && range_a.begin <= range_b.end
       selected_instruments = @instruments.select do |instrument|
         instrument.bookings.count do |booking|
-          booking.start_date <= end_date && booking.end_date >= start_date
+          booking.start_date <= end_date && booking.end_date >= start_date && booking.status != 3
         end.zero?
       end
       @instruments = selected_instruments

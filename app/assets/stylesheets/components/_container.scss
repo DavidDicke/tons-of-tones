@@ -1,5 +1,7 @@
+// full-height defined in banner.scss
+
 .container-viewport {
-  height: 100dvh - $nav-height;
+  height: $full-height;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

@@ -1,0 +1,20 @@
+<div class="search-input-toggler">
+  <div class="search-toggle-btn" data-bs-toggle="collapse" data-bs-target="#collapseSearchForm" aria-expanded="false" aria-controls="collapseSearchForm">
+    <div>
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </div>
+    <div>
+      <h5><%= params[:query].present? ? params[:query] : "All Instruments" %></h5>
+      <p>
+        <% if @start_date.present? && @end_date.present? %>
+          <%= Date.parse(@start_date).strftime("%b %e") %> - <%= Date.parse(@end_date).strftime("%b %e") %>
+        <% else %>
+          Search for Availability
+        <% end %>
+      </p>
+    </div>
+  </div>
+  <div class="collapse" id="collapseSearchForm">
+    <%= render "shared/searchbar" %>
+  </div>
+</div>

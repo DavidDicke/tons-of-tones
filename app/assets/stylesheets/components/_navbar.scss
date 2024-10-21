@@ -1,9 +1,14 @@
-$nav-height: 8dvh;
+$nav-height: 80px;
 
 .navbar-lewagon {
   justify-content: space-between;
   background: white;
   height: $nav-height;
+  i {
+    margin-left: 0.5rem;
+    color: black;
+    font-size: 1.2rem;
+  }
 }
 
 .navbar-lewagon .navbar-collapse {
