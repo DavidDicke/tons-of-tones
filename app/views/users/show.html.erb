@@ -1,14 +1,12 @@
 <div class="container text-center">
   <div class="user-info mb-4 p-4">
-    <% if current_user.first_name != @user.first_name || current_user.last_name != @user.last_name %>
-      <div class="avatar-container">
-        <% if @user.photo.attached? %>
-          <%= cl_image_tag(@user.photo.key, class: "avatar", alt: "User Profile Picture") %>
-        <% else %>
-          <%= image_tag "avatar-placeholder.png", class: "avatar", alt: "dropdown menu" %>
-        <% end %>
-      </div>
-    <% end %>
+    <div class="avatar-container">
+      <% if @user.photo.attached? %>
+        <%= cl_image_tag(@user.photo.key, class: "avatar", alt: "User Profile Picture") %>
+      <% else %>
+        <%= image_tag "avatar-placeholder.png", class: "avatar", alt: "dropdown menu" %>
+      <% end %>
+    </div>
 
     <div class="user-rating">
       <% if @reviews_about_me.any? %>
@@ -19,67 +17,152 @@
           <span><%= average_rating.round(1) %></span>
         </div>
       <% else %>
-        <div></div>
+        <div>No ratings yet</div> <!-- Customize this message if needed -->
       <% end %>
 
       <h1><%= @user.first_name %> <%= @user.last_name %></h1>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-12 col-sm-6 mb-4">
-      <h5>Reviews about me</h5>
-      <% if @reviews_about_me.empty? %>
-        <small><em class="text-muted">No reviews about <%= current_user.first_name %> yet.</em></small>
-      <% end %>
-      <% @reviews_about_me.each do |review| %>
-        <div>
-          <% review.rating.times do %>
-            <i class="fas fa-star star-yellow"></i>
+  <% if current_user.first_name != @user.first_name || current_user.last_name != @user.last_name %>
+    <!-- Display reviews first and instruments below -->
+    <div class="row">
+      <!-- Reviews about me -->
+      <div class="col-12 col-sm-6 mb-4">
+        <h5>Reviews about me</h5>
+        <% if @reviews_about_me.empty? %>
+          <small><em class="text-muted">No reviews about <%= @user.first_name %> yet.</em></small>
+        <% else %>
+          <% @reviews_about_me.each do |review| %>
+            <div>
+              <% review.rating.times do %>
+                <i class="fas fa-star star-yellow"></i>
+              <% end %>
+              <small><em class="text-muted"><%= distance_of_time_in_words_to_now(review.created_at) %> ago</em></small>
+              <p class="mb-0"><%= review.content %></p>
+            </div>
+            <hr>
           <% end %>
-          <small><em class="text-muted"><%= distance_of_time_in_words_to_now(review.created_at) %> ago</em></small>
-          <p class="mb-0"><%= review.content %></p>
-        </div>
-        <hr>
+        <% end %>
+      </div>
+
+      <!-- Reviews by me -->
+      <div class="col-12 col-sm-6 mb-5">
+        <h5>Reviews by me</h5>
+        <% if @reviews_by_me.empty? %>
+          <small><em class="text-muted">No reviews written by <%= @user.first_name %> yet.</em></small>
+        <% else %>
+          <% @reviews_by_me.each do |review| %>
+            <div>
+              <% review.rating.times do %>
+                <i class="fas fa-star star-yellow"></i>
+              <% end %>
+              <small><em class="text-muted"><%= distance_of_time_in_words_to_now(review.created_at) %> ago</em></small>
+              <p class="mb-0"><%= review.content %></p>
+            </div>
+            <hr>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="instruments">
+      <h5>My Instruments</h5>
+
+      <% if @user.instruments.any? %>
+        <% @user.instruments.each do |instrument| %>
+          <div>
+            <% if instrument.booking_reviews.any? %>
+              <% total_rating = instrument.booking_reviews.sum(&:rating) %>
+              <% average_rating = total_rating.to_f / instrument.booking_reviews.size %>
+            <% else %>
+              <% average_rating = nil %>
+            <% end %>
+
+            <%= render partial: 'my_instruments', locals: {
+              photos: instrument.photos,
+              instrument: link_to(instrument.name, instrument_path(instrument)),
+              delete_link: current_user.first_name == @user.first_name && current_user.last_name == @user.last_name ?
+                link_to('<i class="fa-solid fa-trash"></i>'.html_safe, instrument_path(instrument), method: :delete, class: 'btn') : nil,
+              edit_link: current_user.first_name == @user.first_name && current_user.last_name == @user.last_name ?
+                link_to('<i class="fa-solid fa-pen-to-square"></i>'.html_safe, edit_instrument_path(instrument), class: 'btn') : nil,
+              average_rating: average_rating&.round(1)
+            } %>
+          </div>
+        <% end %>
+      <% else %>
+        <p>No instruments found.</p>
       <% end %>
     </div>
 
-    <div class="col-12 col-sm-6 mb-4">
-      <h5>Reviews by me</h5>
-      <% if @reviews_by_me.empty? %>
-        <small><em class="text-muted">No reviews written by this <%= current_user.first_name %> yet.</em></small>
-      <% end %>
-      <% @reviews_by_me.each do |review| %>
-        <div>
-          <% review.rating.times do %>
-            <i class="fas fa-star star-yellow"></i>
-          <% end %>
-          <small><em class="text-muted"><%= distance_of_time_in_words_to_now(review.created_at) %> ago</em></small>
-          <p class="mb-0"><%= review.content %></p>
-        </div>
-        <hr>
+  <% else %>
+    <div class="instruments pb-5">
+      <h5>My Instruments</h5>
+
+      <% if @user.instruments.any? %>
+        <% @user.instruments.each do |instrument| %>
+          <div>
+            <% if instrument.booking_reviews.any? %>
+              <% total_rating = instrument.booking_reviews.sum(&:rating) %>
+              <% average_rating = total_rating.to_f / instrument.booking_reviews.size %>
+            <% else %>
+              <% average_rating = nil %>
+            <% end %>
+
+            <%= render partial: 'my_instruments', locals: {
+              photos: instrument.photos,
+              instrument: link_to(instrument.name, instrument_path(instrument)),
+              delete_link: current_user.first_name == @user.first_name && current_user.last_name == @user.last_name ?
+                link_to('<i class="fa-solid fa-trash"></i>'.html_safe, instrument_path(instrument), method: :delete, class: 'btn') : nil,
+              edit_link: current_user.first_name == @user.first_name && current_user.last_name == @user.last_name ?
+                link_to('<i class="fa-solid fa-pen-to-square"></i>'.html_safe, edit_instrument_path(instrument), class: 'btn') : nil,
+              average_rating: average_rating&.round(1)
+            } %>
+          </div>
+        <% end %>
+      <% else %>
+        <p>No instruments found.</p>
       <% end %>
     </div>
-  </div>
 
-  <div class="instruments">
-    <h5>My Instruments</h5>
+    <div class="row">
+      <!-- Reviews about me -->
+      <div class="col-12 col-sm-6 mb-5">
+        <h5>Reviews about me</h5>
+        <% if @reviews_about_me.empty? %>
+          <small><em class="text-muted">No reviews about <%= @user.first_name %> yet.</em></small>
+        <% else %>
+          <% @reviews_about_me.each do |review| %>
+            <div>
+              <% review.rating.times do %>
+                <i class="fas fa-star star-yellow"></i>
+              <% end %>
+              <small><em class="text-muted"><%= distance_of_time_in_words_to_now(review.created_at) %> ago</em></small>
+              <p class="mb-0"><%= review.content %></p>
+            </div>
+            <hr>
+          <% end %>
+        <% end %>
+      </div>
 
-    <% if @user.instruments.any? %>
-      <% @user.instruments.each do |instrument| %>
-        <div>
-          <%= render partial: 'my_instruments', locals: {
-            photos: instrument.photos,
-            instrument: link_to(instrument.name, instrument_path(instrument)),
-            delete_link: current_user.first_name == @user.first_name && current_user.last_name == @user.last_name ?
-              link_to('<i class="fa-solid fa-trash"></i>'.html_safe, instrument_path(instrument), method: :delete, class: 'btn') : nil,
-            edit_link: current_user.first_name == @user.first_name && current_user.last_name == @user.last_name ?
-              link_to('<i class="fa-solid fa-pen-to-square"></i>'.html_safe, edit_instrument_path(instrument), class: 'btn') : nil
-          } %>
-        </div>
-      <% end %>
-    <% else %>
-      <p>No instruments found.</p>
-    <% end %>
-  </div>
+      <!-- Reviews by me -->
+      <div class="col-12 col-sm-6 mb-4">
+        <h5>Reviews by me</h5>
+        <% if @reviews_by_me.empty? %>
+          <small><em class="text-muted">No reviews written by <%= @user.first_name %> yet.</em></small>
+        <% else %>
+          <% @reviews_by_me.each do |review| %>
+            <div>
+              <% review.rating.times do %>
+                <i class="fas fa-star star-yellow"></i>
+              <% end %>
+              <small><em class="text-muted"><%= distance_of_time_in_words_to_now(review.created_at) %> ago</em></small>
+              <p class="mb-0"><%= review.content %></p>
+            </div>
+            <hr>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>

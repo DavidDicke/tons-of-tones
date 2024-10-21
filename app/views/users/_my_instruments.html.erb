@@ -1,12 +1,19 @@
 <div class="card-product">
-  <%= cl_image_tag photos.first.key if photos.any? %>
+  <% if photos.any? %>
+    <%= cl_image_tag photos.first.key %>
+  <% end %>
   <div class="card-product-infos">
     <div class="details">
-      <h2><%= instrument %></h2>
+      <h2 class="pb-2"><%= instrument %></h2>
+      <% if defined?(average_rating) && average_rating.present? %>
+        <div class="rating">
+          <i class="fas fa-star star-yellow"></i>
+          <span><%= sprintf('%.1f', average_rating) %></span>
+        </div>
+      <% end %>
     </div>
 
     <div class="icons">
-      <%= rating if defined?(rating) %>
       <%= edit_link if defined?(edit_link) && edit_link.present? %>
       <%= delete_link if defined?(delete_link) && delete_link.present? %>
     </div>

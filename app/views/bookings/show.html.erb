@@ -5,4 +5,5 @@
 <p>Status: <%= @booking.status %></p>
 <p>Total price: <%= @booking.total_price %> EUR</p>
 <%= link_to 'Pay Now', user_bookings_bookings_path, class: 'btn btn-primary' %>
+<%= link_to 'Cancel', request.referer || root_path, class: 'btn btn-secondary' %>
 </div>

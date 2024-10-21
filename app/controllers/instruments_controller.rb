@@ -11,6 +11,7 @@ class InstrumentsController < ApplicationController
 
   def show
     @instrument = Instrument.find(params[:id])
+    @user = @instrument.user
     @booking = Booking.new
     @booking.start_date = params[:start_date] if params[:start_date]
     @booking.end_date = params[:end_date] if params[:end_date]
