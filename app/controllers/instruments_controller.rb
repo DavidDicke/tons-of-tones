@@ -15,6 +15,12 @@ class InstrumentsController < ApplicationController
     @booking.start_date = params[:start_date] if params[:start_date]
     @booking.end_date = params[:end_date] if params[:end_date]
     @booking.user_id = current_user.id if current_user.present?
+
+    # Add marker for map:
+    @markers = [{
+    lat: @instrument.latitude,
+    lng: @instrument.longitude
+  }]
   end
 
   def new
