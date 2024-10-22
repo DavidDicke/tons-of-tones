@@ -43,20 +43,26 @@ export default class extends Controller {
   }
 
   appendNotificationToDom() {
+    // Get the path from the data attribute
+    const userBookingsPath = this.element.dataset.userBookingsPath;
+
     // Create the notification HTML with a link
     const notificationHTML = `
       <div class="notification">
-        <a href="#" class="notification-link" role="button">
+        <a href="${userBookingsPath}" class="notification-link" role="button">
           <i class="fa-solid fa-message"></i>
         </a>
       </div>
     `;
+
     this.notifTarget.insertAdjacentHTML('afterbegin', notificationHTML); // Append new notification
 
     // Add a click event listener to remove the notification when clicked
     const notificationLink = this.notifTarget.querySelector('.notification-link');
     notificationLink.addEventListener('click', (event) => {
-      event.preventDefault(); // Prevent the default anchor click behavior
+      // Redirect to the user bookings path when clicked
+      window.location.href = userBookingsPath; // Navigate to user bookings page
+      event.preventDefault(); // Prevent the default anchor click behavior if necessary
       this.removeNotification(notificationLink); // Call the function to remove the notification
     });
   }

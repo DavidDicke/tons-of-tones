@@ -10,7 +10,7 @@
           <%= link_to root_path, class: "navbar-textlogo" do %>
             <h5 class="m-0">Tons of Tones</h5>
           <% end %>
-          <div id="notif" class="mt-2" data-controller="booking-notifications" data-booking-notifications-target="notif">
+          <div id="notif" class="mt-2" data-controller="booking-notifications" data-booking-notifications-target="notif" data-user-bookings-path="<%= user_bookings_bookings_path %>">
             <!-- Notifications will appear here -->
           </div>
         </div>
