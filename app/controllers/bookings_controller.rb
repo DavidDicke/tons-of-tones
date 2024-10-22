@@ -2,7 +2,6 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :update, :show_alternative]
   before_action :update_completed_bookings
 
-
   def index
     @user_bookings = current_user.bookings
     @instruments = current_user.instruments
@@ -73,8 +72,23 @@ class BookingsController < ApplicationController
   end
 
   def confirmed_bookings
-    @confirmed_bookings = current_user.bookings.where(status: "confirmed").where('updated_at > ?', 1.minute.ago)
-    render json: @confirmed_bookings
+    # Retrieve the notified booking IDs from the session, or initialize an empty array
+    notified_booking_ids = session[:notified_booking_ids] || []
+
+    # Fetch the confirmed bookings updated within the last minute
+    @confirmed_bookings = current_user.bookings.where(status: "confirmed")
+                                                .where('updated_at > ?', 1.minute.ago)
+
+    # Filter out already notified bookings
+    new_confirmed_bookings = @confirmed_bookings.reject do |booking|
+      notified_booking_ids.include?(booking.id)
+    end
+
+    # Update the notified booking IDs to include the newly confirmed bookings
+    notified_booking_ids.concat(new_confirmed_bookings.map(&:id))
+    session[:notified_booking_ids] = notified_booking_ids.uniq # Store back to session
+
+    render json: new_confirmed_bookings # Return only new confirmed bookings
   end
 
   private
