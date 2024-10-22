@@ -11,33 +11,10 @@
     <!-- Active Bookings -->
     <div class="tab-pane fade show active" id="nav-active" role="tabpanel" aria-labelledby="nav-active-tab">
       <% active_bookings = @user_bookings.select { |booking| booking.status == 'pending' || booking.status == 'confirmed' || booking.status == 'confirm_viewed' } %>
-      <% active_bookings.sort_by! { |booking| booking.status == 'pending' ? 0 : 1 } %> <!-- Sort by status: pending first -->
-
+      <% active_bookings.sort_by!(&:created_at).reverse! %> <!-- Sort by created_at in descending order -->
       <% if active_bookings.any? %>
         <% has_pending = active_bookings.any? { |booking| booking.status == 'pending' } %>
-        <% has_confirmed = active_bookings.any? { |booking| booking.status == 'confirmed'|| booking.status == 'confirm_viewed' } %>
-
-        <!-- Pending Section -->
-        <% if has_pending %>
-          <h4 class="ms-4 mt-4">Pending</h4>
-          <hr class="mx-4">
-          <% active_bookings.each do |user_booking| %>
-            <% if user_booking.status == 'pending' %>
-              <div>
-                <% cancel_link = button_to '<i class="fa-solid fa-ban"></i>'.html_safe, booking_path(user_booking), method: :patch, params: { booking: { status: :cancelled } }, data: { turbo: true }, class: 'btn' %>
-
-                <%= render partial: 'card_product_bookings', locals: {
-                  photos: user_booking.instrument.photos,
-                  instrument: link_to(user_booking.instrument.name, alternative_booking_path(user_booking.id), class: 'no-italic'),
-                  owner: link_to("#{user_booking.instrument.user.first_name} #{user_booking.instrument.user.last_name}", user_path(user_booking.instrument.user)),
-                  start_date: user_booking.start_date.strftime("%d/%m/%Y"),
-                  end_date: user_booking.end_date.strftime("%d/%m/%Y"),
-                  cancel_link: cancel_link
-                } %>
-              </div>
-            <% end %>
-          <% end %>
-        <% end %>
+        <% has_confirmed = active_bookings.any? { |booking| booking.status == 'confirmed' || booking.status == 'confirm_viewed' } %>
 
         <!-- Confirmed Section -->
         <% if has_confirmed %>
@@ -64,6 +41,28 @@
                   start_date: user_booking.start_date.strftime("%d/%m/%Y"),
                   end_date: user_booking.end_date.strftime("%d/%m/%Y"),
                   status: user_booking.status,
+                } %>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+
+        <!-- Pending Section -->
+        <% if has_pending %>
+          <h4 class="ms-4 mt-4">Pending</h4>
+          <hr class="mx-4">
+          <% active_bookings.each do |user_booking| %>
+            <% if user_booking.status == 'pending' %>
+              <div>
+                <% cancel_link = button_to '<i class="fa-solid fa-ban"></i>'.html_safe, booking_path(user_booking), method: :patch, params: { booking: { status: :cancelled } }, data: { turbo: true }, class: 'btn' %>
+
+                <%= render partial: 'card_product_bookings', locals: {
+                  photos: user_booking.instrument.photos,
+                  instrument: link_to(user_booking.instrument.name, alternative_booking_path(user_booking.id), class: 'no-italic'),
+                  owner: link_to("#{user_booking.instrument.user.first_name} #{user_booking.instrument.user.last_name}", user_path(user_booking.instrument.user)),
+                  start_date: user_booking.start_date.strftime("%d/%m/%Y"),
+                  end_date: user_booking.end_date.strftime("%d/%m/%Y"),
+                  cancel_link: cancel_link
                 } %>
               </div>
             <% end %>
