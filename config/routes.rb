@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     collection do
       get 'user_bookings', to: 'bookings#user_bookings'
       get 'instrument_bookings', to: 'bookings#instrument_bookings'
+      get 'get_booking_update', to: 'bookings#get_booking_update'
     end
   end
 end

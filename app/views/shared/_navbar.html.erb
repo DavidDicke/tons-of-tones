@@ -1,4 +1,4 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon" data-controller="notification-updater" data-notification-updater-path-value="<%= get_booking_update_bookings_path %>" data-notification-updater-logedin-value="<%= user_signed_in? %>">
   <div class="container-fluid">
     <div class="row w-100 align-items-center mx-0">
       <div class="col-3 p-0">
@@ -18,6 +18,7 @@
         <div class="d-flex justify-content-end w-100">
           <button class="navbar-toggler border-0" type="button" data-bs-toggle="modal" data-bs-target="#newNavbarModal" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
+            <div data-notification-updater-target="allNotifications"></div>
           </button>
         </div>
       </div>

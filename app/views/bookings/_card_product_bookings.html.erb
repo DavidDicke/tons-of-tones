@@ -1,4 +1,4 @@
-<div class="card-product">
+<div class="card-product <%= if local_variables.include?(:status) then if status == "confirmed" then "unviewed" end else "" end %>">
   <%= cl_image_tag photos.first.key %>
   <div class="card-product-infos">
     <div class="details">

@@ -22,8 +22,10 @@ module ApplicationHelper
       instruments_path
     elsif request.path.include?("instruments") && request.path.exclude?("new")
       root_path
-    elsif request.path.include?("bookings") && request.path.exclude?("_bookings")
+    elsif request.path.include?("bookings") && request.path.exclude?("_") && request.path.exclude?("alternative")
       instrument_path(@instrument)
+    elsif request.path.include?("bookings") && request.path.include?("alternative")
+      user_bookings_bookings_path
     end
   end
 end
