@@ -73,7 +73,7 @@ class BookingsController < ApplicationController
   end
 
   def confirmed_bookings
-    @confirmed_bookings = current_user.bookings.where(status: "confirmed").where('updated_at > ?', 10.seconds.ago)
+    @confirmed_bookings = current_user.bookings.where(status: "confirmed").where('updated_at > ?', 1.minute.ago)
     render json: @confirmed_bookings
   end
 
