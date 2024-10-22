@@ -28,7 +28,7 @@ $full-height: calc(100dvh - #{$nav-height});
   margin: 0;
   color: white;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-  font-size: 32px;
+  font-size: 1.75rem;
   font-weight: bold;
 }
 
@@ -38,4 +38,7 @@ $full-height: calc(100dvh - #{$nav-height});
   color: white;
   opacity: .7;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+.container-banner {
+  padding: 0 3rem;
 }

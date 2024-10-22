@@ -20,13 +20,13 @@
         <h1><%= @instrument.name %></h1>
       </div>
       <div class="py-3 d-flex align-items-end">
-        <h3 class="text-primary me-1"><%= @instrument.price %> €</h3><h6> per day</h6>
+        <h3 class="text-primary me-1 mb-0"><%= @instrument.price %> €</h3><h6 class="mb-0"> per day</h6>
       </div>
-      <div class="pt-3 border-top border-secondary">
+      <div class="pt-3 mt-5 border-top border-secondary">
         <p><%= @instrument.description %></p>
       </div>
-      <div class="pt-4 border-top border-secondary">
-        <h4>Pick it up here</h4>
+      <div class="pt-4 mb-5 border-top border-secondary">
+        <h4 class="py-4">Pick it up here</h4>
         <div style="width: 100%; height: 200px;"
              data-controller="map"
              data-map-markers-value="<%= @markers.to_json %>"
@@ -51,11 +51,11 @@
         <% end %>
       </div>
 
-      <div class="pt-4">
+      <div class="pt-4 pb-3">
         <h4>Rented out by</h4>
         <%= link_to render("users/card_user", user: @instrument.user), user_path(@instrument.user) %>
       </div>
-      <%= link_to 'Back to Instruments', instruments_path, class: "" %>
+      <%# <%= link_to 'Back to Instruments', instruments_path, class: "" %>
     </div>
   </div>
 

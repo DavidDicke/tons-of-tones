@@ -5,11 +5,14 @@ export default class extends Controller {
   static targets = ["startDate", "endDate"]
   static values = { bookings: Array }
   connect() {
-    flatpickr(this.startDateTarget, { minDate: "today", disable: this.bookingsValue });
-    flatpickr(this.endDateTarget, { minDate: this.startDateTarget.value, disable: this.bookingsValue });
-    // flatpickr(this.element, {
-    //   minDate: "today",
-    //   dateFormat: "Y-m-d",
-    // })
+    if(this.bookingsValue.length !== 0){
+      flatpickr(this.startDateTarget, { minDate: "today", disable: this.bookingsValue });
+      flatpickr(this.endDateTarget, { minDate: "today", disable: this.bookingsValue });
+    } else {
+      flatpickr(this.startDateTarget, { minDate: "today" });
+      flatpickr(this.endDateTarget, { minDate: "today" });
+      console.log(this.startDateTarget, this.endDateTarget);
+
+    }
   }
 }
