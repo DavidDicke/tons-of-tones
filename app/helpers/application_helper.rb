@@ -19,7 +19,7 @@ module ApplicationHelper
 
   def nav_back
     if request.path.include?("instruments/") && request.path.exclude?("new")
-      instruments_path
+      :back
     elsif request.path.include?("instruments") && request.path.exclude?("new")
       root_path
     elsif request.path.include?("bookings") && request.path.exclude?("_") && request.path.exclude?("alternative")
