@@ -1,14 +1,17 @@
+// app/javascript/controllers/booking_notifications_controller.js
+
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
   static targets = ["notif"];
 
+  // Variable to keep track of whether the notification is already displayed
   notificationDisplayed = false;
 
   connect() {
     console.log("Booking notifications controller connected");
-    this.refresh();
-    this.interval = setInterval(() => this.refresh(), 1000); // every second
+    this.refresh(); // Start immediately
+    this.interval = setInterval(() => this.refresh(), 1000); // Poll every second
   }
 
   disconnect() {
@@ -40,7 +43,7 @@ export default class extends Controller {
   }
 
   appendNotificationToDom() {
-    // Create the notification HTML with a link to refresh the page
+    // Create the notification HTML with a link
     const notificationHTML = `
       <div class="notification">
         <a href="#" class="notification-link" role="button">
@@ -50,11 +53,16 @@ export default class extends Controller {
     `;
     this.notifTarget.insertAdjacentHTML('afterbegin', notificationHTML); // Append new notification
 
-    // Add a click event listener to refresh the page when clicked
+    // Add a click event listener to remove the notification when clicked
     const notificationLink = this.notifTarget.querySelector('.notification-link');
     notificationLink.addEventListener('click', (event) => {
-      event.preventDefault();
-      location.reload(); // Refresh the current page
+      event.preventDefault(); // Prevent the default anchor click behavior
+      this.removeNotification(notificationLink); // Call the function to remove the notification
     });
+  }
+
+  removeNotification(notification) {
+    // Remove the notification element from the DOM
+    notification.parentElement.remove(); // Remove the parent div of the notification link
   }
 }
