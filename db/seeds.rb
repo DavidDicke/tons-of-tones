@@ -1599,7 +1599,7 @@ end
 
 
   # Reviews for 50% of completed bookings
-  completed_bookings = Booking.where(status: completed)
+  completed_bookings = Booking.where(status: 4)
 
   # Randomly select 50% of the completed bookings
   bookings_to_review = completed_bookings.sample(completed_bookings.count / 2)
