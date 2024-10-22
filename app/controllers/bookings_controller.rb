@@ -21,8 +21,13 @@ class BookingsController < ApplicationController
   end
 
   def get_booking_update
-    @new_bookings = Booking.where(user: current_user, status: 1)
-    format.json
+    if user_signed_in?
+      @new_loanings = Booking.joins(:instrument).where(instrument: { user: current_user }, status: 1)
+      @new_borrowings = Booking.where(user: current_user, status: 2)
+    else
+      @new_loanings = []
+      @new_borrowings = []
+    end
   end
 
   def create

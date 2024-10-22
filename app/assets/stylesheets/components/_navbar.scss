@@ -41,9 +41,15 @@ $nav-height: 80px;
 }
 .navbar-notification {
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: 20px;
+  right: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: $violin-red;
   border-radius: 50%;
+  font-size: 10px;
   color: white;
+  width: 20px;
+  height: 20px;
 }
