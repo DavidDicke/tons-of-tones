@@ -1,9 +1,15 @@
-<div>
-<h2>booking</h2>
-<p>Start Date: <%= @booking.start_date %></p>
-<p>End Date: <%= @booking.end_date %></p>
-<p>Status: <%= @booking.status %></p>
-<p>Total price: <%= @booking.total_price %> EUR</p>
-<%= link_to 'Pay Now', user_bookings_bookings_path, class: 'btn btn-primary' %>
-<%= link_to 'Cancel', request.referer || root_path, class: 'btn btn-secondary' %>
+<div class="container booking-card">
+  <h1>Booking Details</h1>
+
+  <div class="booking-info">
+    <p><strong>Start Date:</strong> <%= @booking.start_date %></p>
+    <p><strong>End Date:</strong> <%= @booking.end_date %></p>
+    <p><strong>Status:</strong> <%= @booking.status %></p>
+    <p><strong>Total price:</strong> €<%= @booking.total_price %></p>
+  </div>
+
+  <div class="booking-actions">
+    <%= link_to 'Commit to Pay', user_bookings_bookings_path, class: 'btn btn-primary' %>
+    <%= link_to 'Cancel', request.referer || root_path, class: 'btn btn-secondary' %>
+  </div>
 </div>
