@@ -72,6 +72,11 @@ class BookingsController < ApplicationController
     @instrument_bookings = Booking.includes(:instrument).where(instrument: current_user.instruments)
   end
 
+  def confirmed_bookings
+    @confirmed_bookings = current_user.bookings.where(status: "confirmed").where('updated_at > ?', 5.minutes.ago)
+    render json: @confirmed_bookings
+  end
+
   private
 
   def set_booking
