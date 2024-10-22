@@ -61,14 +61,19 @@ class BookingsController < ApplicationController
 
   def update
     if @booking.update(booking_params)
-      if @booking.cancelled?
+      if @booking.confirm_viewed?
+        flash[:notice] = "Booking confirmation was received."
+        redirect_to alternative_booking_path(@booking)
+      elsif @booking.cancelled?
         flash[:notice] = "Booking was successfully cancelled."
+        redirect_back(fallback_location: root_path)
       elsif @booking.confirmed?
         flash[:notice] = "Booking was successfully confirmed."
+        redirect_back(fallback_location: root_path)
       else
         flash[:notice] = "Booking was successfully updated."
+        redirect_back(fallback_location: root_path)
       end
-      redirect_back(fallback_location: root_path)
     else
       render :edit, alert: 'There was an issue updating the booking.'
     end
