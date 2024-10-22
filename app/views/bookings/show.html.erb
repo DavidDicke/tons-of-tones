@@ -13,3 +13,7 @@
     <%= link_to 'Cancel', request.referer || root_path, class: 'btn btn-secondary' %>
   </div>
 </div>
+
+  <div class="booking-instrument">
+    <%= render partial: "shared/instrument_card", locals: { instrument: @instrument, start_date: @booking.start_date, end_date: @booking.end_date } %>
+  </div>
