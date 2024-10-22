@@ -838,7 +838,7 @@ instruments = Instrument.all
 
 # 1 Completed borrowing::
 
-2.times do
+3.times do
   user_email = "pguelfi@gmail.com"
   user = User.find_by(email: user_email)
   today = Date.today
@@ -868,7 +868,7 @@ end
 
 # 2 Completed lending:
 
-2.times do
+3.times do
   # Define the user email for the instrument owner
   user_email = "pguelfi@gmail.com"
   instrument_owner = User.find_by(email: user_email)
@@ -1092,7 +1092,7 @@ end
 
 # 1 Completed borrowing::
 
-2.times do
+3.times do
   user_email = "post@david-dicke.de"
   user = User.find_by(email: user_email)
   today = Date.today
@@ -1122,7 +1122,7 @@ end
 
 # 2 Completed lending:
 
-2.times do
+3.times do
   # Define the user email for the instrument owner
   user_email = "post@david-dicke.de"
   instrument_owner = User.find_by(email: user_email)
@@ -1346,7 +1346,7 @@ end
 
 # 1 Completed borrowing::
 
-2.times do
+3.times do
   user_email = "momoelgazzar@gmail.com"
   user = User.find_by(email: user_email)
   today = Date.today
@@ -1376,7 +1376,7 @@ end
 
 # 2 Completed lending:
 
-2.times do
+3.times do
   # Define the user email for the instrument owner
   user_email = "momoelgazzar@gmail.com"
   instrument_owner = User.find_by(email: user_email)
@@ -1599,7 +1599,7 @@ end
 
 
   # Reviews for 50% of completed bookings
-  completed_bookings = Booking.where(status: 1)
+  completed_bookings = Booking.where(status: completed)
 
   # Randomly select 50% of the completed bookings
   bookings_to_review = completed_bookings.sample(completed_bookings.count / 2)
