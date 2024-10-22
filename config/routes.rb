@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     resources :bookings, only: [:new, :create]
   end
 
+  get 'bookings/confirmed', to: 'bookings#confirmed_bookings'
+
   resources :bookings, only: [:index, :show, :edit, :update] do
     get 'alternative', on: :member, to: 'bookings#show_alternative'
     resources :booking_reviews, only: [:new, :create, :show]
