@@ -11,11 +11,30 @@
     <!-- Active Bookings -->
     <div class="tab-pane fade show active" id="nav-active" role="tabpanel" aria-labelledby="nav-active-tab">
       <% active_bookings = @user_bookings.select { |booking| booking.status == 'pending' || booking.status == 'confirmed' } %>
-      <% active_bookings.sort_by! { |booking| booking.status == 'pending' ? 0 : 1 } %> <!-- Sort by status: pending first -->
+      <% active_bookings.sort_by!(&:created_at).reverse! %> <!-- Sort by created_at in descending order -->
 
       <% if active_bookings.any? %>
         <% has_pending = active_bookings.any? { |booking| booking.status == 'pending' } %>
         <% has_confirmed = active_bookings.any? { |booking| booking.status == 'confirmed' } %>
+
+        <!-- Confirmed Section -->
+        <% if has_confirmed %>
+          <h4 class="ms-4 mt-4">Confirmed</h4>
+          <hr class="mx-4">
+          <% active_bookings.each do |user_booking| %>
+            <% if user_booking.status == 'confirmed' %>
+              <div>
+                <%= render partial: 'card_product_bookings', locals: {
+                  photos: user_booking.instrument.photos,
+                  instrument: link_to(user_booking.instrument.name, alternative_booking_path(user_booking.id), class: 'no-italic'),
+                  owner: link_to("#{user_booking.instrument.user.first_name} #{user_booking.instrument.user.last_name}", user_path(user_booking.instrument.user)),
+                  start_date: user_booking.start_date.strftime("%d/%m/%Y"),
+                  end_date: user_booking.end_date.strftime("%d/%m/%Y"),
+                } %>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
 
         <!-- Pending Section -->
         <% if has_pending %>
@@ -33,25 +52,6 @@
                   start_date: user_booking.start_date.strftime("%d/%m/%Y"),
                   end_date: user_booking.end_date.strftime("%d/%m/%Y"),
                   cancel_link: cancel_link
-                } %>
-              </div>
-            <% end %>
-          <% end %>
-        <% end %>
-
-        <!-- Confirmed Section -->
-        <% if has_confirmed %>
-          <h4 class="ms-4 mt-5">Confirmed</h4>
-          <hr class="mx-4">
-          <% active_bookings.each do |user_booking| %>
-            <% if user_booking.status == 'confirmed' %>
-              <div>
-                <%= render partial: 'card_product_bookings', locals: {
-                  photos: user_booking.instrument.photos,
-                  instrument: link_to(user_booking.instrument.name, alternative_booking_path(user_booking.id), class: 'no-italic'),
-                  owner: link_to("#{user_booking.instrument.user.first_name} #{user_booking.instrument.user.last_name}", user_path(user_booking.instrument.user)),
-                  start_date: user_booking.start_date.strftime("%d/%m/%Y"),
-                  end_date: user_booking.end_date.strftime("%d/%m/%Y"),
                 } %>
               </div>
             <% end %>
