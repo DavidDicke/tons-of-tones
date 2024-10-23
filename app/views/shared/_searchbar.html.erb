@@ -1,5 +1,5 @@
-<div class="container-search">
-  <%= form_with url: instruments_path, method: :get do |form| %>
+<div class="container-search"  >
+  <%= form_with url: instruments_path, method: :get, data: { controller: "datepicker", datepicker_bookings_value: "[]"} do |form| %>
     <div class="mr-sm-2 mb-2">
       <%= form.label :query, "Instrument", class: "form-label mb-0"%>
       <%= form.text_field :query, class: "form-control", value: "#{ params[:query] ? params[:query] : "" }", placeholder: "Guitar" %>
@@ -7,11 +7,11 @@
     <div class="search-dates">
       <div>
         <%= form.label :start_date, "From", class: "form-label mb-0"%>
-        <%= form.date_field :start_date, class: "form-control", value: "#{ @start_date if @start_date.present? }" %>
+        <%= form.text_field :start_date, class: "form-control", data: { datepicker_target: "startDate"}, value: "#{ @start_date if @start_date.present? }"  %>
       </div>
       <div>
         <%= form.label :end_date, "To", class: "form-label mb-0"%>
-        <%= form.date_field :end_date, class: "form-control", value: "#{ @end_date if @end_date.present? }" %>
+        <%= form.text_field :end_date, class: "form-control", data: { datepicker_target: "endDate"}, value: "#{ @end_date if @end_date.present? }" %>
       </div>
     </div>
     <div class="search-btns">

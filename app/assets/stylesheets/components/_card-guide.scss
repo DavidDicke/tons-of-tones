@@ -39,4 +39,8 @@
     width: 3px;
     background-color: $piano-black;
   }
+
+}
+.carousel-control-prev-icon, .carousel-control-next-icon {
+  filter: invert(70%);
 }

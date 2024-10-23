@@ -36,8 +36,8 @@ export default class extends Controller {
   connect() {
     currently_logedin = this.logedinValue;
     if(currently_logedin){
+      this.refresh();
       this.start();
-      console.log("loop started again");
     }
   }
   stop(event) {
