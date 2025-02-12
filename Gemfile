@@ -74,6 +74,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "rspec-rails", "~> 7.1"
+  gem "launchy"
 end
 
 gem 'devise'
