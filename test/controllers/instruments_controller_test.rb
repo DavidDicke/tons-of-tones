@@ -7,7 +7,7 @@ class InstrumentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get show" do
-    get instrument_url
+    get instrument_url(Instrument.last)
     assert_response :success
   end
 end
