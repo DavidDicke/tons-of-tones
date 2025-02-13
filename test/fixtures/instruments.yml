@@ -1,0 +1,9 @@
+violin:
+  name: old Violin
+  address: 1234 Elm St.
+  category: string
+  price: 10
+  description: old beautiful warm sound
+  capacity: 1
+  latitude: 37.7749
+  longitude: 122.4194
