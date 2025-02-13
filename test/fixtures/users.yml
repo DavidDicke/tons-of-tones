@@ -9,3 +9,9 @@ pablo:
   encrypted_password: <%= Devise::Encryptor.digest(User, '123456') %>
   first_name: Pablo
   last_name: Guelfi
+
+blank_user:
+  email: test@test.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, '123456') %>
+  first_name: Blank
+  last_name: User

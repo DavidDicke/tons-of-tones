@@ -77,7 +77,7 @@ class InstrumentTest < ActiveSupport::TestCase
     assert_not instrument.save, "Saved the Instrument without a price"
   end
 
-  test "instrument does not save without a price that is string" do
+  test "instrument does not save with a price that is a string" do
     instrument = Instrument.new(
       name: "Violin",
       description: "A beautiful violin",
