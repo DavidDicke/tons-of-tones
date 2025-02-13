@@ -1,5 +1,5 @@
 first_booking_review:
   content: Super nice Experience
   rating: 5
-  booking_id: first_booking
-  user_id: David
+  booking: first_booking
+  user: David
