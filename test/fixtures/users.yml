@@ -1,10 +1,10 @@
-David:
+david:
   email: test@david-dicke.de
   encrypted_password: <%= Devise::Encryptor.digest(User, '123456') %>
   first_name: David
   last_name: Dicke
 
-Pablo:
+pablo:
   email: test@pablo-guelfi.de
   encrypted_password: <%= Devise::Encryptor.digest(User, '123456') %>
   first_name: Pablo

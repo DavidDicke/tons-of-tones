@@ -1,6 +1,13 @@
 first_booking:
-  user: Pablo
+  user: pablo
   total_price: 120
   instrument: violin
   start_date: 2022-01-01
   end_date: 2022-01-02
+
+second_booking:
+  user: pablo
+  total_price: 120
+  instrument: violin
+  start_date: 2022-10-01
+  end_date: 2022-10-02
