@@ -1,0 +1,5 @@
+first_user_review:
+  content: Great Experience
+  rating: 5
+  user_id: Pablo
+  booking_id: first_booking
