@@ -33,7 +33,7 @@ class BookingTest < ActiveSupport::TestCase
 
   test "the booking have a valid status value" do
     assert_raises(ArgumentError) do
-      booking = Booking.new(start_date: Date.today, end_date: Date.today, user: users(:pablo), instrument: instruments(:violin), status: "undefined")
+      Booking.new(start_date: Date.today, end_date: Date.today, user: users(:pablo), instrument: instruments(:violin), status: "undefined")
     end
   end
 
