@@ -8,6 +8,9 @@ jobs:
     env:
       RAILS_ENV: test
       NODE_ENV: test
+      CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+      CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+      CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
     runs-on: ubuntu-latest # runner
     services:
       # Label used to access the service container
@@ -25,6 +28,7 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+
     steps:
       - name: Checkout repository # copies repo in runner
         uses: actions/checkout@v2 # short for https://github.com/actions/checkout
