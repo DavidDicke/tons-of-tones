@@ -6,7 +6,6 @@ class InstrumentsController < ApplicationController
     filter_search
     filter_dates
     filter_categories
-    set_dates
   end
 
   def show
@@ -72,15 +71,6 @@ class InstrumentsController < ApplicationController
       redirect_to my_instruments_path and return
     else
       @instrument = Instrument.find(params[:id])
-    end
-  end
-
-  def set_dates
-    if params[:start_date]
-      @start_date = params[:start_date]
-    end
-    if params[:end_date]
-      @end_date = params[:end_date]
     end
   end
 

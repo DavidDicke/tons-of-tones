@@ -1,20 +1,20 @@
 <div class="instruments-card card-trip">
-  <% if instrument.photos.attached? %>
-    <%= link_to instrument_path(instrument, start_date: start_date, end_date: end_date) do %>
-      <%= image_tag instrument.photos[0], class: "img-fluid" %>
+  <%= link_to instrument_path(instrument, start_date: start_date, end_date: end_date) do %>
+    <% if instrument.photos.attached? %>
+        <%= image_tag instrument.photos[0], class: "img-fluid" %>
     <% end %>
-  <% end %>
 
-  <div class="card-body card-trip-infos">
-    <div>
-      <h5 class="card-title"><%= link_to instrument.name, instrument_path(instrument) %></h5>
-      <p class="card-description"><%= instrument.description %></p>
+    <div class="card-body card-trip-infos">
+      <div>
+        <h5 class="card-title"><%= instrument.name %></h5>
+        <p class="card-description"><%= instrument.description %></p>
+      </div>
+
+      <h5 class="card-trip-pricing">€<%= instrument.price %></h5>
+
+      <% if instrument.user&.photo.attached? %> <!-- Check if the user's photo is attached -->
+        <%= cl_image_tag instrument.user.photo.key, class: "avatar-bordered card-trip-user" %>
+      <% end %>
     </div>
-
-    <h5 class="card-trip-pricing">€<%= instrument.price %></h5>
-
-    <% if instrument.user&.photo.attached? %> <!-- Check if the user's photo is attached -->
-      <%= cl_image_tag instrument.user.photo.key, class: "avatar-bordered card-trip-user" %>
-    <% end %>
-  </div>
+  <% end %>
 </div>

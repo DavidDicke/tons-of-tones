@@ -15,7 +15,7 @@
         <%= simple_form_for([instrument, booking], data: { controller: "datepicker", datepicker_bookings_value: instrument.bookings.map {|booking| { from: booking.start_date, to: booking.end_date}} }) do |f| %>
           <%= f.input :start_date, label: "From", as: :string, input_html: { data: { datepicker_Target: "startDate", booking_Cta_Target: "startDateModal" } }, placeholder: booking.start_date %>
           <%= f.input :end_date, label: "To", as: :string, input_html: { data: { datepicker_Target: "endDate", booking_Cta_Target: "endDateModal" } }, placeholder: booking.end_date, class: "endDate" %>
-          <%= f.submit "Book", class: "btn btn-primary w-100" %>
+          <%= f.submit "Confirm Booking", class: "btn btn-primary w-100" %>
         <% end %>
       </div>
       <div class="modal-footer justify-content-start">
