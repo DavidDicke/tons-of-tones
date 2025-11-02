@@ -7,7 +7,12 @@ image: daanmardi/tons_of_tones
 # Deploy to these servers.
 servers:
   web:
-    - 91.99.146.25
+    hosts:
+      - 91.99.146.25
+    labels:
+      traefik.http.routers.tons_of_tones.rule: Host(`tons-of-tones.david-dicke.de`)
+      traefik.http.routers.tons_of_tones.tls: "true"
+      traefik.http.routers.tons_of_tones.tls.certresolver: letsencrypt
   # job:
   #   hosts:
   #     - 192.168.0.1
@@ -19,7 +24,7 @@ servers:
 # Note: If using Cloudflare, set encryption mode in SSL/TLS setting to "Full" to enable CF-to-app encryption.
 proxy:
   ssl: true
-  host: dickes-design.com
+  host: tons-of-tones.david-dicke.de
 
 # Credentials for your image host.
 registry:
