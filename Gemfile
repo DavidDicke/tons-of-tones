@@ -15,6 +15,17 @@ gem "pg", "~> 1.1"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 
+# Use the database-backed adapters for Rails.cache, Active Job, and Action Cable
+# gem "solid_cache"
+# gem "solid_queue"
+# gem "solid_cable"
+
+# Deploy this application anywhere as a Docker container [https://kamal-deploy.org]
+gem "kamal", require: false
+
+# Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
+gem "thruster", require: false
+
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails", "~> 1.2.3"
 
