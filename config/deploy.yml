@@ -9,7 +9,7 @@ servers:
   web:
     hosts:
       - 91.99.146.25
-    ports:
+    port:
       - "81:80"
     labels:
       traefik.http.routers.tons_of_tones.rule: Host(`tons-of-tones.david-dicke.de`)
