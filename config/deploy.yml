@@ -9,6 +9,8 @@ servers:
   web:
     hosts:
       - 91.99.146.25
+    ports:
+      - "81:80"
     labels:
       traefik.http.routers.tons_of_tones.rule: Host(`tons-of-tones.david-dicke.de`)
       traefik.http.routers.tons_of_tones.tls: "true"
@@ -109,6 +111,7 @@ accessories:
     image: postgres:16
     host: 91.99.146.25
     # Change to 3306 to expose port to the world instead of just local network.
+    port: "127.0.0.1:5433:5432"
     env:
       clear:
         POSTGRES_USER: tons_of_tones
